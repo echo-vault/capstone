@@ -32,6 +32,67 @@
  - As an Admin, I can:
    1. DO ALL THE THINGS
 
+#Feature List:
+- Homepage
+  1. About Site
+  2. Links to ads
+  3. Links to Registration/Login/Search
+- Registration Page
+  1. Registration form
+  2. Redirect to login
+  3. Add user to database
+  4. Create username and password
+- Login page
+  1. Login form
+  2. Redirect to profile
+- User profile 
+  1. Upload image
+  2. Display Name
+  3. Lists pages you created
+- Create Memorial Page
+  1. Create form
+  2. Upload photos
+  3. Upload Video
+  4. Cover photo
+  5. Carousel
+  6. Deceased name
+  7. Deceased dates
+  8. Optional details
+  9. Place of birth
+  10. Relationships
+  11 .Memories
+- Memorial Page
+  1. Carousel of images
+  2. Background image
+  3. Image of the deceased
+  4. Deceased info
+  5. Center column of memories(posts)
+  6. Scrollable
+  7.Map (optional)
+  8. Footer with links to services(flowers, grief counseling etc.
+
+
+- Search Page 
+  1. Search for public memorial pages by name
+  2. Sorts by date added and name
+
+- Partials
+  1. Navbar
+  2.Footer
+  3. Head
+  4. Modals
+  5. Scripts
+  6. Pagination
+- Mail API
+- Map API
+  1. Optional Description
+  2. Yelp API? 
+- Error page
+  1. Error Messages
+- Validation
+- Mobile responsiveness
+
+
 
     
     
