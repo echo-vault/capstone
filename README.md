@@ -60,7 +60,7 @@
   8. Optional details
   9. Place of birth
   10. Relationships
-  11 .Memories
+  11. Memories
 - Memorial Page
   1. Carousel of images
   2. Background image
@@ -68,7 +68,7 @@
   4. Deceased info
   5. Center column of memories(posts)
   6. Scrollable
-  7.Map (optional)
+  7. Map (optional)
   8. Footer with links to services(flowers, grief counseling etc.
 
 
@@ -78,7 +78,7 @@
 
 - Partials
   1. Navbar
-  2.Footer
+  2. Footer
   3. Head
   4. Modals
   5. Scripts
