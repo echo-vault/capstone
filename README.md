@@ -1,3 +1,5 @@
+![Echo Vault](echovaultlogo.png)
+
 # Echo Vault Readme
     Echos are familiarly known as reflections of sound. Remember your loved
     one by echoing their memory where the reflection never ends, Echo Vault.
