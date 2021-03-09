@@ -7,8 +7,9 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "memories")
-public class Memory {
+@Table(name = "comments")
+
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +19,6 @@ public class Memory {
     @Column(nullable = false)
     private String body;
 
-    @Column
-    private String image;
-
     @Column(nullable = false)
     private Date timestamp;
 
@@ -29,15 +27,12 @@ public class Memory {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "echo_id")
-    private Echo echo;
+    @JoinColumn(name = "memory_id")
+    private Memory memory;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "memory")
-    private List<Comment> comments;
+    public Comment(){}
 
-    public Memory(){}
-
-    public Memory(String body){
+    public Comment(String body){
         this.body = body;
         this.timestamp = new Date();
     }
@@ -58,12 +53,12 @@ public class Memory {
         this.body = body;
     }
 
-    public String getImage() {
-        return image;
+    public Date getTimestamp() {
+        return timestamp;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
     }
 
     public User getUser() {
@@ -74,19 +69,11 @@ public class Memory {
         this.user = user;
     }
 
-    public Echo getEcho() {
-        return echo;
+    public Memory getMemory() {
+        return memory;
     }
 
-    public void setEcho(Echo echo) {
-        this.echo = echo;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
+    public void setMemory(Memory memory) {
+        this.memory = memory;
     }
 }
