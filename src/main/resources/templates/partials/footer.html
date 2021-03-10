@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title th:text="${title}"></title>
     <link type="text/css" rel="stylesheet" href="../../static/css/materialize.min.css" media="screen,projection"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title th:text="${title}"></title>
+    <style>
+        body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+        main {
+        flex: 1 0 auto;
+    }
+    </style>
 </head>
 <body>
-<footer th:fragment="footer">
+<footer class="page-footer" th:fragment="footer">
     <div class="footer-copyright">
         <div class="container">
             © 2021 Echo Vault Inc.
