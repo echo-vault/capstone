@@ -15,14 +15,19 @@ public class Memory {
     @Unsigned
     private long id;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "Text", nullable = false)
     private String body;
 
     @Column
     private String image;
 
     @Column(nullable = false)
-    private Date timestamp;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -39,7 +44,22 @@ public class Memory {
 
     public Memory(String body){
         this.body = body;
-        this.timestamp = new Date();
+        this.createdAt = new Date();
+    }
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public long getId() {
