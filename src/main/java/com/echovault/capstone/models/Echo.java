@@ -22,6 +22,14 @@ public class Echo {
     private String lastName;
 
     @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
+
+    @Column(nullable = false)
     private String birthDate;
 
     @Column(nullable = false)
@@ -39,8 +47,9 @@ public class Echo {
     @Column
     private String backgroundImage;
 
-    @Column
-    private String link;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "echo")
+    private List<Link> links;
+
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "echo")
     private List<Memory> memories;
@@ -59,6 +68,31 @@ public class Echo {
         this.lastName = lastName;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
+        this.createdAt = new Date();
+    }
+
+    public List<Link> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<Link> links) {
+        this.links = links;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public long getId() {
@@ -131,14 +165,6 @@ public class Echo {
 
     public void setBackgroundImage(String backgroundImage) {
         this.backgroundImage = backgroundImage;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
     }
 
     public List<Memory> getMemories() {

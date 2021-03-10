@@ -16,11 +16,16 @@ public class Comment {
     @Unsigned
     private long id;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String body;
 
     @Column(nullable = false)
-    private Date timestamp;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -34,7 +39,7 @@ public class Comment {
 
     public Comment(String body){
         this.body = body;
-        this.timestamp = new Date();
+        this.createdAt = new Date();
     }
 
     public long getId() {
@@ -53,14 +58,6 @@ public class Comment {
         this.body = body;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
-    }
-
     public User getUser() {
         return user;
     }
@@ -75,5 +72,21 @@ public class Comment {
 
     public void setMemory(Memory memory) {
         this.memory = memory;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
