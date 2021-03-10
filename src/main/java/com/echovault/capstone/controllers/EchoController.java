@@ -1,7 +1,12 @@
 package com.echovault.capstone.controllers;
 
 
+import com.echovault.capstone.models.Echo;
+import com.echovault.capstone.repositories.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class EchoController {
@@ -21,6 +26,7 @@ public class EchoController {
         this.linkDao = linkDao;
         this.userDao = userDao;
     }
+
 
 
 }
