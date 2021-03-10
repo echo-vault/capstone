@@ -51,10 +51,10 @@ public class User {
         lastName = copy.lastName;
     }
 
-    public User(String username, String email, String password, String firstName, String lastName){
-        this.username = username;
+    public User(String email, String password, String username, String firstName, String lastName){
         this.email = email;
         this.password = password;
+        this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
     }
