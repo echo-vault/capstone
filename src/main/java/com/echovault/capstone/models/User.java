@@ -45,10 +45,10 @@ public class User {
 
     public User(User copy){
         username = copy.username;
-        username = copy.username;
-        username = copy.username;
-        username = copy.username;
-        username = copy.username;
+        email = copy.email;
+        password = copy.password;
+        firstName = copy.firstName;
+        lastName = copy.lastName;
     }
 
     public User(String username, String email, String password, String firstName, String lastName){
