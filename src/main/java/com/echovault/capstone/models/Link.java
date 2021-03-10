@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "links")
-public class Echo Vault is designed to give people an easy and convenient location to share memories of loved ones with stories, photos, and more.Link {
+public class Link {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
