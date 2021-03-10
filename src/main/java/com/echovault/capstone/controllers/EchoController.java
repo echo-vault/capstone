@@ -27,6 +27,10 @@ public class EchoController {
         this.userDao = userDao;
     }
 
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
 
 
 }
