@@ -13,6 +13,11 @@
     <script>
         $(document).ready(function() {
             $('.carousel').carousel();
+            function autoplay() {
+                $('.carousel').carousel('next');
+                setTimeout(autoplay, 4500);
+            }
+            autoplay()
             M.updateTextFields();
         });
     </script>
