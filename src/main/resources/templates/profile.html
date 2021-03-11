@@ -5,6 +5,11 @@
 <main>
     <nav th:replace="partials/navbar :: navbar"></nav>
     <h1>Here is your profile page, <span th:text="${user.username}"></span></h1>
+    <h2>First name: <span th:text="${user.firstName}"></span></h2>
+    <h2>Last name: <span th:text="${user.lastName}"></span></h2>
+    <h2>Email: <span th:text="${user.email}"></span></h2>
+    <p>Profile pic will be here eventually.</p>
+    <a th:href="@{/profile/edit}" class="waves-effect waves-light btn">Edit Profile</a>
 
 </main>
 
