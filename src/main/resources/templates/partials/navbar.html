@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <link type="text/css" rel="stylesheet" href="../../static/css/materialize.min.css" media="screen,projection"/>
     <meta charset="UTF-8">
@@ -13,6 +13,12 @@
             <li><a href="sass.html">Sass</a></li>
             <li><a href="badges.html">Components</a></li>
             <li><a href="collapsible.html">JavaScript</a></li>
+            <li sec:authorize="isAuthenticated()">
+                <a id="logout" href="#!"><i class="material-icons">clear</i>logout</a>
+            </li>
+            <li sec:authorize="isAnonymous()">
+                <a th:href="@{/login}"><i class="material-icons">portrait</i>login</a>
+            </li>
         </ul>
     </div>
 </nav>
