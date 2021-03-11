@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="partials/head.html :: head"></div>
+<body>
+
+
+    <main>
+        <div class="container center">
+            <h1 th:text="${error}"></h1>
+            <br>
+            <h4>our team has been notified and is working to resolve the issue</h4>
+        </div>
+    </main>
+
+    <div th:replace="partials/footer.html :: footer"></div>
+    <div th:replace="partials/scripts.html :: scripts"></div>
+</body>
+</html>
