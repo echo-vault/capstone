@@ -6,8 +6,7 @@ import com.echovault.capstone.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UserController {
@@ -27,10 +26,18 @@ public class UserController {
         return "profile";
     }
 
-    @GetMapping("/profile/create")
+    @GetMapping("/profile/edit")
     public String createProfile(Model model){
         User user = userService.getLoggedInUser();
         model.addAttribute("user", user);
-        return "profile-create";
+        return "profile-edit";
     }
+
+    @PostMapping("/profile/edit")
+    public String goToProfile(Model model){
+        User user = userService.getLoggedInUser();
+        userDao.save(user);
+        return "redirect:/profile";
+    }
+
 }

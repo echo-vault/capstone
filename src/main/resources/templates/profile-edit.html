@@ -4,23 +4,23 @@
 <body>
 <main>
     <nav th:replace="partials/navbar :: navbar"></nav>
-    <h1>Let's set up your profile. Need to make any changes? Add a profile pic!</h1>
+    <h1>Edit Your Profile Here!</h1>
     <div class="row">
-        <form th:action="@{/profile/create}" th:method="POST" th:object="${user}" class="col s12">
+        <form th:action="@{/profile/edit}" th:method="POST" th:object="${user}" class="col s12">
             <div class="row">
                 <div class="input-field col s6">
                     <input id="first_name" type="text" class="validate" th:field="*{firstName}">
-                    <label for="first_name"><span th:text="${user.firstName}"></span></label>
+                    <label for="first_name">First Name</label>
                 </div>
                 <div class="input-field col s6">
                     <input id="last_name" type="text" class="validate" th:field="*{lastName}">
-                    <label for="last_name"><span th:text="${user.lastName}"></span></label>
+                    <label for="last_name">Last Name</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
                     <input id="username" type="text" class="validate" th:field="*{username}">
-                    <label for="username"><span th:text="${user.username}"></span></label>
+                    <label for="username">Username</label>
                 </div>
             </div>
             <div class="row">
@@ -35,8 +35,8 @@
                     <label for="image">Some kind of image input will go here....</label>
                 </div>
             </div>
-            <button class="btn waves-effect waves-light" type="submit" name="action">Create my profile!
-                <i class="material-icons right">send</i>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Save Changes
+                <i class="material-icons right">check</i>
             </button>
         </form>
 
