@@ -23,7 +23,7 @@
                     </div>
                     <img class="circle profile-image" th:src="${echo.profileImage}">
                     <div class="card-content profile-content">
-                      <p th:text="${echo.getDisplayedDates()}"></p>
+                      <p class="center" th:text="${echo.getDisplayedDates()}"></p>
                     </div>
                 </div>
             </div>
@@ -37,6 +37,42 @@
 <!--                      <a href="#">This is a link</a>-->
 <!--                      <a href="#">This is a link</a>-->
 <!--                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col hide-on-small-and-down m3">
+            <div th:each="memory : ${echo.getMemories()}" class="chip">
+                <img th:src="${memory.user.image}">
+                <span th:text="${memory.user.getFullName()}"></span>
+            </div>
+        </div>
+        <div class="col s12 m9">
+            <div class="row">
+                <div class="col s12">
+                    <div class="card horizontal">
+                      <div class="card-stacked">
+                        <div class="card-content">
+                          <p>Form for submitting memory here</p>
+                        </div>
+                        <div class="card-action">
+                          <a href="#">Echo your Memory</a>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div th:each="memory : ${echo.getMemories()}" class="col s12 m6">
+                    <div class="card">
+                        <div class="card-content">
+                          <span class="card-title" th:text="${memory.user.getFullName()}"></span>
+                          <p th:text="${memory.body}"></p>
+                        </div>
+                        <div class="card-action">
+                          <p th:text="${memory.createdAt}"></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
