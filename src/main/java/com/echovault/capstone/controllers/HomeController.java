@@ -1,30 +1,25 @@
 package com.echovault.capstone.controllers;
 
 import com.echovault.capstone.models.Echo;
+import com.echovault.capstone.models.User;
 import com.echovault.capstone.repositories.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class HomeController {
 
-    private final EchoRepository echoDao;
-    private final MemoryRepository memoryDao;
-    private final CommentRepository commentDao;
-    private final ImageRepository imageDao;
-    private final LinkRepository linkDao;
     private final UserRepository userDao;
+    private final PasswordEncoder encoder;
 
-    public HomeController(EchoRepository echoDao, MemoryRepository memoryDao, CommentRepository commentDao, ImageRepository imageDao, LinkRepository linkDao, UserRepository userDao) {
-        this.echoDao = echoDao;
-        this.memoryDao = memoryDao;
-        this.commentDao = commentDao;
-        this.imageDao = imageDao;
-        this.linkDao = linkDao;
+    public HomeController(UserRepository userDao, PasswordEncoder encoder) {
         this.userDao = userDao;
+        this.encoder = encoder;
     }
 
     @GetMapping("/login")
@@ -38,8 +33,18 @@ public class HomeController {
     }
 
     @GetMapping("/register")
-    public String register(){
+    public String register(Model model){
+        model.addAttribute("user", new User());
         return "register";
+    }
+
+    @PostMapping("/register")
+    public String createUser(@ModelAttribute User user){
+        String password = user.getPassword();
+        String hash = encoder.encode(password);
+        user.setPassword(hash);
+        userDao.save(user);
+        return "redirect:/login";
     }
 
 }
