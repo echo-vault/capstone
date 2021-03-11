@@ -8,35 +8,38 @@
     <nav th:replace="partials/navbar :: navbar"></nav>
     <h1>Sign up for an account!</h1>
     <div class="row">
-        <form class="col s12">
+        <form th:action="@{/register}" th:method="POST" th:object="${user}" class="col s12">
             <div class="row">
                 <div class="input-field col s6">
-                    <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+                    <input id="first_name" type="text" class="validate" th:field="*{firstName}">
                     <label for="first_name">First Name</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="last_name" type="text" class="validate">
+                    <input id="last_name" type="text" class="validate" th:field="*{lastName}">
                     <label for="last_name">Last Name</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="username" type="text" class="validate">
+                    <input id="username" type="text" class="validate" th:field="*{username}">
                     <label for="username">Username</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="password" type="password" class="validate">
+                    <input id="password" type="password" class="validate" th:field="*{password}">
                     <label for="password">Password</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="email" type="email" class="validate">
+                    <input id="email" type="email" class="validate" th:field="*{email}">
                     <label for="email">Email</label>
                 </div>
             </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+            </button>
         </form>
     </div>
 </main>
