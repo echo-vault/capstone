@@ -8,6 +8,7 @@
     <!--    carousel-->
 
         <div class="carousel">
+            <div class="carousel-fixed-item center"><h1 th:text="${echo.getFullName()}"></h1></div>
             <a th:each="image : ${carousel}" class="carousel-item" th:href="'#' + ${carousel.indexOf(image) + 1} + '!'"><img th:src="${image.path}"></a>
         </div>
 
@@ -16,13 +17,12 @@
     <div class="container">
         <div class="row">
             <div class="col s12 m6">
-                <div class="card">
-                    <div class="card-image">
+                <div class="card profile-card">
+                    <div class="card-image background-image">
                       <img th:src="${echo.backgroundImage}">
-                      <a class="btn-floating halfway-fab"><img class="circle" th:src="${echo.profileImage}"></a>
                     </div>
-                    <div class="card-content">
-                      <p th:text="${echo.getFullName()}"></p>
+                    <img class="circle profile-image" th:src="${echo.profileImage}">
+                    <div class="card-content profile-content">
                       <p th:text="${echo.getDisplayedDates()}"></p>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
 
 </main>
 
-<div th:replace="partials/footer.html :: footer"></div>
+<div th:replace="partials/footer.html :: echo-footer"></div>
 <div th:replace="partials/scripts.html :: scripts"></div>
 </body>
 </html>

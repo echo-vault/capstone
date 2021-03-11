@@ -1,6 +1,6 @@
 USE echo_vault_db;
 
-SELECT * FROM images;
+SELECT * FROM links;
 
 INSERT INTO users (email, first_name, image, last_name, password, username)
 VALUES ('bill@bill', 'bill', '/img/echovaultlogo.png', 'bill', '$2a$10$QO00htdOA1P8nU30brQOL.NlL7QXMMva3B2ud7IsVSFzJZbhzGD4O', 'bill')
@@ -11,6 +11,10 @@ VALUES ('/img/echovaultlogo.png', 'September 2020', '2020-09-21 09:00:00', 'Apri
 
 INSERT INTO images (path, echo_id)
 VALUES ('/img/echovaultlogo.png', 1);
+
+INSERT INTO links (url, echo_id, name)
+VALUES ('https://gofundme.com', 1, 'GoFundMe');
+
 
 UPDATE echoes
 SET profile_image = '/img/echovaultlogo.png'

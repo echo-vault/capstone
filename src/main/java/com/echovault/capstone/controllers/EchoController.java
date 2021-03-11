@@ -33,6 +33,7 @@ public class EchoController {
         Echo echo = echoDao.getOne(id);
         model.addAttribute("echo", echo);
         model.addAttribute("carousel", echo.getImages());
+        model.addAttribute("links", echo.getLinks());
         for(Image i: echo.getImages()){
             System.out.println(i.getPath());
         }
