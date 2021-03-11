@@ -2,6 +2,7 @@ package com.echovault.capstone.controllers;
 
 
 import com.echovault.capstone.models.Echo;
+import com.echovault.capstone.models.Image;
 import com.echovault.capstone.repositories.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,17 @@ public class EchoController {
         this.imageDao = imageDao;
         this.linkDao = linkDao;
         this.userDao = userDao;
+    }
+
+    @GetMapping("/echo/{id}")
+    public String viewEcho(Model model, @PathVariable long id){
+        Echo echo = echoDao.getOne(id);
+        model.addAttribute("echo", echo);
+        model.addAttribute("carousel", echo.getImages());
+        for(Image i: echo.getImages()){
+            System.out.println(i.getPath());
+        }
+        return "echo";
     }
 
 
