@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head">
+
 </head>
 <body>
-
+<nav th:replace="partials/navbar :: navbar"></nav>
+<div>
+    <form th:action="@{echo/create}" th:method="post">
+        <div>
+        <label for="profile-img">Profile Image</label>
+       <input type="file" id="profile-img" name="file name">
+        </div>
+        <div>
+        <label for="background-img">Background Image</label>
+        <input type="file" id="background-img" name="file name">
+        </div>
+        <div>
+        <label for="carousel-img">Carousel Image</label>
+        <input type="file" id="carousel-img" name = "file name">
+        </div>
+        <div>
+        <label for="name">Name</label>
+        <input type="text" id="name">
+        </div>
+        <div>
+        <label for="birthdate">Birthdate</label>
+        <input type="date" id="birthdate">
+        </div>
+        <div>
+        <label for="passingdate">Passingdate</label>
+        <input type="date" id="passingdate">
+        </div>
+        <div>
+        <label for="lifestory">Life Story</label>
+        <textarea id="lifestory"></textarea>
+        </div>
+    </form>
+</div>
 </body>
 </html>
