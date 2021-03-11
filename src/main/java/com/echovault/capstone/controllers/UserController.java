@@ -26,4 +26,11 @@ public class UserController {
         model.addAttribute("user", user);
         return "profile";
     }
+
+    @GetMapping("/profile/create")
+    public String createProfile(Model model){
+        User user = userService.getLoggedInUser();
+        model.addAttribute("user", user);
+        return "profile-create";
+    }
 }
