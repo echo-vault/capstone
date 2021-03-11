@@ -20,11 +20,10 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/profile/{id}")
-    public String showProfile(@PathVariable long id, Model model){
+    @GetMapping("/profile")
+    public String showProfile(Model model){
         User user = userService.getLoggedInUser();
         model.addAttribute("user", user);
-        return "/profile";
-
+        return "profile";
     }
 }
