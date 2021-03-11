@@ -37,8 +37,8 @@ public class UserController {
 
     @PostMapping("/profile/edit")
     public String goToProfile(@ModelAttribute User user){
-        User editedUser = userService.getLoggedInUser();
-        user.setId(editedUser.getId());
+//        User editedUser = userService.getLoggedInUser();
+//        user.setId(editedUser.getId());
         user.setPassword("password");
         userDao.save(user);
         return "redirect:/profile";

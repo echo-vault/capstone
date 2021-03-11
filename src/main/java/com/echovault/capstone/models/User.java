@@ -44,6 +44,7 @@ public class User {
     public User(){}
 
     public User(User copy){
+        id = copy.id;
         username = copy.username;
         email = copy.email;
         password = copy.password;
