@@ -71,6 +71,14 @@ public class Echo {
         this.createdAt = new Date();
     }
 
+    public String getFullName(){
+        return firstName + " " + lastName;
+    }
+
+    public String getDisplayedDates(){
+        return birthDate + " - " + deathDate;
+    }
+
     public List<Link> getLinks() {
         return links;
     }

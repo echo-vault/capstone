@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <link type="text/css" rel="stylesheet" href="../../static/css/materialize.min.css" media="screen,projection"/>
-    <meta charset="UTF-8">
-    <title>Navbar</title>
-</head>
+<head></head>
 <body>
-<nav th:fragment="navbar">
-    <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Logo</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">JavaScript</a></li>
-            <li sec:authorize="isAuthenticated()">
-                <a id="logout" href="#!">Logout</a>
-            </li>
-            <li sec:authorize="isAnonymous()">
-                <a th:href="@{/login}">Login</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+
+<header th:fragment="navbar">
+
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo valign-wrapper">EchoVault</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li sec:authorize="isAuthenticated()">
+                    <a id="logout" href="#!">Logout</a>
+                </li>
+                <li sec:authorize="isAnonymous()">
+                    <a th:href="@{/login}">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <form id="logoutForm" th:action="@{/logout}" th:method="post"></form>
+
+</header>
+
 </body>
-</html>
