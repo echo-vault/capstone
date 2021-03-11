@@ -14,10 +14,10 @@
             <li><a href="badges.html">Components</a></li>
             <li><a href="collapsible.html">JavaScript</a></li>
             <li sec:authorize="isAuthenticated()">
-                <a id="logout" href="#!"><i class="material-icons">clear</i>logout</a>
+                <a id="logout" href="#!">Logout</a>
             </li>
             <li sec:authorize="isAnonymous()">
-                <a th:href="@{/login}"><i class="material-icons">portrait</i>login</a>
+                <a th:href="@{/login}">Login</a>
             </li>
         </ul>
     </div>
