@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 @Service("userService")
 public class UserService {
 
-    private final UserRepository usersDao;
+    private final UserRepository userDao;
 
-    public UserService(UserRepository usersDao) {
-        this.usersDao = usersDao;
+    public UserService(UserRepository userDao) {
+        this.userDao = userDao;
     }
 
-    public User loggedInUser(){
+    public User getLoggedInUser(){
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }

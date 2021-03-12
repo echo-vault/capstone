@@ -4,6 +4,7 @@ package com.echovault.capstone.controllers;
 import com.echovault.capstone.Util.FileUpload;
 import com.echovault.capstone.models.Echo;
 import com.echovault.capstone.models.User;
+import com.echovault.capstone.models.Image;
 import com.echovault.capstone.repositories.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -42,12 +43,28 @@ public class EchoController {
         return "echo-create";
     }
 
+
     @PostMapping("/echo-create")
     public String saveFile(@ModelAttribute Echo echo,
                            @RequestParam(name = "profile-img") MultipartFile uploadedFile,
                            @RequestParam(name = "background-img") MultipartFile uploadedFile2,
                            @RequestParam(name = "carousel-img") MultipartFile uploadedFile3,
                            Model model
+
+    @GetMapping("/echo/{id}")
+    public String viewEcho(Model model, @PathVariable long id){
+        Echo echo = echoDao.getOne(id);
+        model.addAttribute("echo", echo);
+        model.addAttribute("carousel", echo.getImages());
+        model.addAttribute("links", echo.getLinks());
+        for(Image i: echo.getImages()){
+            System.out.println(i.getPath());
+        }
+        return "echo";
+    }
+
+
+
 
     ) {
         FileUpload.savedFile(uploadedFile, echo, uploadPath);
