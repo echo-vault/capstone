@@ -54,9 +54,9 @@ public class HomeController {
     }
 
     @PostMapping("/register")
-    public String createUser(@AuthenticationPrincipal User principal, @RequestParam(name = "user-profile-img") MultipartFile uploadedFile, Model model){
-        User user = userDao.findById(principal.getId()).get();
-        model.addAttribute("user", user);
+    public String createUser(@ModelAttribute User user, @RequestParam(name = "user-profile-img") MultipartFile uploadedFile, Model model){
+//        User user = userDao.findById(principal.getId()).get();
+//        model.addAttribute("user", user);
         if(uploadedFile != null) {
             String fileName = uploadedFile.getOriginalFilename();
             String filePath = Paths.get(uploadPath, fileName).toString();
