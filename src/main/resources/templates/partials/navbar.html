@@ -9,11 +9,20 @@
         <div class="nav-wrapper">
             <a href="#" class="brand-logo valign-wrapper">EchoVault</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li sec:authorize="isAuthenticated()">
-                    <a id="logout" href="#!">Logout</a>
+                <li>
+                    <a th:href="@{/home}">Home</a>
                 </li>
                 <li sec:authorize="isAnonymous()">
                     <a th:href="@{/login}">Login</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a id="echo-create" th:href="@{/echo-create}">Create an Echo</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a id="view-profile" th:href="@{/profile}">Profile</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a id="logout">Logout</a>
                 </li>
             </ul>
         </div>
