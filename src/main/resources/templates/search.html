@@ -6,12 +6,31 @@
 <body>
 <form>
     <nav th:replace="partials/navbar :: navbar"></nav>
-    <div class="input-field">
-        <input id="search" type="search" required>
-        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-        <i class="material-icons">close</i>
-    </div>
-</form>
+
+    <nav>
+        <div class="nav-wrapper">
+            <form th:object="${echo}" method="post">
+                <div class="input-field">
+                    <input id="search" type="text" name="last_name" th:value="${echo}">
+                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i>
+                </div>
+            </form>
+        </div>
+    </nav>
+
+
+    <table>
+
+        <tr th:each="lecture : ${foundEchos}">
+            <td><span th:text="${echo.first_name}" >First Name:</span></td>
+            <td><span th:text="${echo.last_name}" >Last Name</span></td>
+
+        </tr>
+
+    </table>
+
+
 
 
 </body>
