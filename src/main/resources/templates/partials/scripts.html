@@ -8,8 +8,6 @@
 <div th:fragment="scripts" th:remove="tag">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-<!--    <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>-->
     <script>
         $(document).ready(function() {
             $('.carousel').carousel();
@@ -22,6 +20,9 @@
             $('#logout').click(function(){
                 $('#logoutForm').submit();
             })
+            function makeCardsEven(){
+               document.getElementsByClassName("summary-card").style.height = document.getElementsByClassName("profile-card").style.height
+            }
         });
     </script>
 </div>
