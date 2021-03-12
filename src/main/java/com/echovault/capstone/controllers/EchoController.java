@@ -26,10 +26,7 @@ public class EchoController {
         this.linkDao = linkDao;
         this.userDao = userDao;
     }
-    @GetMapping("search-results")
-    public String login(){
-        return "search-results";
-    }
+
 
 
 
