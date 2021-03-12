@@ -44,43 +44,43 @@ public class EchoController {
     }
 
 
-    @PostMapping("/echo-create")
-    public String saveFile(@ModelAttribute Echo echo,
-                           @RequestParam(name = "profile-img") MultipartFile uploadedFile,
-                           @RequestParam(name = "background-img") MultipartFile uploadedFile2,
-                           @RequestParam(name = "carousel-img") MultipartFile uploadedFile3,
-                           Model model
+//    @PostMapping("/echo-create")
+//    public String saveFile(@ModelAttribute Echo echo,
+//                           @RequestParam(name = "profile-img") MultipartFile uploadedFile,
+//                           @RequestParam(name = "background-img") MultipartFile uploadedFile2,
+//                           @RequestParam(name = "carousel-img") MultipartFile uploadedFile3,
+//                           Model model
 
-    @GetMapping("/echo/{id}")
-    public String viewEcho(Model model, @PathVariable long id){
-        Echo echo = echoDao.getOne(id);
-        model.addAttribute("echo", echo);
-        model.addAttribute("carousel", echo.getImages());
-        model.addAttribute("links", echo.getLinks());
-        for(Image i: echo.getImages()){
-            System.out.println(i.getPath());
-        }
-        return "echo";
-    }
-
-
-
-
-    ) {
-        FileUpload.savedFile(uploadedFile, echo, uploadPath);
-        FileUpload.savedFile(uploadedFile2, echo, uploadPath);
-        FileUpload.savedFile(uploadedFile3, echo, uploadPath);
-
-        echo.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        Echo savedEcho = echoDao.save(echo);
-        String subject = "New Post Created!";
-//        String body = "Dear " + savedPost.getUser().getUsername() + ". Thank you for creating a post. Your post id is: " + savedPost.getId();
+//    @GetMapping("/echo/{id}")
+//    public String viewEcho(Model model, @PathVariable long id){
+//        Echo echo = echoDao.getOne(id);
+//        model.addAttribute("echo", echo);
+//        model.addAttribute("carousel", echo.getImages());
+//        model.addAttribute("links", echo.getLinks());
+//        for(Image i: echo.getImages()){
+//            System.out.println(i.getPath());
+//        }
+//        return "echo";
+//    }
 //
-//        emailService.prepareAndSend(savedEcho, subject, body);
-        model.addAttribute("message", "File successfully uploaded!");
-        return "redirect:/echo-create";
-
-    }
+//
+//
+//
+//    ) {
+//        FileUpload.savedFile(uploadedFile, echo, uploadPath);
+//        FileUpload.savedFile(uploadedFile2, echo, uploadPath);
+//        FileUpload.savedFile(uploadedFile3, echo, uploadPath);
+//
+//        echo.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+//        Echo savedEcho = echoDao.save(echo);
+//        String subject = "New Post Created!";
+////        String body = "Dear " + savedPost.getUser().getUsername() + ". Thank you for creating a post. Your post id is: " + savedPost.getId();
+////
+////        emailService.prepareAndSend(savedEcho, subject, body);
+//        model.addAttribute("message", "File successfully uploaded!");
+//        return "redirect:/echo-create";
+//
+//    }
 }
 
 

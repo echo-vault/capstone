@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="partials/head :: head">
+']
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 <body>
@@ -8,7 +9,7 @@
     <nav th:replace="partials/navbar :: navbar"></nav>
     <h1>Sign up for an account!</h1>
     <div class="row">
-        <form th:action="@{/register}" th:method="POST" th:object="${user}" class="col s12">
+        <form th:action="@{/register}" th:method="POST" th:object="${user}" class="col s12" enctype="multipart/form-data">
             <div class="row">
                 <div class="input-field col s6">
                     <input id="first_name" type="text" class="validate" th:field="*{firstName}">
@@ -36,6 +37,10 @@
                     <input id="email" type="email" class="validate" th:field="*{email}">
                     <label for="email">Email</label>
                 </div>
+            </div>
+            <div>
+                <label for="user-profile-img">Upload a profile image</label>
+                <input id="user-profile-img" name="user-profile-img" type="file" />
             </div>
             <button class="btn waves-effect waves-light" type="submit" name="action">Submit
                 <i class="material-icons right">send</i>

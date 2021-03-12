@@ -8,7 +8,10 @@
     <h2>First name: <span th:text="${user.firstName}"></span></h2>
     <h2>Last name: <span th:text="${user.lastName}"></span></h2>
     <h2>Email: <span th:text="${user.email}"></span></h2>
-    <p>Profile pic will be here eventually.</p>
+<!--    <div th:if="${user.image != null}">-->
+    <img th:src="@{'' + ${user.image}}"/>
+
+    <!--    </div>-->
     <a th:href="@{/profile/edit}" class="waves-effect waves-light btn">Edit Profile</a>
 
 </main>

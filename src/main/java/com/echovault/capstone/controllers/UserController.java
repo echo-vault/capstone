@@ -3,6 +3,7 @@ package com.echovault.capstone.controllers;
 import com.echovault.capstone.models.User;
 import com.echovault.capstone.repositories.UserRepository;
 import com.echovault.capstone.services.UserService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ public class UserController {
     @GetMapping("/profile")
     public String showProfile(Model model){
         User user = userService.getLoggedInUser();
+        user = userDao.findByUsername(user.getUsername());
         model.addAttribute("user", user);
         return "profile";
     }
