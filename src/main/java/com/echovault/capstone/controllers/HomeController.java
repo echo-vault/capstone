@@ -5,6 +5,7 @@ import com.echovault.capstone.models.User;
 import com.echovault.capstone.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,7 +54,9 @@ public class HomeController {
     }
 
     @PostMapping("/register")
-    public String createUser(@ModelAttribute User user, @RequestParam(name = "user-profile-img") MultipartFile uploadedFile, Model model){
+    public String createUser(@AuthenticationPrincipal User principal, @RequestParam(name = "user-profile-img") MultipartFile uploadedFile, Model model){
+        User user = userDao.findById(principal.getId()).get();
+        model.addAttribute("user", user);
         if(uploadedFile != null) {
             String fileName = uploadedFile.getOriginalFilename();
             String filePath = Paths.get(uploadPath, fileName).toString();
