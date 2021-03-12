@@ -39,7 +39,8 @@ public class EchoController {
     private String uploadPath;
 
     @GetMapping("/echo-create")
-    public String showCreateForm() {
+    public String showCreateForm(Model model) {
+        model.addAttribute("echo", new Echo());
         return "echo-create";
     }
 
@@ -63,7 +64,7 @@ public class EchoController {
 //
 //        emailService.prepareAndSend(savedEcho, subject, body);
         model.addAttribute("message", "File successfully uploaded!");
-        return "redirect:/echo-create";
+        return "redirect:/echo/" + echo.getId();
 
     }
 
