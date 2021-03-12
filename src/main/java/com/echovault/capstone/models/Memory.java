@@ -44,7 +44,6 @@ public class Memory {
 
     public Memory(String body){
         this.body = body;
-        this.createdAt = new Date();
     }
     public Date getCreatedAt() {
         return createdAt;
@@ -105,6 +104,16 @@ public class Memory {
     public List<Comment> getComments() {
         return comments;
     }
+
+    public String getNumberOfComments(){
+        int num = this.getComments().size();
+        if(num == 1){
+            return num + " comment";
+        } else if(num > 1){
+            return num + " comments";
+        }
+        return null;
+    };
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
