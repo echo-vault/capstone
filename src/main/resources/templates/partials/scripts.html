@@ -11,6 +11,10 @@
     <script>
         $(document).ready(function() {
             $('.carousel').carousel();
+            $('#textarea1').val('New Text');
+            M.textareaAutoResize($('#textarea1'));
+            $('.datepicker').datepicker();
+            $('select').formSelect();
             function autoplay() {
                 $('.carousel').carousel('next');
                 setTimeout(autoplay, 4500);
