@@ -26,4 +26,19 @@ public class FileUpload {
             }
         }
     }
+
+    public static void backgroundFile(MultipartFile uploadedFile, Echo echo, @Value("${file-upload-path}") String uploadPath) {
+        if (uploadedFile != null) {
+            String filename = uploadedFile.getOriginalFilename();
+            String filepath = Paths.get(uploadPath, filename).toString();
+            File destinationFile = new File(filepath);
+            try {
+                uploadedFile.transferTo(destinationFile);
+                echo.setBackgroundImage("/uploads/" + filename);
+            } catch (IOException e) {
+                e.printStackTrace();
+
+            }
+        }
+    }
 }

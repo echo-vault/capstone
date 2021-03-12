@@ -55,13 +55,16 @@ public class EchoController {
     public String saveFile(@ModelAttribute Echo echo,
                            @RequestParam(name = "profile-img") MultipartFile uploadedFile,
                            @RequestParam(name = "background-img") MultipartFile uploadedFile2,
-                           @RequestParam(name = "carousel-img") MultipartFile uploadedFile3,
+//                           @RequestParam(name = "carousel-img") MultipartFile uploadedFile3,
+                           @RequestParam(name = "image") String path,
                            Model model)
     {
         FileUpload.savedFile(uploadedFile, echo, uploadPath);
-        FileUpload.savedFile(uploadedFile2, echo, uploadPath);
-        FileUpload.savedFile(uploadedFile3, echo, uploadPath);
+        FileUpload.backgroundFile(uploadedFile2, echo, uploadPath);
+//        FileUpload.savedFile(uploadedFile3, echo, uploadPath);
         echo.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        Image image = new Image(path);
+        echo.getImages().add(image);
         Echo savedEcho = echoDao.save(echo);
         String subject = "New Post Created!";
 //        String body = "Dear " + savedPost.getUser().getUsername() + ". Thank you for creating a post. Your post id is: " + savedPost.getId();

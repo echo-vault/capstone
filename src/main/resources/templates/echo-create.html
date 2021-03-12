@@ -4,48 +4,48 @@
 
 </head>
 <body>
-<div class="container">
+
 <nav th:replace="partials/navbar :: navbar"></nav>
 <div>
     <form th:action="@{/echo-create}" th:method="post" th:object="${echo} "enctype="multipart/form-data" >
-        <form action="#">
+<!--        <form action="#">-->
             <div class="file-field input-field">
                 <div class="btn">
                     <span>Profile</span>
                     <input type="file">
                 </div>
                 <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" th:field="*{profileImage}">
+                    <input class="file-path validate" type="text" name="profile-img">
                 </div>
             </div>
-        </form>
+<!--        </form>-->
 
-        <form action="#">
+<!--        <form action="#">-->
             <div class="file-field input-field">
                 <div class="btn">
                     <span>Background</span>
                     <input type="file">
                 </div>
                 <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" th:field="*{backgroundImage}">
+                    <input class="file-path validate" type="text" name="background-img">
                 </div>
             </div>
-        </form>
+<!--        </form>-->
 
-        <form action="#">
+<!--        <form action="#">-->
             <div class="file-field input-field">
                 <div class="btn">
                     <span>Carousel</span>
                     <input type="file" multiple>
                 </div>
                 <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" placeholder="Upload one or more images" th:field="*{images}">
+                    <input class="file-path validate" type="text" placeholder="Upload one or more images" name="image">
                 </div>
             </div>
-        </form>
+<!--        </form>-->
 
         <div class="row">
-            <form class="col s12">
+            <div class="col s12">
                 <div class="row">
                     <div class="input-field col s6">
                         <input placeholder="Placeholder" id="first_name" type="text" class="validate" th:field="*{firstName}" >
@@ -55,7 +55,9 @@
                         <input id="last_name" type="text" class="validate" th:field="*{lastName}">
                         <label for="last_name">Last Name</label>
                     </div>
-
+                    </div>
+                </div>
+</div>
         <div>
         <label for="birthdate">Birthdate</label>
             <input type="text" class="datepicker" id="birthdate" th:field="*{birthDate}">
@@ -67,14 +69,14 @@
         </div>
 
         <div class="row">
-            <form class="col s12">
+            <div class="col s12">
                 <div class="row">
                     <div class="input-field col s12">
                         <textarea id="textarea1" class="materialize-textarea" th:field="*{summary}"></textarea>
                         <label for="textarea1">Life Story</label>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
 
         <div class="input-field">
@@ -82,56 +84,56 @@
          <input type="text" name="burialaddress" id="burialaddress" th:field="*{restingPlace}">
         </div>
 
-        <div class="input-field col s12">
-            <select>
-                <option value="" disabled selected>Choose What kind of link to add.</option>
-                <option value="1">Donations</option>
-                <option value="2">Flowers/Condolences</option>
-                <option value="3">Services Details</option>
-            </select>
-            <label>Helpful Links</label>
-        </div>
+<!--        <div class="input-field col s12">-->
+<!--            <select>-->
+<!--                <option value="" disabled selected>Choose What kind of link to add.</option>-->
+<!--                <option value="1">Donations</option>-->
+<!--                <option value="2">Flowers/Condolences</option>-->
+<!--                <option value="3">Services Details</option>-->
+<!--            </select>-->
+<!--            <label>Helpful Links</label>-->
+<!--        </div>-->
 
-            <div class="input-field">
-                <label for="link1">Link 1</label>
-                <input type="text" name="link1" id="link1" th:field="*{links}">
-            </div>
+<!--            <div class="input-field">-->
+<!--                <label for="link1">Link 1</label>-->
+<!--                <input type="text" name="link1" id="link1" th:field="*{links}">-->
+<!--            </div>-->
 
-        <div class="input-field col s12">
-            <select>
-                <option value="" disabled selected>Choose What kind of link to add.</option>
-                <option value="1">Donations</option>
-                <option value="2">Flowers/Condolences</option>
-                <option value="3">Services Details</option>
-            </select>
-            <label>Helpful Links</label>
-        </div>
+<!--        <div class="input-field col s12">-->
+<!--            <select>-->
+<!--                <option value="" disabled selected>Choose What kind of link to add.</option>-->
+<!--                <option value="1">Donations</option>-->
+<!--                <option value="2">Flowers/Condolences</option>-->
+<!--                <option value="3">Services Details</option>-->
+<!--            </select>-->
+<!--            <label>Helpful Links</label>-->
+<!--        </div>-->
 
-        <div class="input-field">
-            <label for="link2">Link 2</label>
-            <input type="text" name="link2" id="link2" th:field="*{links}">
-        </div>
+<!--        <div class="input-field">-->
+<!--            <label for="link2">Link 2</label>-->
+<!--            <input type="text" name="link2" id="link2" th:field="*{links}">-->
+<!--        </div>-->
 
-        <div class="input-field col s12">
-            <select>
-                <option value="" disabled selected>Choose What kind of link to add.</option>
-                <option value="1">Donations</option>
-                <option value="2">Flowers/Condolences</option>
-                <option value="3">Services Details</option>
-            </select>
-            <label>Helpful Links</label>
-        </div>
+<!--        <div class="input-field col s12">-->
+<!--            <select>-->
+<!--                <option value="" disabled selected>Choose What kind of link to add.</option>-->
+<!--                <option value="1">Donations</option>-->
+<!--                <option value="2">Flowers/Condolences</option>-->
+<!--                <option value="3">Services Details</option>-->
+<!--            </select>-->
+<!--            <label>Helpful Links</label>-->
+<!--        </div>-->
 
-        <div class="input-field">
-            <label for="link3">Link 3</label>
-            <input type="text" name="link3" id="link3" th:field="*{links}">
-        </div>
+<!--        <div class="input-field">-->
+<!--            <label for="link3">Link 3</label>-->
+<!--            <input type="text" name="link3" id="link3" th:field="*{links}">-->
+<!--        </div>-->
 
         <button class="btn waves-effect waves-light" type="submit" name="action">Submit
             <i class="material-icons right">send</i>
         </button>
     </form>
-</div>
+
 </div>
 <div th:replace="partials/scripts :: scripts"></div>
 </body>
