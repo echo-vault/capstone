@@ -50,6 +50,10 @@ public class User {
         password = copy.password;
         firstName = copy.firstName;
         lastName = copy.lastName;
+        image = copy.image;
+        memories = copy.memories;
+        echoes = copy.echoes;
+        comments = copy.comments;
     }
 
     public User(String email, String password, String username, String firstName, String lastName){

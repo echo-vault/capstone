@@ -1,6 +1,6 @@
 USE echo_vault_db;
 
-SELECT * FROM users;
+SELECT * FROM memories;
 
 INSERT INTO users (email, first_name, image, last_name, password, username)
 VALUES ('bill@bill', 'bill', '/img/echovaultlogo.png', 'bill', '$2a$10$QO00htdOA1P8nU30brQOL.NlL7QXMMva3B2ud7IsVSFzJZbhzGD4O', 'bill')
@@ -16,7 +16,15 @@ INSERT INTO links (url, echo_id, name)
 VALUES ('https://gofundme.com', 1, 'GoFundMe');
 
 INSERT INTO memories (body, created_at, image, echo_id, user_id)
-VALUES ('I LOVE THIS COHORT', '2020-09-21 09:00:00', '/img/echovaultlogo.png', 1, 1);
+VALUES ('I LOVE THIS COHORT', '2020-09-21 09:00:00', '/img/echovaultlogo.png', 1, 1),
+       ('...like it\'s really COOL', '2020-09-21 09:00:00', '/img/echovaultlogo.png', 1, 1);
+
+INSERT INTO comments (body, created_at, memory_id, user_id)
+VALUES ('I learned so much from Jupiter', '2020-09-21 09:00:00', 2, 1),
+('AGREED', '2020-09-21 09:00:00', 1, 1),
+('Me too', '2020-09-21 09:00:00', 1, 1),
+('Me three!', '2020-09-21 09:00:00', 1, 1),
+('I liked the swag handout from Jupiter Cohort', '2020-09-21 09:00:00', 3, 1);
 
 
 UPDATE users

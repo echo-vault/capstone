@@ -20,9 +20,10 @@
             $('#logout').click(function(){
                 $('#logoutForm').submit();
             })
-            function makeCardsEven(){
-               document.getElementsByClassName("summary-card").style.height = document.getElementsByClassName("profile-card").style.height
-            }
+            $('#addComment').click(function(){
+                $('#commentForm').submit();
+            })
+            $('.modal').modal();
         });
     </script>
 </div>
