@@ -17,14 +17,18 @@ public class Link {
     @Column(nullable = false)
     private String url;
 
+    @Column(nullable = false)
+    private String name;
+
     @ManyToOne
     @JoinColumn(name = "echo_id")
     private Echo echo;
 
     public Link(){}
 
-    public Link(String url){
+    public Link(String url, String name){
         this.url = url;
+        this.name = name;
     }
 
     public long getId() {
@@ -41,6 +45,14 @@ public class Link {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Echo getEcho() {
