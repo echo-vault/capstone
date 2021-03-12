@@ -9,7 +9,7 @@
 
         <div class="carousel">
             <div class="carousel-fixed-item center"><h1 th:text="${echo.getFullName()}"></h1></div>
-            <a th:each="image : ${carousel}" class="carousel-item" th:href="'#' + ${carousel.indexOf(image) + 1} + '!'"><img th:src="${image.path}"></a>
+            <a th:each="image : ${echo.getImages()}" class="carousel-item" th:href="'#' + ${echo.getImages().indexOf(image) + 1} + '!'"><img th:src="${image.path}"></a>
         </div>
 
 
@@ -17,7 +17,7 @@
     <div class="container">
         <div class="row">
             <div class="col s12 m6">
-                <div class="card profile-card">
+                <div class="card profile-card large">
                     <div class="card-image background-image">
                       <img th:src="${echo.backgroundImage}">
                     </div>
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="col s12 m6">
-                <div class="card summary-card">
+                <div class="card summary-card large">
                     <div class="card-content">
                       <span class="card-title">Life Story</span>
                       <p th:text="${echo.summary}"></p>
@@ -45,10 +45,14 @@
     <div class="container">
         <div class="row">
             <div class="col hide-on-small-and-down m3 memory-posters">
-                <h1 class="center">People Who Have Posted Memories</h1>
-                <div th:each="memory : ${echo.getMemories()}" class="chip">
-                    <img th:src="${memory.user.image}">
-                    <span th:text="${memory.user.getFullName()}"></span>
+                <h4 class="center">Posters</h4>
+                <div class="row">
+                    <div class="col s12 center" th:each="memory : ${echo.getMemories()}">
+                        <div class="chip">
+                            <img th:src="${memory.user.image}">
+                            <span th:text="${memory.user.getFullName()}"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col s12 m9">
@@ -56,12 +60,22 @@
                     <div class="col s12">
                         <div class="card horizontal">
                           <div class="card-stacked">
-                            <div class="card-content">
-                              <p>Form for submitting memory here</p>
-                            </div>
-                            <div class="card-action">
-                              <a href="#">Echo your Memory</a>
-                            </div>
+                              <form th:action="@{/memory}" method="post" th:object="${memory}">
+                                <div class="card-content">
+                                    <span class="card-title">Share a memory...</span>
+                                  <div class="input-field col s12">
+                                      <textarea id="textarea1" class="materialize-textarea" th:field="*{body}"></textarea>
+<!--                                      <label for="textarea1">Textarea</label>-->
+                                      <input type="hidden" name="echoId" th:value="${echo.getId()}">
+                                      <input type="hidden" name="userId" th:value="${user.getId()}">
+                                    </div>
+                                </div>
+                                  <div class="card-action">
+                                    <button class="btn waves-effect waves-light" type="submit">Submit
+                                    <i class="material-icons right">send</i>
+                                  </button>
+                                    </div>
+                              </form>
                           </div>
                         </div>
                     </div>
@@ -70,11 +84,23 @@
                             <div class="card-content">
                               <span class="card-title" th:text="${memory.user.getFullName()}"></span>
                               <p th:text="${memory.body}"></p>
-                            </div>
-                            <div class="card-action">
                               <p th:text="${memory.createdAt}"></p>
                             </div>
+                            <div class="card-action">
+                              <div th:if="${memory.getNumberOfComments()} != null">
+                                  <a class="activator" th:text="${memory.getNumberOfComments()}"></a>
+                              </div>
+                                <a class='modal-trigger' href='#modal1' >Add Comment</a>
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title">Comments<i class="material-icons right">close</i></span>
+                                <div th:each="comment : ${memory.getComments()}">
+                                    <h6 th:text="${comment.user.getFullName()}"></h6>
+                                    <p th:text="${comment.body}"></p>
+                                </div>
+                            </div>
                         </div>
+                        <div th:replace="partials/modal.html :: comment-modal"></div>
                     </div>
                 </div>
             </div>
@@ -83,6 +109,7 @@
 
 
 </main>
+
 
 <div th:replace="partials/footer.html :: echo-footer"></div>
 <div th:replace="partials/scripts.html :: scripts"></div>

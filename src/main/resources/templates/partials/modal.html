@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+    <div th:fragment="comment-modal" id="modal1" class="modal large">
+        <h2 class="center">Add a comment</h2>
+        <form th:action="@{/comment}" method="post" th:object="${comment}" id="commentForm">
+            <div class="modal-content">
+
+                    <div class="input-field col s12">
+                        <textarea id="textarea1" class="materialize-textarea" th:field="*{body}"></textarea>
+                    </div>
+                    <input type="hidden" name="memoryId" th:value="${memory.getId()}">
+                    <input type="hidden" name="userId" th:value="${user.getId()}">
+
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class="modal-close waves-effect waves-teal btn">Cancel</a>
+              <a id="addComment" href="#!" class="waves-effect waves-red btn">Add Comment</a>
+            </div>
+        </form>
+    </div>
+
+
+
+
+
+
