@@ -44,11 +44,16 @@ public class User {
     public User(){}
 
     public User(User copy){
+        id = copy.id;
         username = copy.username;
         email = copy.email;
         password = copy.password;
         firstName = copy.firstName;
         lastName = copy.lastName;
+        image = copy.image;
+        memories = copy.memories;
+        echoes = copy.echoes;
+        comments = copy.comments;
     }
 
     public User(String email, String password, String username, String firstName, String lastName){

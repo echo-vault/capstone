@@ -1,5 +1,6 @@
 package com.echovault.capstone.services;
 
+
 import com.echovault.capstone.models.User;
 import com.echovault.capstone.models.UserWithRoles;
 import com.echovault.capstone.repositories.UserRepository;
@@ -13,7 +14,7 @@ public class UserDetailsLoader implements UserDetailsService {
 
     private final UserRepository usersDao;
 
-    public UserDetailsLoader(UserRepository usersDao) {
+    public UserDetailsLoader(UserRepository usersDao){
         this.usersDao = usersDao;
     }
 
