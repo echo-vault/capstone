@@ -11,6 +11,7 @@
     <script>
         $(document).ready(function() {
             $('.carousel').carousel();
+            $('select').formSelect();
             function autoplay() {
                 $('.carousel').carousel('next');
                 setTimeout(autoplay, 4500);

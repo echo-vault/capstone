@@ -49,7 +49,23 @@ public class EchoController {
                            @RequestParam(name = "profile-img") MultipartFile uploadedFile,
                            @RequestParam(name = "background-img") MultipartFile uploadedFile2,
                            @RequestParam(name = "carousel-img") MultipartFile uploadedFile3,
-                           Model model
+                           Model model)
+
+    {
+        FileUpload.savedFile(uploadedFile, echo, uploadPath);
+        FileUpload.savedFile(uploadedFile2, echo, uploadPath);
+        FileUpload.savedFile(uploadedFile3, echo, uploadPath);
+
+        echo.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        Echo savedEcho = echoDao.save(echo);
+        String subject = "New Post Created!";
+//        String body = "Dear " + savedPost.getUser().getUsername() + ". Thank you for creating a post. Your post id is: " + savedPost.getId();
+//
+//        emailService.prepareAndSend(savedEcho, subject, body);
+        model.addAttribute("message", "File successfully uploaded!");
+        return "redirect:/echo-create";
+
+    }
 
     @GetMapping("/echo/{id}")
     public String viewEcho(Model model, @PathVariable long id){
@@ -66,21 +82,8 @@ public class EchoController {
 
 
 
-    ) {
-        FileUpload.savedFile(uploadedFile, echo, uploadPath);
-        FileUpload.savedFile(uploadedFile2, echo, uploadPath);
-        FileUpload.savedFile(uploadedFile3, echo, uploadPath);
 
-        echo.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        Echo savedEcho = echoDao.save(echo);
-        String subject = "New Post Created!";
-//        String body = "Dear " + savedPost.getUser().getUsername() + ". Thank you for creating a post. Your post id is: " + savedPost.getId();
-//
-//        emailService.prepareAndSend(savedEcho, subject, body);
-        model.addAttribute("message", "File successfully uploaded!");
-        return "redirect:/echo-create";
 
-    }
 }
 
 
