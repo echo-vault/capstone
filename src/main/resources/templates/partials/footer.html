@@ -15,33 +15,33 @@
 </footer>
 </div>
 
-<!--        Echo Footer-->
-<!--<div th:fragment="echo-footer" >-->
-<!--        <footer class="page-footer">-->
-<!--          <div class="container">-->
-<!--            <div class="row">-->
-<!--              <div class="col l6 s12">-->
-<!--                <h5 class="white-text">Location</h5>-->
-<!--                <p class="grey-text text-lighten-4" th:text="${echo.restingPlace}"></p>-->
-<!--              </div>-->
-<!--              <div class="col l4 offset-l2 s12">-->
-<!--                <h5 class="white-text">Links</h5>-->
-<!--                <ul>-->
-<!--                  <li th:each="link : ${links}">-->
-<!--                      <a class="grey-text text-lighten-3" th:href="${link.url}" th:text="${link.name}" target="_blank"></a>-->
-<!--                  </li>-->
-<!--                </ul>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="footer-copyright">-->
-<!--            <div class="container">-->
-<!--            © 2014 Copyright Text-->
+
+
+        <div class="page-footer" th:fragment="echo-footer" >
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Location</h5>
+                <p class="grey-text text-lighten-4" th:text="${echo.restingPlace}"></p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                  <li th:each="link : ${echo.getLinks()}">
+                      <a class="grey-text text-lighten-3" th:href="${link.url}" th:text="${link.name}" target="_blank"></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2021 Echo Vault Inc.
 <!--            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </footer>-->
-<!--</div>-->
+            </div>
+          </div>
+        </div>
+
 
 
 
