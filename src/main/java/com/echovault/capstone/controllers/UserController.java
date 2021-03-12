@@ -41,6 +41,7 @@ public class UserController {
     public String goToProfile(@ModelAttribute User user){
         User sessionUser = userService.getLoggedInUser();
         User editedUser = userDao.getOne(sessionUser.getId());
+        user.setId(editedUser.getId());
         user.setPassword(editedUser.getPassword());
         userDao.save(user);
         return "redirect:/profile";
