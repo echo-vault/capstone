@@ -23,7 +23,8 @@ public class UserController {
 
     @GetMapping("/profile")
     public String showProfile(Model model){
-        User user = userService.getLoggedInUser();
+        User sessionUser = userService.getLoggedInUser();
+        User user = userDao.getOne(sessionUser.getId());
         model.addAttribute("user", user);
         return "profile";
     }
@@ -37,9 +38,9 @@ public class UserController {
 
     @PostMapping("/profile/edit")
     public String goToProfile(@ModelAttribute User user){
-//        User editedUser = userService.getLoggedInUser();
-//        user.setId(editedUser.getId());
-        user.setPassword("password");
+        User sessionUser = userService.getLoggedInUser();
+        User editedUser = userDao.getOne(sessionUser.getId());
+        user.setPassword(editedUser.getPassword());
         userDao.save(user);
         return "redirect:/profile";
     }
