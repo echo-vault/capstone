@@ -1,6 +1,8 @@
 package com.echovault.capstone.controllers;
 
 import com.echovault.capstone.StorageService;
+import com.echovault.capstone.Util.Password;
+import com.echovault.capstone.Util.TLSEmail;
 import com.echovault.capstone.models.User;
 import com.echovault.capstone.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -81,5 +84,35 @@ public class HomeController {
     public String logout(){
         return "redirect:/home";
     }
+
+    @GetMapping("/forgot")
+    public String forgotPassowrdForm(){
+        return "forgot-password";
+    }
+
+    @PostMapping("/forgot")
+    public String forgotPassword(@RequestParam(name = "email") String email) throws ServletException, IOException {
+        User user = userDao.findByEmail(email);
+        if(user != null){
+            TLSEmail.sendEmail(user.getEmail(), user.getFirstName());
+            String passwordGen = Password.getThePassword().get(0);
+            user.setPassword(passwordGen);
+            userDao.save(user);
+        }
+        return "email-sent";
+    }
+
+    @GetMapping("/reset-password")
+    public String resetPasswordForm(){
+        return "reset-password";
+    }
+
+    @PostMapping("/reset-password")
+    public String resetPassword(@RequestParam(name="username") String username,
+                                @RequestParam(name="email") String email,
+                                @RequestParam(name="password") String password){
+        return "reset-password";
+    }
+
 
 }
