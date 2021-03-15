@@ -7,28 +7,32 @@
 <form>
     <nav th:replace="partials/navbar :: navbar"></nav>
 
-    <nav>
-        <div class="nav-wrapper">
-            <form th:object="${echo}" method="post">
-                <div class="input-field">
-                    <input id="search" type="text" name="last_name" th:value="${echo}">
-                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                    <i class="material-icons">close</i>
+<!--    <nav>-->
+<!--        <div class="nav-wrapper">-->
+<!--            <form th:object="${echo}" method="post">-->
+<!--                <div class="input-field">-->
+<!--                    <input id="search" type="text" name="last_name" th:value="${echo}">-->
+<!--                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>-->
+<!--                    <i class="material-icons">close</i>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </nav>-->
+
+
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card blue-grey darken-1">
+                <div class="card-content white-text" th:each="echo : ${echos}">
+                    <a th:text="${echo.first_name}" th:href="@{|/echos/${echo.id}|}"></a>
                 </div>
-            </form>
+                <div class="card-action">
+                    <a href="#">This is a link</a>
+                    <a href="#">This is a link</a>
+                </div>
+            </div>
         </div>
-    </nav>
-
-
-    <table>
-
-        <tr th:each="lecture : ${foundEchos}">
-            <td><span th:text="${echo.first_name}" >First Name:</span></td>
-            <td><span th:text="${echo.last_name}" >Last Name</span></td>
-
-        </tr>
-
-    </table>
+    </div>
 
 
 
