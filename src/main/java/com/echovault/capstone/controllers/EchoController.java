@@ -63,7 +63,11 @@ public class EchoController {
                            @RequestParam(name = "image") ArrayList<MultipartFile> images,
                            Model model,
                             @RequestParam(name = "linkName1") String linkName1,
-                           @RequestParam(name = "link1") String link1)
+                           @RequestParam(name = "link1") String link1,
+                           @RequestParam(name = "linkName2") String linkName2,
+                           @RequestParam(name = "link2") String link2,
+                           @RequestParam(name = "linkName3") String linkName3,
+                           @RequestParam(name = "link3") String link3)
         {
          if (profileImg != null) {
             String filename = profileImg.getOriginalFilename();
@@ -129,6 +133,20 @@ public class EchoController {
             link.setEcho(echo);
             linkDao.save(link);
         }
+            if(link2 != null) {
+                Link link = new Link();
+                link.setName(linkName2);
+                link.setUrl(link2);
+                link.setEcho(echo);
+                linkDao.save(link);
+            }
+            if(link3 != null) {
+                Link link = new Link();
+                link.setName(linkName3);
+                link.setUrl(link3);
+                link.setEcho(echo);
+                linkDao.save(link);
+            }
         return "redirect:/echo/" + echo.getId();
     }
 
