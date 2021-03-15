@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,13 +31,25 @@ public class SearchController {
         return "search";
     }
 
-//    @PostMapping("/Search/{id}")
-//    public String Search(Echo echo, Model model, @PathVariable long id) {
-//
-//        List<Echo> foundEchos = echoDao.findAll();
-//        model.addAttribute("foundEchos", echo.getLastName());
-//
-//        return "Search";
-//    }
+    @PostMapping("/search")
+    public String Search(Echo echo, Model model, @RequestParam (name = "search")String search) {
+
+        List<Echo> foundEchos = echoDao.findAll();
+        List<Echo> matchedEchos = new ArrayList<>();
+        for(Echo e : foundEchos){
+            if(e.getLastName().equals(search)){
+                matchedEchos.add(e);
+            }
+            if(e.getFirstName().equals(search)){
+                matchedEchos.add(e);
+            }
+            if(e.getFullName().equals(search)){
+                matchedEchos.add(e);
+            }
+        }
+        model.addAttribute("echos", matchedEchos);
+
+        return "Search";
+    }
 
 }
