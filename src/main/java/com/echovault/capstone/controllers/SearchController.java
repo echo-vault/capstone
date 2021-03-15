@@ -21,17 +21,21 @@ public class SearchController {
     }
 
     @GetMapping("/search")
-    public String search(){
+    public String search(Model model){
+        List<Echo> echoList = echoDao.findAll();
+
+//        model.addAttribute("firstName", "All Echos");
+        model.addAttribute("echos", echoList);
         return "search";
     }
 
-    @PostMapping("/Search/{id}")
-    public String Search(Echo echo, Model model, @PathVariable long id) {
-
-        List<Echo> foundEchos = echoDao.findAll();
-        model.addAttribute("foundEchos", echo.getLastName());
-
-        return "Search";
-    }
+//    @PostMapping("/Search/{id}")
+//    public String Search(Echo echo, Model model, @PathVariable long id) {
+//
+//        List<Echo> foundEchos = echoDao.findAll();
+//        model.addAttribute("foundEchos", echo.getLastName());
+//
+//        return "Search";
+//    }
 
 }
