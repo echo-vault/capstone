@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/head :: head"></head>
+<head th:replace="partials/head :: head('Hello, ' + ${user.getFirstName()})"></head>
 <body>
 <main>
     <nav th:replace="partials/navbar :: navbar"></nav>
