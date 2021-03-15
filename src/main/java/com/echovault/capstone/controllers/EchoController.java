@@ -61,8 +61,10 @@ public class EchoController {
                            @RequestParam(name = "bgImg") MultipartFile bgImg,
 //                           @RequestParam(name = "carousel-img") MultipartFile uploadedFile3,
                            @RequestParam(name = "image") ArrayList<MultipartFile> images,
-                           Model model)
-    {
+                           Model model,
+                            @RequestParam(name = "linkName1") String linkName1,
+                           @RequestParam(name = "link1") String link1)
+        {
          if (profileImg != null) {
             String filename = profileImg.getOriginalFilename();
             String filepath = Paths.get(uploadPath, filename).toString();
@@ -119,6 +121,13 @@ public class EchoController {
 
             }
         }
+        }
+        if(link1 != null) {
+            Link link = new Link();
+            link.setName(linkName1);
+            link.setUrl(link1);
+            link.setEcho(echo);
+            linkDao.save(link);
         }
         return "redirect:/echo/" + echo.getId();
     }
