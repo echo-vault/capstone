@@ -68,7 +68,6 @@ public class Echo {
         this.lastName = lastName;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
-        this.createdAt = new Date();
     }
 
     public String getFullName(){

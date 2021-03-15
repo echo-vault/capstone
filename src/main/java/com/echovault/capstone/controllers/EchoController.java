@@ -53,24 +53,48 @@ public class EchoController {
 
     @PostMapping("/echo-create")
     public String saveFile(@ModelAttribute Echo echo,
-                           @RequestParam(name = "profile-img") MultipartFile uploadedFile,
-                           @RequestParam(name = "background-img") MultipartFile uploadedFile2,
+                           @RequestParam(name = "profileImg") MultipartFile profileImg,
+                           @RequestParam(name = "bgImg") MultipartFile bgImg,
 //                           @RequestParam(name = "carousel-img") MultipartFile uploadedFile3,
-                           @RequestParam(name = "image") String path,
+//                           @RequestParam(name = "image") String path,
                            Model model)
     {
-        FileUpload.savedFile(uploadedFile, echo, uploadPath);
-        FileUpload.backgroundFile(uploadedFile2, echo, uploadPath);
+         if (profileImg != null) {
+            String filename = profileImg.getOriginalFilename();
+            String filepath = Paths.get(uploadPath, filename).toString();
+            File destinationFile = new File(filepath);
+            try {
+                profileImg.transferTo(destinationFile);
+                echo.setProfileImage("/uploads/" + filename);
+            } catch (IOException e) {
+                e.printStackTrace();
+
+            }
+        }
+        if (bgImg != null) {
+            String filename = bgImg.getOriginalFilename();
+            String filepath = Paths.get(uploadPath, filename).toString();
+            File destinationFile = new File(filepath);
+            try {
+                bgImg.transferTo(destinationFile);
+                echo.setBackgroundImage("/uploads/" + filename);
+            } catch (IOException e) {
+                e.printStackTrace();
+
+            }
+        }
 //        FileUpload.savedFile(uploadedFile3, echo, uploadPath);
         echo.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        Image image = new Image(path);
-        echo.getImages().add(image);
-        Echo savedEcho = echoDao.save(echo);
-        String subject = "New Post Created!";
+        echo.setCreatedAt(new Date());
+        echoDao.save(echo);
+//        Image image = new Image(path);
+//        echo.getImages().add(image);
+//        Echo savedEcho = echoDao.save(echo);
+//        String subject = "New Post Created!";
 //        String body = "Dear " + savedPost.getUser().getUsername() + ". Thank you for creating a post. Your post id is: " + savedPost.getId();
 //
 //        emailService.prepareAndSend(savedEcho, subject, body);
-        model.addAttribute("message", "File successfully uploaded!");
+//        model.addAttribute("message", "File successfully uploaded!");
         return "redirect:/echo/" + echo.getId();
     }
 
