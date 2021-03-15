@@ -7,30 +7,35 @@
 <form>
     <nav th:replace="partials/navbar :: navbar"></nav>
 
-<!--    <nav>-->
-<!--        <div class="nav-wrapper">-->
-<!--            <form th:object="${echo}" method="post">-->
-<!--                <div class="input-field">-->
-<!--                    <input id="search" type="text" name="last_name" th:value="${echo}">-->
-<!--                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>-->
-<!--                    <i class="material-icons">close</i>-->
-<!--                </div>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </nav>-->
+
+    <nav>
+        <div class="nav-wrapper">
+            <form th:action="@{/search}" method="post">
+                <div class="input-field" >
+                    <input id="search" type="search" required name="search">
+                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i>
+                </div>
+            </form>
+        </div>
+    </nav>
 
 
     <div class="row">
         <div class="col s12 m6" th:each="echo : ${echos}">
-            <div class="card blue-grey darken-1">
-                <div class="card-content white-text" >
-                    <span class="card-title" th:text="${echo.getFullName()}"></span>
+            <div class="card profile-card large">
+                <div class="card-image background-image">
+                    <img th:src="${echo.backgroundImage}" style="max-height: max-content">
                 </div>
-                <div class="card-action">
-
-                    <a th:href="@{/echo/{id}(id = ${echo.getId()})}">View Echo</a>
-
+                <img class="circle profile-image" th:src="${echo.profileImage}" style="max-height: 200px">
+                <div class="card-content profile-content">
+                    <a class="card-title center" th:text="${echo.getFullName()}" th:href="@{/echo/{id}(id = ${echo.getId()})}"></a>
+                    <p class="center" th:text="${echo.getDisplayedDates()}"></p>
                 </div>
+
+<!--            <div class="card-action">-->
+<!--                <a th:href="@{/echo/{id}(id = ${echo.getId()})}">View Echo</a>-->
+<!--            </div>-->
             </div>
         </div>
     </div>

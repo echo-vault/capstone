@@ -8,5 +8,6 @@ import java.util.List;
 public interface EchoRepository extends JpaRepository<Echo, Long> {
 
     List<Echo> findAll();
+    List<Echo> findAllByLastName(String lastName);
 
 }
