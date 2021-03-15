@@ -24,7 +24,7 @@ public class SearchController {
     public String search(Model model){
         List<Echo> echoList = echoDao.findAll();
 
-        model.addAttribute("firstName", "All Echos");
+//        model.addAttribute("firstName", "All Echos");
         model.addAttribute("echos", echoList);
         return "search";
     }
