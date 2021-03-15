@@ -15,11 +15,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.List;
 
 @Controller
 public class EchoController {
@@ -46,29 +50,86 @@ public class EchoController {
     private String uploadPath;
 
     @GetMapping("/echo-create")
-    public String showCreateForm() {
+    public String showCreateForm(Model model) {
+        model.addAttribute("echo", new Echo());
         return "echo-create";
     }
 
     @PostMapping("/echo-create")
     public String saveFile(@ModelAttribute Echo echo,
-                           @RequestParam(name = "profile-img") MultipartFile uploadedFile,
-                           @RequestParam(name = "background-img") MultipartFile uploadedFile2,
-                           @RequestParam(name = "carousel-img") MultipartFile uploadedFile3,
-                           Model model) {
-        FileUpload.savedFile(uploadedFile, echo, uploadPath);
-        FileUpload.savedFile(uploadedFile2, echo, uploadPath);
-        FileUpload.savedFile(uploadedFile3, echo, uploadPath);
+                           @RequestParam(name = "profileImg") MultipartFile profileImg,
+                           @RequestParam(name = "bgImg") MultipartFile bgImg,
+//                           @RequestParam(name = "carousel-img") MultipartFile uploadedFile3,
+                           @RequestParam(name = "image") ArrayList<MultipartFile> images,
+                           Model model,
+                            @RequestParam(name = "linkName1") String linkName1,
+                           @RequestParam(name = "link1") String link1)
+        {
+         if (profileImg != null) {
+            String filename = profileImg.getOriginalFilename();
+            String filepath = Paths.get(uploadPath, filename).toString();
+            File destinationFile = new File(filepath);
+            try {
+                profileImg.transferTo(destinationFile);
+                echo.setProfileImage("/uploads/" + filename);
+            } catch (IOException e) {
+                e.printStackTrace();
 
+            }
+        }
+        if (bgImg != null) {
+            String filename = bgImg.getOriginalFilename();
+            String filepath = Paths.get(uploadPath, filename).toString();
+            File destinationFile = new File(filepath);
+            try {
+                bgImg.transferTo(destinationFile);
+                echo.setBackgroundImage("/uploads/" + filename);
+            } catch (IOException e) {
+                e.printStackTrace();
+
+            }
+        }
+        System.out.println(images);
+
+
+//        FileUpload.savedFile(uploadedFile3, echo, uploadPath);
         echo.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        Echo savedEcho = echoDao.save(echo);
-        String subject = "New Post Created!";
+        echo.setCreatedAt(new Date());
+        echoDao.save(echo);
+//        Image image = new Image(path);
+//        echo.getImages().add(image);
+//        Echo savedEcho = echoDao.save(echo);
+//        String subject = "New Post Created!";
 //        String body = "Dear " + savedPost.getUser().getUsername() + ". Thank you for creating a post. Your post id is: " + savedPost.getId();
 //
 //        emailService.prepareAndSend(savedEcho, subject, body);
-        model.addAttribute("message", "File successfully uploaded!");
-        return "redirect:/echo-create";
+//        model.addAttribute("message", "File successfully uploaded!");
+        if (images != null) {
+        for(MultipartFile image: images){
+            System.out.println(image);
+            String filename = image.getOriginalFilename();
+            String filepath = Paths.get(uploadPath, filename).toString();
+            File destinationFile = new File(filepath);
+            try {
+                image.transferTo(destinationFile);
+                Image img = new Image();
+                img.setPath("/uploads/" + filename);
+                img.setEcho(echo);
+                imageDao.save(img);
+            } catch (IOException e) {
+                e.printStackTrace();
 
+            }
+        }
+        }
+        if(link1 != null) {
+            Link link = new Link();
+            link.setName(linkName1);
+            link.setUrl(link1);
+            link.setEcho(echo);
+            linkDao.save(link);
+        }
+        return "redirect:/echo/" + echo.getId();
     }
 
     @GetMapping("/echo/{id}")
@@ -105,6 +166,7 @@ public class EchoController {
         commentDao.save(comment);
         return "redirect:/echo/" + comment.getMemory().getEcho().getId();
     }
+
 }
 
 

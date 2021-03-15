@@ -19,15 +19,15 @@
             <div class="col s12 m6">
                 <div class="card profile-card large">
                     <div class="card-image background-image">
-                      <img th:src="${echo.backgroundImage}">
+                      <img th:src="${echo.backgroundImage}" style="max-height: max-content">
                     </div>
-                    <img class="circle profile-image" th:src="${echo.profileImage}">
+                    <img class="circle profile-image" th:src="${echo.profileImage}" style="max-height: 200px">
                     <div class="card-content profile-content">
                       <p class="center" th:text="${echo.getDisplayedDates()}"></p>
                     </div>
                 </div>
             </div>
-            <div class="col s12 m6">
+            <div class="col s12 m6 valign-wrapper">
                 <div class="card summary-card large">
                     <div class="card-content">
                       <span class="card-title">Life Story</span>
@@ -79,6 +79,8 @@
                           </div>
                         </div>
                     </div>
+                </div>
+                <div class="row scrollable">
                     <div th:each="memory : ${echo.getMemories()}" class="col s12 m6">
                         <div class="card">
                             <div class="card-content">
@@ -102,6 +104,7 @@
                         </div>
                         <div th:replace="partials/modal.html :: comment-modal"></div>
                     </div>
+                </div>
                 </div>
             </div>
         </div>

@@ -1,26 +1,41 @@
 package com.echovault.capstone.controllers;
 
-import com.echovault.capstone.models.Echo;
+import com.echovault.capstone.StorageService;
 import com.echovault.capstone.models.User;
 import com.echovault.capstone.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 
 @Controller
 public class HomeController {
 
     private final UserRepository userDao;
     private final PasswordEncoder encoder;
+//    private final StorageService storageService;
+
+//    @Autowired
+//    public FileUploadController(StorageService storageService) {
+//        this.storageService = storageService;
+//    }
+
 
     public HomeController(UserRepository userDao, PasswordEncoder encoder) {
         this.userDao = userDao;
         this.encoder = encoder;
     }
+
+    @Value("${file-upload-path}")
+    private String uploadPath;
 
     @GetMapping("/login")
     public String login(){
@@ -39,7 +54,22 @@ public class HomeController {
     }
 
     @PostMapping("/register")
-    public String createUser(@ModelAttribute User user){
+    public String createUser(@ModelAttribute User user, @RequestParam(name = "user-profile-img") MultipartFile uploadedFile, Model model){
+//        User user = userDao.findById(principal.getId()).get();
+//        model.addAttribute("user", user);
+        if(uploadedFile != null) {
+            String fileName = uploadedFile.getOriginalFilename();
+            String filePath = Paths.get(uploadPath, fileName).toString();
+            File destinationFile = new File(filePath);
+            try {
+                uploadedFile.transferTo(destinationFile);
+                user.setImage("/uploads/" + fileName);
+                model.addAttribute("message", "File successfully uploaded!");
+            } catch (IOException e) {
+                e.printStackTrace();
+                model.addAttribute("message", "Oops! Something went wrong! " + e);
+            }
+        }
         String password = user.getPassword();
         String hash = encoder.encode(password);
         user.setPassword(hash);
