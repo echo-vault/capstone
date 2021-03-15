@@ -15,11 +15,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.List;
 
 @Controller
 public class EchoController {
@@ -56,7 +60,7 @@ public class EchoController {
                            @RequestParam(name = "profileImg") MultipartFile profileImg,
                            @RequestParam(name = "bgImg") MultipartFile bgImg,
 //                           @RequestParam(name = "carousel-img") MultipartFile uploadedFile3,
-//                           @RequestParam(name = "image") String path,
+                           @RequestParam(name = "image") ArrayList<MultipartFile> images,
                            Model model)
     {
          if (profileImg != null) {
@@ -83,6 +87,9 @@ public class EchoController {
 
             }
         }
+        System.out.println(images);
+
+
 //        FileUpload.savedFile(uploadedFile3, echo, uploadPath);
         echo.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         echo.setCreatedAt(new Date());
@@ -95,6 +102,24 @@ public class EchoController {
 //
 //        emailService.prepareAndSend(savedEcho, subject, body);
 //        model.addAttribute("message", "File successfully uploaded!");
+        if (images != null) {
+        for(MultipartFile image: images){
+            System.out.println(image);
+            String filename = image.getOriginalFilename();
+            String filepath = Paths.get(uploadPath, filename).toString();
+            File destinationFile = new File(filepath);
+            try {
+                image.transferTo(destinationFile);
+                Image img = new Image();
+                img.setPath("/uploads/" + filename);
+                img.setEcho(echo);
+                imageDao.save(img);
+            } catch (IOException e) {
+                e.printStackTrace();
+
+            }
+        }
+        }
         return "redirect:/echo/" + echo.getId();
     }
 
