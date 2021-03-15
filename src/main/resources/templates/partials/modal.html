@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-    <div th:fragment="comment-modal" id="modal1" class="modal large">
+    <div th:fragment="comment-modal" th:id="${memory.getId()}" class="modal large">
         <h2 class="center">Add a comment</h2>
-        <form th:action="@{/comment}" method="post" th:object="${comment}" id="commentForm">
+        <form th:action="@{/comment}" method="post" th:object="${comment}">
             <div class="modal-content">
 
                     <div class="input-field col s12">
@@ -15,7 +15,7 @@
             </div>
             <div class="modal-footer">
               <a href="#!" class="modal-close waves-effect waves-teal btn">Cancel</a>
-              <a id="addComment" href="#!" class="waves-effect waves-red btn">Add Comment</a>
+              <button type="submit" class="waves-effect waves-red btn">Add Comment</button>
             </div>
         </form>
     </div>

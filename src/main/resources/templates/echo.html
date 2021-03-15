@@ -1,6 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<div th:replace="partials/head.html :: head"></div>
+<div th:replace="partials/head.html :: head(${echo.getFullName()})"></div>
 <body>
 <div th:replace="partials/navbar.html :: navbar"></div>
 
@@ -92,7 +92,7 @@
                               <div th:if="${memory.getNumberOfComments()} != null">
                                   <a class="activator" th:text="${memory.getNumberOfComments()}"></a>
                               </div>
-                                <a class='modal-trigger' href='#modal1' >Add Comment</a>
+                                <a class='modal-trigger' th:href="'#' + ${memory.getId()}" >Add Comment</a>
                             </div>
                             <div class="card-reveal">
                                 <span class="card-title">Comments<i class="material-icons right">close</i></span>
