@@ -12,6 +12,9 @@
                 <li>
                     <a th:href="@{/}">Home</a>
                 </li>
+                <li>
+                    <a th:href="@{/search}">Search</a>
+                </li>
                 <li sec:authorize="isAnonymous()">
                     <a th:href="@{/login}">Login</a>
                 </li>

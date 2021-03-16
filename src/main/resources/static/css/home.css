@@ -6,3 +6,17 @@
     height: 160px;
     color:darkblue;
 }
+
+.input-field {
+    padding: 20px !important;
+
+}
+
+.card-content{
+    height: 130px;
+}
+
+.card-action {
+    height: 100px;
+    color: white;
+}

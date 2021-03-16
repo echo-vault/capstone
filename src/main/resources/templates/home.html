@@ -20,7 +20,7 @@
         <div class="card blue-grey darken-1">
             <div class="card-content white-text">
                 <span class="card-title">Register and Login</span>
-                <p>Register with Echo Vault to be able to add an echo, add a memory, post an image, or leave a comment</p>
+                <p>Register with Echo Vault to be able to add an echo, add a memory, post an image, or comment on an echo</p>
             </div>
             <div class="card-action">
                 <a th:href="@{/register}">Register</a>
@@ -33,10 +33,16 @@
         <div class="card blue-grey darken-1">
             <div class="card-content white-text">
                 <span class="card-title">Search Echos</span>
-                <p>Search for an Echo</p>
+                <p>Search for an Echo by first or last name</p>
             </div>
             <div class="card-action">
-                <a th:href="@{/search}">Search for an Echo</a>
+                <form th:action="@{/search}" method="post">
+                    <div class="input-field" >
+                        <input id="search" type="search" required name="search">
+                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                        <i class="material-icons">close</i>
+                    </div>
+                </form>
 
 
             </div>
