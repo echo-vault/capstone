@@ -83,7 +83,7 @@
             <label for="burialaddress">Resting Place</label>
             <input type="text" name="burialaddress" id="burialaddress" th:field="*{restingPlace}">
         </div>
-
+        <input type="hidden" name="current-links" th:value="${echo.getLinks()}">
         <div class="input-field col s12">
             <select name="linkName1">
                 <option value="" disabled selected>Choose What kind of link to add.</option>

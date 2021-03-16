@@ -154,6 +154,7 @@ public class EchoController {
                            @RequestParam(name = "current-carousel") List<Image> currentImages,
                            @RequestParam(name = "current-profile") String profileImgPath,
                            @RequestParam(name = "current-background") String bgImgPath,
+                           @RequestParam(name = "current-links") List<Link> currentLinks,
                            @RequestParam(name = "linkName1", defaultValue = "") String linkName1,
                            @RequestParam(name = "link1", defaultValue = "") String link1,
                            @RequestParam(name = "linkName2", defaultValue = "") String linkName2,
@@ -167,6 +168,7 @@ public class EchoController {
         echo.setBackgroundImage(bgImgPath);
         echo.setProfileImage(profileImgPath);
         echo.setImages(currentImages);
+        echo.setLinks(currentLinks);
 
         if (profileImg != null) {
             String filename = profileImg.getOriginalFilename();
