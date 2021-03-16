@@ -12,28 +12,39 @@
                 <div class="input-field col s6">
                     <input id="first_name" type="text" class="validate" th:field="*{firstName}">
                     <label for="first_name">First Name</label>
+                    <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="red-text" />
                 </div>
                 <div class="input-field col s6">
                     <input id="last_name" type="text" class="validate" th:field="*{lastName}">
                     <label for="last_name">Last Name</label>
+                    <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="red-text" />
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
                     <input id="username" type="text" class="validate" th:field="*{username}">
                     <label for="username">Username</label>
+                    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="red-text"/>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
                     <input id="password" type="password" class="validate" th:field="*{password}">
                     <label for="password">Password</label>
+                    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="red-text"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="confirmPassword" type="password" class="validate" name="confirm">
+                    <label for="confirmPassword">Confirm Password</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
                     <input id="email" type="email" class="validate" th:field="*{email}">
                     <label for="email">Email</label>
+                    <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="red-text"/>
                 </div>
             </div>
             <div>
