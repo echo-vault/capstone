@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head('Edit Echo')">
+
+</head>
+<body>
+
+<nav th:replace="partials/navbar :: navbar"></nav>
+<div class="container">
+    <h1>Edit Your Echo</h1>
+
+    <form th:action="@{/echo/{id}/edit/(id=${echo.id})}" th:method="POST" th:object="${echo}" enctype="multipart/form-data" >
+
+        <div class="file-field input-field">
+            <div class="btn">
+                <span>Profile</span>
+                <input type="file" name="profileImg">
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+            </div>
+        </div>
+
+        <div class="file-field input-field">
+            <div class="btn">
+                <span>Background</span>
+                <input type="file" name="bgImg">
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+            </div>
+        </div>
+
+        <div class="file-field input-field">
+            <div class="btn">
+                <span>Carousel</span>
+                <input type="file" multiple  name="image">
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text" placeholder="Upload one or more images">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="first_name" type="text" class="validate" th:field="*{firstName}" >
+                        <label for="first_name">First Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="last_name" type="text" class="validate" th:field="*{lastName}">
+                        <label for="last_name">Last Name</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <label for="birthdate">Birthdate</label>
+            <input type="text" class="datepicker" id="birthdate" th:field="*{birthDate}">
+        </div>
+
+        <div>
+            <label for="passingdate">Date of Passing</label>
+            <input type="text" class="datepicker" id="passingdate" th:field="*{deathDate}">
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="textarea1" class="materialize-textarea" th:field="*{summary}"></textarea>
+                        <label for="textarea1">Life Story</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-field">
+            <label for="burialaddress">resting Place</label>
+            <input type="text" name="burialaddress" id="burialaddress" th:field="*{restingPlace}">
+        </div>
+
+        <div class="input-field col s12">
+            <select name="linkName1">
+                <option value="" disabled selected>Choose What kind of link to add.</option>
+                <option value="Donations">Donations</option>
+                <option value="Flowers/Condolences">Flowers/Condolences</option>
+                <option value="Services Details">Services Details</option>
+            </select>
+            <label>Helpful Links</label>
+        </div>
+
+        <div class="input-field">
+            <label for="link1">Link 1</label>
+            <input type="text" name="link1" id="link1">
+        </div>
+
+        <div class="input-field col s12">
+            <select name="linkName2">
+                <option value="" disabled selected>Choose What kind of link to add.</option>
+                <option value="Donations">Donations</option>
+                <option value="Flowers/Condolences">Flowers/Condolences</option>
+                <option value="Services Details">Services Details</option>
+            </select>
+            <label>Helpful Links</label>
+        </div>
+
+        <div class="input-field">
+            <label for="link2">Link 2</label>
+            <input type="text" name="link2" id="link2">
+        </div>
+
+        <div class="input-field col s12">
+            <select name="linkName3">
+                <option value="" disabled selected>Choose What kind of link to add.</option>
+                <option value="Donations">Donations</option>
+                <option value="Flowers/Condolences">Flowers/Condolences</option>
+                <option value="Services Details">Services Details</option>
+            </select>
+            <label>Helpful Links</label>
+        </div>
+
+        <div class="input-field">
+            <label for="link3">Link 3</label>
+            <input type="text" name="link3" id="link3">
+        </div>
+
+        <button class="btn waves-effect waves-light" type="submit" name="action">Save Changes
+            <i class="material-icons right">check</i>
+        </button>
+    </form>
+
+</div>
+<div th:replace="partials/scripts :: scripts"></div>
+</body>
+</html>

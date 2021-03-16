@@ -137,6 +137,32 @@ public class EchoController {
         return "redirect:/echo/" + echo.getId();
     }
 
+    @GetMapping("/echo/{id}/edit")
+    public String showEditForm(Model model, @PathVariable long id) {
+        Echo echo = echoDao.getOne(id);
+        User sessionUser = userService.getLoggedInUser();
+        User user = userDao.getOne(sessionUser.getId());
+        model.addAttribute("echo", echo);
+        return "echo-edit";
+    }
+
+//    @PostMapping("/echo-edit")
+//    public String editEcho(@ModelAttribute Echo echo,
+//                           @RequestParam(name = "profileImg") MultipartFile profileImg,
+//                           @RequestParam(name = "bgImg") MultipartFile bgImg,
+//                           @RequestParam(name = "image") ArrayList<MultipartFile> images,
+//                           @RequestParam(name = "linkName1", defaultValue = "") String linkName1,
+//                           @RequestParam(name = "link1", defaultValue = "") String link1,
+//                           @RequestParam(name = "linkName2", defaultValue = "") String linkName2,
+//                           @RequestParam(name = "link2", defaultValue = "") String link2,
+//                           @RequestParam(name = "linkName3", defaultValue = "") String linkName3,
+//                           @RequestParam(name = "link3", defaultValue = "") String link3,
+//                           Model model){
+//
+//
+//
+//    }
+
     @GetMapping("/echo/{id}")
     public String viewEcho(Model model, @PathVariable long id){
         Echo echo = echoDao.getOne(id);
