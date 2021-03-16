@@ -12,6 +12,28 @@
         <img th:src="@{'' + ${user.image}}" style="max-height: 200px"/>
     </div>
     <a th:href="@{/profile/edit}" class="waves-effect waves-light btn">Edit Profile</a>
+    <div th:each="echo : ${echoes}">
+        <div class="row">
+            <div class="col s6 m4">
+                <div class="card">
+                    <div class="card-image">
+                        <img th:src="@{'' + ${echo.profileImage}}">
+                    </div>
+                    <div>
+                        <p class="card-title" th:text="${echo.firstName} + ' ' + ${echo.lastName}"></p>
+                    </div>
+                    <div class="card-content">
+                        <p th:text="${echo.birthDate} + ' - ' + ${echo.deathDate}"></p>
+                    </div>
+                    <div class="card-action">
+                        <a th:href="@{/echo/{id}/(id=${echo.id})}">Go to Echo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
 
 </main>
 
