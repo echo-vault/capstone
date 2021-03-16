@@ -13,8 +13,9 @@
 
         <div class="file-field input-field">
             <div class="btn">
-                <span>Profile</span>
+                <span>Change Profile Image</span>
                 <input type="file" name="profileImg">
+                <input type="hidden" name="current-profile" th:value="${echo.profileImage}">
             </div>
             <div class="file-path-wrapper">
                 <input class="file-path validate" type="text">
@@ -23,8 +24,9 @@
 
         <div class="file-field input-field">
             <div class="btn">
-                <span>Background</span>
+                <span>Change Background Image</span>
                 <input type="file" name="bgImg">
+                <input type="hidden" name="current-background" th:value="${echo.backgroundImage}">
             </div>
             <div class="file-path-wrapper">
                 <input class="file-path validate" type="text">
@@ -35,9 +37,10 @@
             <div class="btn">
                 <span>Carousel</span>
                 <input type="file" multiple  name="image">
+                <input type="hidden" name="current-carousel" th:value="${echo.images}">
             </div>
             <div class="file-path-wrapper">
-                <input class="file-path validate" type="text" placeholder="Upload one or more images">
+                <input class="file-path validate" type="text" placeholder="Add one or more images">
             </div>
         </div>
 
@@ -77,7 +80,7 @@
         </div>
 
         <div class="input-field">
-            <label for="burialaddress">resting Place</label>
+            <label for="burialaddress">Resting Place</label>
             <input type="text" name="burialaddress" id="burialaddress" th:field="*{restingPlace}">
         </div>
 
