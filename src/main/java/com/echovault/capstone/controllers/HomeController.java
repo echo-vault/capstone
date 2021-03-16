@@ -12,6 +12,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+
+import org.springframework.validation.annotation.Validated;
+
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -58,9 +62,39 @@ public class HomeController {
     }
 
     @PostMapping("/register")
-    public String createUser(@ModelAttribute User user, @RequestParam(name = "user-profile-img") MultipartFile uploadedFile, Model model){
+    public String createUser(@ModelAttribute @Validated User user, Errors validation, @RequestParam(name = "user-profile-img")MultipartFile uploadedFile, @RequestParam(name = "confirm") String confirm, Model model){
 //        User user = userDao.findById(principal.getId()).get();
 //        model.addAttribute("user", user);
+        for (User u: userDao.findAll()){
+            if(u.getUsername().equalsIgnoreCase(user.getUsername())){
+                validation.rejectValue(
+                        "username",
+                        "user.username",
+                        "username already exists"
+                );
+            }
+        }
+        for (User u: userDao.findAll()){
+            if(u.getEmail().equalsIgnoreCase(user.getEmail())){
+                validation.rejectValue(
+                        "email",
+                        "user.email",
+                        "email has already been registered for this site"
+                );
+            }
+        }
+        if(!user.getPassword().equals(confirm)){
+            validation.rejectValue(
+                    "password",
+                    "user.password",
+                    "passwords do not match"
+            );
+        }
+        if(validation.hasErrors()){
+            model.addAttribute("errors", validation);
+            model.addAttribute("user", user);
+            return "register";
+        }
         if(uploadedFile != null) {
             String fileName = uploadedFile.getOriginalFilename();
             String filePath = Paths.get(uploadPath, fileName).toString();

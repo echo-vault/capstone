@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Array;
@@ -56,7 +58,7 @@ public class EchoController {
     }
 
     @PostMapping("/echo-create")
-    public String saveFile(@ModelAttribute Echo echo,
+    public String saveFile(@ModelAttribute @Validated Echo echo, Errors validation,
                            @RequestParam(name = "profileImg") MultipartFile profileImg,
                            @RequestParam(name = "bgImg") MultipartFile bgImg,
                            @RequestParam(name = "image") ArrayList<MultipartFile> images,
@@ -68,6 +70,11 @@ public class EchoController {
                            @RequestParam(name = "link3", defaultValue = "") String link3,
                            Model model)
         {
+            if(validation.hasErrors()){
+                model.addAttribute("errors", validation);
+                model.addAttribute("echo", echo);
+                return "echo-create";
+            }
          if (profileImg != null) {
             String filename = profileImg.getOriginalFilename();
             String filepath = Paths.get(uploadPath, filename).toString();
