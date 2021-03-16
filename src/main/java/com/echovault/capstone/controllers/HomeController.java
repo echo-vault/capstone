@@ -11,6 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -93,10 +94,12 @@ public class HomeController {
     @PostMapping("/forgot")
     public String forgotPassword(@RequestParam(name = "email") String email) throws ServletException, IOException {
         User user = userDao.findByEmail(email);
+        String randomPassword = Password.randomGen();
+        String body = "Hello " + user.getFirstName() + ", your temporary password is "+ randomPassword +"\n\nPlease go to http://localhost:8080/reset-password";
         if(user != null){
-            TLSEmail.sendEmail(user.getEmail(), user.getFirstName());
-            String passwordGen = Password.getThePassword().get(0);
-            user.setPassword(passwordGen);
+            TLSEmail.sendEmail(user.getEmail(), "Reset Password", body);
+            String hash = encoder.encode(randomPassword);
+            user.setPassword(hash);
             userDao.save(user);
         }
         return "email-sent";
@@ -110,8 +113,36 @@ public class HomeController {
     @PostMapping("/reset-password")
     public String resetPassword(@RequestParam(name="username") String username,
                                 @RequestParam(name="email") String email,
-                                @RequestParam(name="password") String password){
+                                @RequestParam(name="password") String password,
+                                Model model){
+
+        User user = userDao.findByEmail(email);
+        if(user.getUsername().equals(username) && Password.check(password, user.getPassword())){
+            return changePasswordForm(user, model);
+        }
+
         return "reset-password";
+    }
+
+    @GetMapping("/change-password")
+    public String changePasswordForm(User user, Model model){
+        model.addAttribute("user", user);
+        return "change-password";
+    }
+
+    @PostMapping("/change-password")
+    public String changePassword(@RequestParam(name="password")String password,
+                                 @RequestParam(name="confirm")String confirm,
+                                 @RequestParam(name="id")long id,
+                                 Model model){
+        User user = userDao.getOne(id);
+        if (password.equals(confirm)){
+            String hash = encoder.encode(password);
+            user.setPassword(hash);
+            userDao.save(user);
+            return "login";
+        }
+        return changePasswordForm(user, model);
     }
 
 

@@ -25,11 +25,11 @@ public class EmailUtil {
             msg.addHeader("format", "flowed");
             msg.addHeader("Content-Transfer-Encoding", "8bit");
 
-            msg.setFrom(new InternetAddress("seyyadrijaya.com"));
+            msg.setFrom(new InternetAddress("echovault.xyz"));
 
             msg.setReplyTo(InternetAddress.parse("no_reply@example.com", false));
 
-            msg.setSubject("My first Email from Java app","UTF-8");
+//            msg.setSubject("My first Email from Java app","UTF-8");
 
             msg.setText(body, "UTF-8");
 
