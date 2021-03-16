@@ -96,8 +96,9 @@ public class HomeController {
         User user = userDao.findByEmail(email);
         String randomPassword = Password.randomGen();
         String body = "Hello " + user.getFirstName() + ", your temporary password is "+ randomPassword +"\n\nPlease go to http://localhost:8080/reset-password";
+        String subject = "Reset Password";
         if(user != null){
-            TLSEmail.sendEmail(user.getEmail(), "Reset Password", body);
+            TLSEmail.sendEmail(user.getEmail(), subject, body);
             String hash = encoder.encode(randomPassword);
             user.setPassword(hash);
             userDao.save(user);
