@@ -25,7 +25,7 @@
                 <p class="grey-text text-lighten-4" th:text="${echo.restingPlace}"></p>
               </div>
               <div class="col l4 offset-l2 s12">
-                  <div th:if="${echo.getLinks()} != null">
+                  <div th:if="${echo.getLinks().size()} > 0">
                     <h5 class="white-text">Links</h5>
                     <ul>
 

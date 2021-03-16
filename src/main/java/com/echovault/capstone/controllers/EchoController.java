@@ -60,12 +60,12 @@ public class EchoController {
                            @RequestParam(name = "profileImg") MultipartFile profileImg,
                            @RequestParam(name = "bgImg") MultipartFile bgImg,
                            @RequestParam(name = "image") ArrayList<MultipartFile> images,
-                           @RequestParam(name = "linkName1") String linkName1,
-                           @RequestParam(name = "link1") String link1,
-                           @RequestParam(name = "linkName2") String linkName2,
-                           @RequestParam(name = "link2") String link2,
-                           @RequestParam(name = "linkName3") String linkName3,
-                           @RequestParam(name = "link3") String link3,
+                           @RequestParam(name = "linkName1", defaultValue = "") String linkName1,
+                           @RequestParam(name = "link1", defaultValue = "") String link1,
+                           @RequestParam(name = "linkName2", defaultValue = "") String linkName2,
+                           @RequestParam(name = "link2", defaultValue = "") String link2,
+                           @RequestParam(name = "linkName3", defaultValue = "") String linkName3,
+                           @RequestParam(name = "link3", defaultValue = "") String link3,
                            Model model)
         {
          if (profileImg != null) {
@@ -115,19 +115,19 @@ public class EchoController {
                 }
             }
         }
-        if(link1 != null) {
+        if(link1.length() > 0 && linkName1.length() > 0) {
             Link link = new Link();
             link.setName(linkName1);
             link.setUrl(link1);
             link.setEcho(echo);
             linkDao.save(link);
-        } else if(link2 != null) {
+        } else if(link2.length() > 0 && linkName2.length() > 0) {
             Link link = new Link();
             link.setName(linkName2);
             link.setUrl(link2);
             link.setEcho(echo);
             linkDao.save(link);
-        } else if(link3 != null) {
+        } else if(link3.length() > 0 && linkName3.length() > 0) {
             Link link = new Link();
             link.setName(linkName3);
             link.setUrl(link3);
