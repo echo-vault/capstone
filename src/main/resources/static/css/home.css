@@ -18,5 +18,17 @@
 
 .card-action {
     height: 100px;
-    color: white;
+
 }
+
+.echo-vault-intro{
+    padding: 50px;
+    border-radius: 50%;
+    width: 50%;
+    margin-top: -30px;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+
+}
+
