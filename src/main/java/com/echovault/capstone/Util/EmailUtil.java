@@ -29,7 +29,7 @@ public class EmailUtil {
 
             msg.setReplyTo(InternetAddress.parse("no_reply@example.com", false));
 
-//            msg.setSubject("My first Email from Java app","UTF-8");
+            msg.setSubject(subject,"UTF-8");
 
             msg.setText(body, "UTF-8");
 
