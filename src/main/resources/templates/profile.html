@@ -4,14 +4,45 @@
 <body>
 <main>
     <nav th:replace="partials/navbar :: navbar"></nav>
-    <h1>Here is your profile page, <span th:text="${user.username}"></span></h1>
-    <h2>First name: <span th:text="${user.firstName}"></span></h2>
-    <h2>Last name: <span th:text="${user.lastName}"></span></h2>
-    <h2>Email: <span th:text="${user.email}"></span></h2>
-    <div th:if="${user.image != null}">
-        <img th:src="@{'' + ${user.image}}" style="max-height: 200px"/>
+    <div class="container">
+        <div class="row">
+    <!--        <div class="row">-->
+                <div class="col s12 m6 center-align">
+                    <div th:if="${user.image != null}">
+                        <img class="circle user-profile-img" th:src="@{'' + ${user.image}}" style="max-height: 200px"/>
+                    </div>
+    <!--                <h1>Here is your profile page, <span th:text="${user.username}"></span></h1>-->
+    <!--                <h2>First name: <span th:text="${user.firstName}"></span></h2>-->
+    <!--                <h2>Last name: <span th:text="${user.lastName}"></span></h2>-->
+                    <h3 th:text="${user.firstName} + ' ' + ${user.lastName}"></h3>
+    <!--                <h2>Email: <span th:text="${user.email}"></span></h2>-->
+                    <a th:href="@{/profile/edit}" class="waves-effect waves-light btn">Edit Profile</a>
+                </div>
+    <!--        </div>-->
+
+    <!--        <div class="row">-->
+                <div class="col s12 m6 center-align">
+                    <h2>Your Echoes</h2>
+                    <div th:each="echo : ${echoes}">
+                            <div class="card hoverable">
+                                <div class="card-image">
+                                    <img th:src="@{'' + ${echo.profileImage}}">
+                                </div>
+                                <div>
+                                    <p class="card-title" th:text="${echo.firstName} + ' ' + ${echo.lastName}"></p>
+                                </div>
+                                <div class="card-content">
+                                    <p th:text="${echo.birthDate} + ' - ' + ${echo.deathDate}"></p>
+                                </div>
+                                <div class="card-action">
+                                    <a th:href="@{/echo/{id}/(id=${echo.id})}">Go to Echo</a>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+    <!--        </div>-->
+        </div>
     </div>
-    <a th:href="@{/profile/edit}" class="waves-effect waves-light btn">Edit Profile</a>
 
 </main>
 

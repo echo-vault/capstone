@@ -7,6 +7,7 @@
     color:darkblue;
 }
 
+
 .input-field {
     padding: 20px !important;
 
@@ -32,3 +33,7 @@
 
 }
 
+
+.user-profile-img {
+    padding-top: 1.5em;
+}

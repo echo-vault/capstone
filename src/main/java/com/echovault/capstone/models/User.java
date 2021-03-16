@@ -3,6 +3,8 @@ package com.echovault.capstone.models;
 import jdk.jfr.Unsigned;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -15,18 +17,23 @@ public class User {
     private long id;
 
     @Column(nullable = false, unique = true)
+    @Email(message = "Please enter a valid email address")
     private String email;
+
 
     @Column(nullable = false)
     private String password;
 
     @Column(nullable = false, unique = true)
+    @NotBlank(message = "Username can not be blank")
     private String username;
 
     @Column(nullable = false)
+    @NotBlank(message = "First name can not be blank")
     private String firstName;
 
     @Column(nullable = false)
+    @NotBlank(message = "Last name can not be blank")
     private String lastName;
 
     @Column

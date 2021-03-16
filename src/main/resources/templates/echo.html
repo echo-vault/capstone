@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <div th:replace="partials/head.html :: head(${echo.getFullName()})"></div>
 <body>
 <div th:replace="partials/navbar.html :: navbar"></div>
@@ -56,33 +56,33 @@
                 </div>
             </div>
             <div class="col s12 m9">
-                <div class="row">
-                    <div class="col s12">
-                        <div class="card horizontal">
-                          <div class="card-stacked">
-                              <form th:action="@{/memory}" method="post" th:object="${memory}">
-                                <div class="card-content">
-                                    <span class="card-title">Share a memory...</span>
-                                  <div class="input-field col s12">
-                                      <textarea id="textarea1" class="materialize-textarea" th:field="*{body}"></textarea>
-<!--                                      <label for="textarea1">Textarea</label>-->
-                                      <input type="hidden" name="echoId" th:value="${echo.getId()}">
-                                      <input type="hidden" name="userId" th:value="${user.getId()}">
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="card horizontal">
+                              <div class="card-stacked">
+                                  <form th:action="@{/memory}" method="post" th:object="${memory}">
+                                    <div class="card-content">
+                                        <span class="card-title">Share a memory...</span>
+                                      <div class="input-field col s12">
+                                          <textarea id="textarea1" class="materialize-textarea" th:field="*{body}"></textarea>
+    <!--                                      <label for="textarea1">Textarea</label>-->
+                                          <input type="hidden" name="echoId" th:value="${echo.getId()}">
+                                          <input type="hidden" name="userId" th:value="${user.getId()}">
+                                        </div>
                                     </div>
-                                </div>
-                                  <div class="card-action">
-                                    <button class="btn waves-effect waves-light" type="submit">Submit
-                                    <i class="material-icons right">send</i>
-                                  </button>
-                                    </div>
-                              </form>
-                          </div>
+                                      <div class="card-action">
+                                        <button class="btn waves-effect waves-light" type="submit">Submit
+                                        <i class="material-icons right">send</i>
+                                      </button>
+                                        </div>
+                                  </form>
+                              </div>
+                            </div>
                         </div>
                     </div>
-                </div>
                 <div class="row scrollable">
                     <div th:each="memory : ${echo.getMemories()}" class="col s12 m6">
-                        <div class="card">
+                        <div class="card hoverable medium">
                             <div class="card-content">
                               <span class="card-title" th:text="${memory.user.getFullName()}"></span>
                               <p th:text="${memory.body}"></p>

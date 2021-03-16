@@ -6,7 +6,8 @@
 <body>
 
 <nav th:replace="partials/navbar :: navbar"></nav>
-<div>
+<div class="container">
+
     <form th:action="@{/echo-create}" th:method="post" th:object="${echo} " enctype="multipart/form-data" >
 <!--        <form action="#">-->
             <div class="file-field input-field">
@@ -50,10 +51,14 @@
                     <div class="input-field col s6">
                         <input placeholder="Placeholder" id="first_name" type="text" class="validate" th:field="*{firstName}" >
                         <label for="first_name">First Name</label>
+                        <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="red-text"/>
+
                     </div>
                     <div class="input-field col s6">
                         <input id="last_name" type="text" class="validate" th:field="*{lastName}">
                         <label for="last_name">Last Name</label>
+                        <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="red-text"/>
+
                     </div>
                     </div>
                 </div>
@@ -61,11 +66,15 @@
         <div>
         <label for="birthdate">Birthdate</label>
             <input type="text" class="datepicker" id="birthdate" th:field="*{birthDate}">
+            <p th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}" class="red-text"/>
+
         </div>
 
         <div>
         <label for="passingdate">Passingdate</label>
             <input type="text" class="datepicker" id="passingdate" th:field="*{deathDate}">
+            <p th:if="${#fields.hasErrors('deathDate')}" th:errors="*{deathDate}" class="red-text"/>
+
         </div>
 
         <div class="row">
