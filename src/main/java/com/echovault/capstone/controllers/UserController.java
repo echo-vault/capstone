@@ -46,7 +46,12 @@ public class UserController {
     }
 
     @PostMapping("/profile/edit")
-    public String goToProfile(@ModelAttribute User user, @RequestParam(name = "user-profile-img-edit") MultipartFile uploadedFile, Model model){
+    public String goToProfile(@ModelAttribute User user, @RequestParam(name = "user-profile-img-edit") MultipartFile uploadedFile, @RequestParam(name = "current-image") String imagePath, Model model){
+
+        User sessionUser = userService.getLoggedInUser();
+        User editedUser = userDao.getOne(sessionUser.getId());
+        user.setImage(imagePath);
+
         if(uploadedFile != null) {
             String fileName = uploadedFile.getOriginalFilename();
             String filePath = Paths.get(uploadPath, fileName).toString();
@@ -59,11 +64,8 @@ public class UserController {
                 e.printStackTrace();
                 model.addAttribute("message", "Oops! Something went wrong! " + e);
             }
-        }else{
-            user.setImage(user.getImage());
         }
-        User sessionUser = userService.getLoggedInUser();
-        User editedUser = userDao.getOne(sessionUser.getId());
+
         user.setId(editedUser.getId());
         user.setPassword(editedUser.getPassword());
         userDao.save(user);
