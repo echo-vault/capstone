@@ -61,15 +61,14 @@ public class EchoController {
     public String saveFile(@ModelAttribute @Validated Echo echo, Errors validation,
                            @RequestParam(name = "profileImg") MultipartFile profileImg,
                            @RequestParam(name = "bgImg") MultipartFile bgImg,
-//                           @RequestParam(name = "carousel-img") MultipartFile uploadedFile3,
                            @RequestParam(name = "image") ArrayList<MultipartFile> images,
-                           Model model,
-                            @RequestParam(name = "linkName1") String linkName1,
-                           @RequestParam(name = "link1") String link1,
-                           @RequestParam(name = "linkName2") String linkName2,
-                           @RequestParam(name = "link2") String link2,
-                           @RequestParam(name = "linkName3") String linkName3,
-                           @RequestParam(name = "link3") String link3)
+                           @RequestParam(name = "linkName1", defaultValue = "") String linkName1,
+                           @RequestParam(name = "link1", defaultValue = "") String link1,
+                           @RequestParam(name = "linkName2", defaultValue = "") String linkName2,
+                           @RequestParam(name = "link2", defaultValue = "") String link2,
+                           @RequestParam(name = "linkName3", defaultValue = "") String linkName3,
+                           @RequestParam(name = "link3", defaultValue = "") String link3,
+                           Model model)
         {
             if(validation.hasErrors()){
                 model.addAttribute("errors", validation);
@@ -99,61 +98,49 @@ public class EchoController {
                 e.printStackTrace();
 
             }
+        } else {
+            echo.setBackgroundImage("/img/sunset1.jpg");
         }
-        System.out.println(images);
-
-
-//        FileUpload.savedFile(uploadedFile3, echo, uploadPath);
         echo.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         echo.setCreatedAt(new Date());
         echoDao.save(echo);
-//        Image image = new Image(path);
-//        echo.getImages().add(image);
-//        Echo savedEcho = echoDao.save(echo);
-//        String subject = "New Post Created!";
-//        String body = "Dear " + savedPost.getUser().getUsername() + ". Thank you for creating a post. Your post id is: " + savedPost.getId();
-//
-//        emailService.prepareAndSend(savedEcho, subject, body);
-//        model.addAttribute("message", "File successfully uploaded!");
         if (images != null) {
-        for(MultipartFile image: images){
-            System.out.println(image);
-            String filename = image.getOriginalFilename();
-            String filepath = Paths.get(uploadPath, filename).toString();
-            File destinationFile = new File(filepath);
-            try {
-                image.transferTo(destinationFile);
-                Image img = new Image();
-                img.setPath("/uploads/" + filename);
-                img.setEcho(echo);
-                imageDao.save(img);
-            } catch (IOException e) {
-                e.printStackTrace();
+            for(MultipartFile image: images){
+                System.out.println(image);
+                String filename = image.getOriginalFilename();
+                String filepath = Paths.get(uploadPath, filename).toString();
+                File destinationFile = new File(filepath);
+                try {
+                    image.transferTo(destinationFile);
+                    Image img = new Image();
+                    img.setPath("/uploads/" + filename);
+                    img.setEcho(echo);
+                    imageDao.save(img);
+                } catch (IOException e) {
+                    e.printStackTrace();
 
+                }
             }
         }
-        }
-        if(link1 != null) {
+        if(link1.length() > 0 && linkName1.length() > 0) {
             Link link = new Link();
             link.setName(linkName1);
             link.setUrl(link1);
             link.setEcho(echo);
             linkDao.save(link);
+        } else if(link2.length() > 0 && linkName2.length() > 0) {
+            Link link = new Link();
+            link.setName(linkName2);
+            link.setUrl(link2);
+            link.setEcho(echo);
+            linkDao.save(link);
+        } else if(link3.length() > 0 && linkName3.length() > 0) {
+            Link link = new Link();
+            link.setName(linkName3);
+            link.setUrl(link3);
+            link.setEcho(echo);
+            linkDao.save(link);
         }
-            if(link2 != null) {
-                Link link = new Link();
-                link.setName(linkName2);
-                link.setUrl(link2);
-                link.setEcho(echo);
-                linkDao.save(link);
-            }
-            if(link3 != null) {
-                Link link = new Link();
-                link.setName(linkName3);
-                link.setUrl(link3);
-                link.setEcho(echo);
-                linkDao.save(link);
-            }
         return "redirect:/echo/" + echo.getId();
     }
 
@@ -161,10 +148,10 @@ public class EchoController {
     public String viewEcho(Model model, @PathVariable long id){
         Echo echo = echoDao.getOne(id);
         User user = userService.getLoggedInUser();
+        model.addAttribute("user", user);
         model.addAttribute("memory", new Memory());
         model.addAttribute("comment", new Comment());
         model.addAttribute("echo", echo);
-        model.addAttribute("user", user);
         return "echo";
     }
 
