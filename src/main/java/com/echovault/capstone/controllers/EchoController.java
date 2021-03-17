@@ -86,7 +86,9 @@ public class EchoController {
                 e.printStackTrace();
 
             }
-        }
+         } else {
+                echo.setProfileImage("/img/genericProfileImage.png");
+         }
         if (bgImg != null) {
             String filename = bgImg.getOriginalFilename();
             String filepath = Paths.get(uploadPath, filename).toString();
@@ -157,14 +159,59 @@ public class EchoController {
 
     @PostMapping("/memory")
     public String createMemory(@ModelAttribute Memory memory,
+                                @RequestParam(name = "memoryImg") MultipartFile memoryImg,
                                 @RequestParam(name = "echoId") long echoId,
                                 @RequestParam(name = "userId") long userId
                                 ){
+        if (memoryImg != null) {
+            String filename = memoryImg.getOriginalFilename();
+            String filepath = Paths.get(uploadPath, filename).toString();
+            File destinationFile = new File(filepath);
+            try {
+                memoryImg.transferTo(destinationFile);
+                memory.setImage("/uploads/" + filename);
+            } catch (IOException e) {
+                e.printStackTrace();
+
+            }
+        }
         memory.setCreatedAt(new Date());
         memory.setUser(userDao.getOne(userId));
         memory.setEcho(echoDao.getOne(echoId));
         memoryDao.save(memory);
         return "redirect:/echo/" + memory.getEcho().getId();
+    }
+
+    @PostMapping("/memory/delete")
+    public String deleteMemory(@RequestParam(name="deleteMemoryId")long memoryId,
+                               @RequestParam(name="memoryEchoId")long echoId){
+        Memory m = memoryDao.getOne(memoryId);
+        memoryDao.delete(m);
+        return "redirect:/echo/" + echoId;
+    }
+
+    @PostMapping("/memory/edit")
+    public String editMemory(@RequestParam(name="editMemoryId")long memoryId,
+                             @RequestParam(name="memoryEchoId")long echoId,
+                             @RequestParam(name="memoryImage")String memoryImage,
+                             @RequestParam(name="body")String body,
+                             @RequestParam(name="memoryImg")MultipartFile uploadedFile){
+        Memory m = memoryDao.getOne(memoryId);
+        m.setBody(body);
+        m.setImage(memoryImage);
+        if(uploadedFile != null) {
+            String fileName = uploadedFile.getOriginalFilename();
+            String filePath = Paths.get(uploadPath, fileName).toString();
+            File destinationFile = new File(filePath);
+            try {
+                uploadedFile.transferTo(destinationFile);
+                m.setImage("/uploads/" + fileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        memoryDao.save(m);
+        return "redirect:/echo/" + echoId;
     }
 
     @PostMapping("/comment")
