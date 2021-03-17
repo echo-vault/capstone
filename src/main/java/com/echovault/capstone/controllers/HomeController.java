@@ -55,6 +55,11 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("/about")
+    public String about(){
+        return "about";
+    }
+
     @GetMapping("/register")
     public String register(Model model){
         model.addAttribute("user", new User());
@@ -179,6 +184,8 @@ public class HomeController {
         }
         return changePasswordForm(user, model);
     }
+
+
 
 
 }
