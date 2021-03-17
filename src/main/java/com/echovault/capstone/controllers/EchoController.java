@@ -233,9 +233,7 @@ public class EchoController {
             link.setEcho(echo);
             linkDao.save(link);
         }
-
-
-        return "redirect:/echo/";
+        return "redirect:/echo/" + echo.getId();
     }
 
     @GetMapping("/echo/{id}")
@@ -248,6 +246,13 @@ public class EchoController {
         model.addAttribute("echo", echo);
         return "echo";
     }
+
+    @PostMapping("/echo/{id}/delete")
+    public String deleteEcho(@PathVariable long id){
+        echoDao.deleteById(id);
+        return "redirect:/profile";
+    }
+
 
     @PostMapping("/memory")
     public String createMemory(@ModelAttribute Memory memory,

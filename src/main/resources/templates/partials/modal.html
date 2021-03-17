@@ -20,6 +20,19 @@
         </form>
     </div>
 
+    <div th:fragment="delete-modal" th:id="${echo.id}" class="modal">
+        <div class="modal-content">
+            <h4>Delete This Echo?</h4>
+            <p>Keep in mind that this action cannot be undone.</p>
+        </div>
+        <div class="modal-footer">
+            <form th:action="@{/echo/{id}/delete/(id=${echo.id})}" th:method="POST">
+                <button type="submit" class="modal-close waves-effect waves-red btn">Delete</button>
+                <button class="modal-close waves-effect waves-red btn">Cancel</button>
+            </form>
+        </div>
+    </div>
+
 
 
 

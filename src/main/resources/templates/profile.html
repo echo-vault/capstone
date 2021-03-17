@@ -37,8 +37,10 @@
                                 <div class="card-action">
                                     <a th:href="@{/echo/{id}/(id=${echo.id})}">Go to Echo</a>
                                     <a th:href="@{/echo/{id}/edit/(id=${echo.id})}">Edit Echo</a>
+                                    <a th:href="'#' + ${echo.id}" class="modal-trigger">Delete Echo</a>
                                 </div>
                             </div>
+                            <div th:replace="partials/modal.html :: delete-modal"></div>
                     </div>
                 </div>
     <!--        </div>-->
