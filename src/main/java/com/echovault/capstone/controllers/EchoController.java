@@ -20,6 +20,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -248,8 +250,9 @@ public class EchoController {
     }
 
     @PostMapping("/echo/{id}/delete")
-    public String deleteEcho(@PathVariable long id){
+    public String deleteEcho(@PathVariable long id, RedirectAttributes redirectAttributes){
         echoDao.deleteById(id);
+        redirectAttributes.addFlashAttribute("success", "Echo successfully deleted.");
         return "redirect:/profile";
     }
 
