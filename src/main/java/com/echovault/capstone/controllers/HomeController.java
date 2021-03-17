@@ -117,7 +117,7 @@ public class HomeController {
 
     @GetMapping("/logout")
     public String logout(){
-        return "redirect:/home";
+        return "redirect:/";
     }
 
     @GetMapping("/forgot")
@@ -136,8 +136,9 @@ public class HomeController {
             String hash = encoder.encode(randomPassword);
             user.setPassword(hash);
             userDao.save(user);
+            return "email-sent";
         }
-        return "email-sent";
+        return "forgot-password";
     }
 
     @GetMapping("/reset-password")
