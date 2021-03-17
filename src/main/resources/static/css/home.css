@@ -10,3 +10,7 @@
 .user-profile-img {
     padding-top: 1.5em;
 }
+
+.delete-modal {
+    width: max-content;
+}
