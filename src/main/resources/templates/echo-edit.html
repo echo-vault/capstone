@@ -14,7 +14,7 @@
         <div class="file-field input-field">
             <div class="btn">
                 <span>Change Profile Image</span>
-                <input type="file" name="profileImg" th:value="${echo.getProfileImage()}" th:field="*{profileImage}">
+                <input type="file" name="profileImg" th:value="${echo.profileImage}" th:field="*{profileImage}">
                 <input type="hidden" name="current-profile" th:value="${echo.profileImage}">
             </div>
             <div class="file-path-wrapper">
@@ -25,7 +25,7 @@
         <div class="file-field input-field">
             <div class="btn">
                 <span>Change Background Image</span>
-                <input type="file" name="bgImg" th:value="${echo.getBackgroundImage()}" th:field="*{backgroundImage}">
+                <input type="file" name="bgImg" th:value="${echo.backgroundImage}" th:field="*{backgroundImage}">
                 <input type="hidden" name="current-background" th:value="${echo.backgroundImage}">
             </div>
             <div class="file-path-wrapper">
@@ -36,7 +36,7 @@
         <div class="file-field input-field">
             <div class="btn">
                 <span>Carousel</span>
-                <input type="file" multiple  name="image" th:value="${echo.getImages()}" th:field="*{images}">
+                <input type="file" multiple  name="image" th:value="${echo.images}" th:field="*{images}">
                 <input type="hidden" name="current-carousel" th:value="${echo.images}">
             </div>
             <div class="file-path-wrapper">
@@ -96,7 +96,7 @@
 
         <div class="input-field">
             <label for="link1">Link 1</label>
-            <input type="text" name="link1" id="link1">
+            <input type="text" name="link1" id="link1" th:value="${echo.getLinks().get(0).getUrl()}">
         </div>
 
         <div class="input-field col s12">
@@ -111,7 +111,7 @@
 
         <div class="input-field">
             <label for="link2">Link 2</label>
-            <input type="text" name="link2" id="link2">
+            <input type="text" name="link2" id="link2" th:value="${echo.getLinks().get(1).getUrl()}">
         </div>
 
         <div class="input-field col s12">
@@ -126,7 +126,7 @@
 
         <div class="input-field">
             <label for="link3">Link 3</label>
-            <input type="text" name="link3" id="link3">
+            <input type="text" name="link3" id="link3" th:value="${echo.getLinks().get(2).getUrl()}">
         </div>
 
         <button class="btn waves-effect waves-light" type="submit" name="action">Save Changes

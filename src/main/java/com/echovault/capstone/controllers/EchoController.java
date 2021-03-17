@@ -119,23 +119,25 @@ public class EchoController {
             }
         }
         if(link1.length() > 0 && linkName1.length() > 0) {
-            Link link = new Link();
-            link.setName(linkName1);
-            link.setUrl(link1);
-            link.setEcho(echo);
-            linkDao.save(link);
-        } else if(link2.length() > 0 && linkName2.length() > 0) {
-            Link link = new Link();
-            link.setName(linkName2);
-            link.setUrl(link2);
-            link.setEcho(echo);
-            linkDao.save(link);
-        } else if(link3.length() > 0 && linkName3.length() > 0) {
-            Link link = new Link();
-            link.setName(linkName3);
-            link.setUrl(link3);
-            link.setEcho(echo);
-            linkDao.save(link);
+            Link linkA = new Link();
+            linkA.setName(linkName1);
+            linkA.setUrl(link1);
+            linkA.setEcho(echo);
+            linkDao.save(linkA);
+        }
+        if(link2.length() > 0 && linkName2.length() > 0) {
+            Link linkB = new Link();
+            linkB.setName(linkName2);
+            linkB.setUrl(link2);
+            linkB.setEcho(echo);
+            linkDao.save(linkB);
+        }
+        if(link3.length() > 0 && linkName3.length() > 0) {
+            Link linkC = new Link();
+            linkC.setName(linkName3);
+            linkC.setUrl(link3);
+            linkC.setEcho(echo);
+            linkDao.save(linkC);
         }
         return "redirect:/echo/" + echo.getId();
     }
@@ -218,23 +220,25 @@ public class EchoController {
             }
         }
         if(link1.length() > 0 && linkName1.length() > 0) {
-            Link link = new Link();
-            link.setName(linkName1);
-            link.setUrl(link1);
-            link.setEcho(echo);
-            linkDao.save(link);
-        } else if(link2.length() > 0 && linkName2.length() > 0) {
-            Link link = new Link();
-            link.setName(linkName2);
-            link.setUrl(link2);
-            link.setEcho(echo);
-            linkDao.save(link);
-        } else if(link3.length() > 0 && linkName3.length() > 0) {
-            Link link = new Link();
-            link.setName(linkName3);
-            link.setUrl(link3);
-            link.setEcho(echo);
-            linkDao.save(link);
+            Link linkA = new Link();
+            linkA.setName(linkName1);
+            linkA.setUrl(link1);
+            linkA.setEcho(echo);
+            linkDao.save(linkA);
+        }
+        if(link2.length() > 0 && linkName2.length() > 0) {
+            Link linkB = new Link();
+            linkB.setName(linkName2);
+            linkB.setUrl(link2);
+            linkB.setEcho(echo);
+            linkDao.save(linkB);
+        }
+        if(link3.length() > 0 && linkName3.length() > 0) {
+            Link linkC = new Link();
+            linkC.setName(linkName3);
+            linkC.setUrl(link3);
+            linkC.setEcho(echo);
+            linkDao.save(linkC);
         }
         return "redirect:/echo/" + echo.getId();
     }
