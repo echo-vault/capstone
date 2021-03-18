@@ -158,11 +158,25 @@ public class EchoController {
     }
 
     @PostMapping("/memory")
-    public String createMemory(@ModelAttribute Memory memory,
+    public String createMemory(@ModelAttribute @Validated Memory memory,
+                                Errors validation,
+                                Model model,
                                 @RequestParam(name = "memoryImg") MultipartFile memoryImg,
                                 @RequestParam(name = "echoId") long echoId,
                                 @RequestParam(name = "userId") long userId
                                 ){
+        if(memory.getBody() == null || memory.getBody().equals("")){
+            validation.rejectValue(
+                    "body",
+                    "memory.boy",
+                    "Memory must have content!"
+            );
+        }
+        if(validation.hasErrors()){
+            model.addAttribute("errors", validation);
+            model.addAttribute("memory", memory);
+            return "echo/" + memory.getEcho().getId();
+        }
         if (memoryImg != null) {
             String filename = memoryImg.getOriginalFilename();
             String filepath = Paths.get(uploadPath, filename).toString();

@@ -60,6 +60,7 @@
                                     <div class="row">
                                         <div class="input-field col s12">
                                           <textarea id="textarea1" class="materialize-textarea" th:field="*{body}"></textarea>
+                                            <p th:if="${#fields.hasErrors('body')}" th:errors="*{body}" />
                                           <label for="textarea1">What would you like to share?</label>
                                         </div>
                                         <div class="file-field input-field col s12">
