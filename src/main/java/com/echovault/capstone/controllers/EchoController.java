@@ -165,11 +165,7 @@ public class EchoController {
                            @RequestParam(name = "link3", defaultValue = "") String link3) {
 
         Echo echo = echoDao.getOne(id);
-//        model.addAttribute("echo", echo);
-//        echo.setBackgroundImage(echoToUpdate.getBackgroundImage());
-//        echo.setProfileImage(echoToUpdate.getProfileImage());
         echo.setImages(echoToUpdate.getImages());
-        echo.setLinks(echoToUpdate.getLinks());
         echo.setRestingPlace(echoToUpdate.getRestingPlace());
         echo.setBirthDate(echoToUpdate.getBirthDate());
         echo.setDeathDate(echoToUpdate.getDeathDate());
@@ -235,8 +231,6 @@ public class EchoController {
         //UPDATING LINKS
         List<Link> links = echo.getLinks();
 
-        //FIRST LINK
-
         if(links != null) {
             if (links.get(0) != null) {
                 if (link1.length() > 0 && linkName1.length() > 0) {
@@ -251,8 +245,8 @@ public class EchoController {
             if (links.get(1) != null) {
                 if (link2.length() > 0 && linkName2.length() > 0) {
                     Link linkB = linkDao.getOne(links.get(1).getId());
-                    linkB.setName(linkName1);
-                    linkB.setUrl(link1);
+                    linkB.setName(linkName2);
+                    linkB.setUrl(link2);
                     linkB.setEcho(echo);
                     linkDao.save(linkB);
                 }
@@ -261,8 +255,8 @@ public class EchoController {
             if (links.get(2) != null) {
                 if (link3.length() > 0 && linkName3.length() > 0) {
                     Link linkC = linkDao.getOne(links.get(2).getId());
-                    linkC.setName(linkName1);
-                    linkC.setUrl(link1);
+                    linkC.setName(linkName3);
+                    linkC.setUrl(link3);
                     linkC.setEcho(echo);
                     linkDao.save(linkC);
                 }
@@ -276,8 +270,6 @@ public class EchoController {
                 linkDao.save(linkA);
             }
 
-            //SECOND LINK
-
             if (link2.length() > 0 && linkName2.length() > 0) {
                 Link linkB = new Link();
                 linkB.setName(linkName1);
@@ -285,8 +277,6 @@ public class EchoController {
                 linkB.setEcho(echo);
                 linkDao.save(linkB);
             }
-
-            //THIRD LINK
 
             if (link3.length() > 0 && linkName3.length() > 0) {
                 Link linkC = new Link();
