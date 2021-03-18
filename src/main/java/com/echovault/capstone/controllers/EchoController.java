@@ -153,29 +153,28 @@ public class EchoController {
 
     @PostMapping("/echo/{id}/edit")
     public String editEcho(@PathVariable long id,
-                           @RequestParam(name = "profileImg") MultipartFile profileImg,
-                           @RequestParam(name = "bgImg") MultipartFile bgImg,
-                           @RequestParam(name = "image") ArrayList<MultipartFile> images,
-                           @RequestParam(name = "current-carousel") List<Image> currentImages,
-                           @RequestParam(name = "current-profile") String profileImgPath,
-                           @RequestParam(name = "current-background") String bgImgPath,
-                           @RequestParam(name = "current-links") List<Link> currentLinks,
+                           @ModelAttribute Echo updatedEcho,
+                           @RequestParam(name = "profileImg", required = false) MultipartFile profileImg,
+                           @RequestParam(name = "bgImg", required = false) MultipartFile bgImg,
+                           @RequestParam(name = "image", required = false) ArrayList<MultipartFile> images,
                            @RequestParam(name = "linkName1", defaultValue = "") String linkName1,
                            @RequestParam(name = "link1", defaultValue = "") String link1,
                            @RequestParam(name = "linkName2", defaultValue = "") String linkName2,
                            @RequestParam(name = "link2", defaultValue = "") String link2,
                            @RequestParam(name = "linkName3", defaultValue = "") String linkName3,
-                           @RequestParam(name = "link3", defaultValue = "") String link3,
-                           Model model){
+                           @RequestParam(name = "link3", defaultValue = "") String link3) {
 
         Echo echo = echoDao.getOne(id);
-        model.addAttribute("echo", echo);
-        echo.setBackgroundImage(bgImgPath);
-        echo.setProfileImage(profileImgPath);
-        echo.setImages(currentImages);
-        echo.setLinks(currentLinks);
+//        model.addAttribute("echo", echo);
+//        echo.setBackgroundImage(updatedEcho.getBackgroundImage());
+//        echo.setProfileImage(updatedEcho.getProfileImage());
+        echo.setImages(updatedEcho.getImages());
+        echo.setLinks(updatedEcho.getLinks());
+        if(!updatedEcho.getSummary().isEmpty()) {
+            echo.setSummary(updatedEcho.getSummary());
+        }
 
-        if (profileImg != null) {
+        if (!profileImg.isEmpty()) {
             String filename = profileImg.getOriginalFilename();
             String filepath = Paths.get(uploadPath, filename).toString();
             File destinationFile = new File(filepath);
@@ -186,8 +185,12 @@ public class EchoController {
                 e.printStackTrace();
 
             }
+        } else {
+            if(echo.getProfileImage().isEmpty())
+                echo.setProfileImage("/img/sunset1.jpg");
+
         }
-        if (bgImg != null) {
+        if (!bgImg.isEmpty()) {
             String filename = bgImg.getOriginalFilename();
             String filepath = Paths.get(uploadPath, filename).toString();
             File destinationFile = new File(filepath);
@@ -199,23 +202,26 @@ public class EchoController {
 
             }
         } else {
+            if(echo.getBackgroundImage().isEmpty())
             echo.setBackgroundImage("/img/sunset1.jpg");
         }
-        if (images != null) {
+        if (!images.isEmpty()) {
             for(MultipartFile image: images){
                 System.out.println(image);
-                String filename = image.getOriginalFilename();
-                String filepath = Paths.get(uploadPath, filename).toString();
-                File destinationFile = new File(filepath);
-                try {
-                    image.transferTo(destinationFile);
-                    Image img = new Image();
-                    img.setPath("/uploads/" + filename);
-                    img.setEcho(echo);
-                    imageDao.save(img);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if(!image.isEmpty()) {
+                    String filename = image.getOriginalFilename();
+                    String filepath = Paths.get(uploadPath, filename).toString();
+                    File destinationFile = new File(filepath);
+                    try {
+                        image.transferTo(destinationFile);
+                        Image img = new Image();
+                        img.setPath("/uploads/" + filename);
+                        img.setEcho(echo);
+                        imageDao.save(img);
+                    } catch (IOException e) {
+                        e.printStackTrace();
 
+                    }
                 }
             }
         }
@@ -240,6 +246,7 @@ public class EchoController {
             linkC.setEcho(echo);
             linkDao.save(linkC);
         }
+        echoDao.save(echo);
         return "redirect:/echo/" + echo.getId();
     }
 

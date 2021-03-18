@@ -10,12 +10,15 @@
     <h1>Edit Your Echo</h1>
 
     <form th:action="@{/echo/{id}/edit/(id=${echo.id})}" th:method="POST" th:object="${echo}" enctype="multipart/form-data" >
-
+<!--        <input type="hidden" th:field="*{id}">-->
         <div class="file-field input-field">
             <div class="btn">
                 <span>Change Profile Image</span>
-                <input type="file" name="profileImg" th:value="${echo.profileImage}" th:field="*{profileImage}">
-                <input type="hidden" name="current-profile" th:value="${echo.profileImage}">
+                <input type="file" name="profileImg" th:value="*{profileImage}">
+<!--                <input type="hidden" name="current-profile" th:value="${echo.profileImage}">-->
+            </div>
+            <div th:if="${echo.profileImage != null}">
+                <img th:src="@{'' + ${echo.profileImage}}" style="max-height: 200px"/>
             </div>
             <div class="file-path-wrapper">
                 <input class="file-path validate" type="text">
@@ -25,8 +28,11 @@
         <div class="file-field input-field">
             <div class="btn">
                 <span>Change Background Image</span>
-                <input type="file" name="bgImg" th:value="${echo.backgroundImage}" th:field="*{backgroundImage}">
-                <input type="hidden" name="current-background" th:value="${echo.backgroundImage}">
+                <input type="file" name="bgImg" th:value="*{backgroundImage}">
+<!--                <input type="hidden" name="current-background" th:value="${echo.backgroundImage}">-->
+            </div>
+            <div th:if="${echo.backgroundImage != null}">
+                <img th:src="@{'' + ${echo.backgroundImage}}" style="max-height: 200px"/>
             </div>
             <div class="file-path-wrapper">
                 <input class="file-path validate" type="text">
@@ -36,8 +42,8 @@
         <div class="file-field input-field">
             <div class="btn">
                 <span>Carousel</span>
-                <input type="file" multiple  name="image" th:value="${echo.images}" th:field="*{images}">
-                <input type="hidden" name="current-carousel" th:value="${echo.images}">
+                <input type="file" multiple  name="image" th:value="*{images}">
+<!--                <input type="hidden" name="current-carousel" th:value="${echo.images}">-->
             </div>
             <div class="file-path-wrapper">
                 <input class="file-path validate" type="text" placeholder="Add one or more images">
@@ -83,7 +89,7 @@
             <label for="burialaddress">Resting Place</label>
             <input type="text" name="burialaddress" id="burialaddress" th:field="*{restingPlace}">
         </div>
-        <input type="hidden" name="current-links" th:value="${echo.getLinks()}">
+<!--        <input type="hidden" name="current-links" th:value="${echo.getLinks()}">-->
         <div class="input-field col s12">
             <select name="linkName1">
                 <option value="" disabled selected>Choose What kind of link to add.</option>
