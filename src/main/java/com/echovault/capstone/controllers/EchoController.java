@@ -198,6 +198,7 @@ public class EchoController {
                              @RequestParam(name="memoryImg")MultipartFile uploadedFile){
         Memory m = memoryDao.getOne(memoryId);
         m.setBody(body);
+        m.setUpdatedAt(new Date());
         m.setImage(memoryImage);
         if(uploadedFile != null) {
             String fileName = uploadedFile.getOriginalFilename();
@@ -225,6 +226,26 @@ public class EchoController {
         commentDao.save(comment);
         return "redirect:/echo/" + comment.getMemory().getEcho().getId();
     }
+
+    @PostMapping("/comment/delete")
+    public String deleteComment(@RequestParam(name="deleteCommentId")long commentId,
+                                @RequestParam(name="commentEchoId")long echoId){
+        Comment c = commentDao.getOne(commentId);
+        commentDao.delete(c);
+        return "redirect:/echo/" + echoId;
+    }
+
+    @PostMapping("/comment/edit")
+    public String editComment(@RequestParam(name="editCommentId")long commentId,
+                                @RequestParam(name="commentEchoId")long echoId,
+                             @RequestParam(name="body")String body){
+        Comment c = commentDao.getOne(commentId);
+        c.setBody(body);
+        c.setUpdatedAt(new Date());
+        commentDao.save(c);
+        return "redirect:/echo/" + echoId;
+    }
+
 
 }
 

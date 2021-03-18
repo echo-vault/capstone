@@ -1,5 +1,6 @@
 package com.echovault.capstone.models;
 
+import com.echovault.capstone.Util.TimeUtil;
 import jdk.jfr.Unsigned;
 
 import javax.persistence.*;
@@ -201,6 +202,14 @@ public class Echo {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getCreatedDate(){
+        return TimeUtil.formatDate(this.createdAt);
+    }
+
+    public String getUpdatedDate(){
+        return TimeUtil.formatDate(this.updatedAt);
     }
 
 

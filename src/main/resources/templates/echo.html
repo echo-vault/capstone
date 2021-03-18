@@ -17,7 +17,7 @@
     <div class="container">
         <div class="row">
             <div class="col s12 m6">
-                <div class="card profile-card large">
+                <div class="card profile-card large hoverable">
                     <div class="card-image background-image">
                       <img th:src="${echo.backgroundImage}" style="max-height: max-content">
                     </div>
@@ -28,15 +28,11 @@
                 </div>
             </div>
             <div class="col s12 m6 valign-wrapper">
-                <div class="card summary-card large">
+                <div class="card summary-card large hoverable">
                     <div class="card-content">
                       <span class="card-title center">Life Story</span>
                       <p th:text="${echo.summary}"></p>
                     </div>
-<!--                    <div class="card-action">-->
-<!--                      <a href="#">This is a link</a>-->
-<!--                      <a href="#">This is a link</a>-->
-<!--                    </div>-->
                 </div>
             </div>
         </div>
@@ -67,7 +63,7 @@
                                           <label for="textarea1">What would you like to share?</label>
                                         </div>
                                         <div class="file-field input-field col s12">
-                                          <div class="btn">
+                                          <div class="waves-effect waves-amber waves-lighten-4 btn amber lighten-2">
                                             <span>Upload Image</span>
                                             <input type="file" name="memoryImg">
                                           </div>
@@ -78,7 +74,7 @@
                                       </div>
                                     <input type="hidden" name="echoId" th:value="${echo.getId()}">
                                     <input type="hidden" name="userId" th:value="${user.getId()}">
-                                    <button class="btn waves-effect waves-light" type="submit">Submit
+                                    <button class="waves-effect waves-amber waves-lighten-4 btn amber lighten-2" type="submit">Submit
                                         <i class="material-icons right">send</i>
                                     </button>
                                 </form>
@@ -90,66 +86,102 @@
                         <th:block th:switch="${memory.getImage()} == null">
 <!--                            Memory does not have an image   -->
                             <div th:case="true">
-                                <div class="card hoverable medium getMemoryIds" th:id="${memory.getId()}" >
+                                <div class="card hoverable">
                                     <div class="card-content">
                                         <span class="card-title" th:text="${memory.user.getFullName()}"></span>
                                       <p th:text="${memory.body}"></p>
-                                      <p th:text="${memory.createdAt}"></p>
+                                      <p th:text="${memory.getCreatedDate()}"></p>
+                                      <div th:replace="partials/modal.html :: comment-modal"></div>
                                     </div>
                                     <div class="card-action">
                                         <div th:if="${memory.getNumberOfComments()} != null">
                                           <a class="activator" href="#!" th:text="${memory.getNumberOfComments()}"></a>
                                         </div>
-                                          <a class='modal-trigger' th:href="'#' + ${memory.getId()}" >Add Comment</a>
+                                          <a class='modal-trigger' th:href="'#addComment' + ${memory.getId()}" >Add Comment</a>
+
                                         <th:block th:if="${user.getId()} == ${memory.getUser().getId()}">
-                                                <a th:href="'#edit' + ${memory.getId()}" class="modal-trigger right">Edit</a>
-                                                <div th:replace="partials/modal.html :: edit-modal"></div>
-                                                <a th:href="'#delete' + ${memory.getId()}" class="right modal-trigger">Delete</a>
-                                                <div th:replace="partials/modal.html :: delete-modal"></div>
+                                                <a th:href="'#edit' + ${memory.getId()}" class="modal-trigger right"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="edit">edit</i></a>
+                                                <a th:href="'#delete' + ${memory.getId()}" class="right modal-trigger"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Delete">delete</i></a>
+                                                <div th:replace="partials/modal.html :: edit-memory-modal"></div>
+                                                <div th:replace="partials/modal.html :: delete-memory-modal"></div>
                                         </th:block>
                                     </div>
                                     <div class="card-reveal">
                                         <span class="card-title">Comments<i class="material-icons right">close</i></span>
                                         <div th:each="comment : ${memory.getComments()}">
-                                            <h6 th:text="${comment.user.getFullName()}"></h6>
-                                            <p th:text="${comment.body}"></p>
+                                            <th:block th:switch="${user.getId()} == ${comment.getUser().getId()}">
+                                                <div th:case="true">
+                                                    <h6 th:text="${comment.user.getFullName()}"></h6>
+                                                    <p th:text="${comment.body}"></p>
+                                                    <p>
+                                                        <span th:text="${comment.getCreatedDate()}"></span>
+                                                        <a th:href="'#editC' + ${comment.getId()}" class="modal-trigger"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Edit">edit</i></a>
+                                                        <a th:href="'#deleteC' + ${comment.getId()}" class="modal-trigger"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Delete">delete</i></a>
+                                                        <div th:replace="partials/modal.html :: edit-comment-modal"></div>
+                                                        <div th:replace="partials/modal.html :: delete-comment-modal"></div>
+                                                    </p>
+                                                </div>
+                                                <div th:case="*">
+                                                    <h6 th:text="${comment.user.getFullName()}"></h6>
+                                                    <p th:text="${comment.body}"></p>
+                                                    <p th:text="${comment.getCreatedDate()}"></p>
+                                                </div>
+                                            </th:block>
                                         </div>
                                     </div>
                                 </div>
-                                <div th:replace="partials/modal.html :: comment-modal"></div>
                             </div>
 <!--                            Memory has an image -->
                             <div th:case="*">
-                                <div class="card hoverable medium">
+                                <div class="card hoverable">
                                     <div class="card-image">
                                       <img th:src="${memory.getImage()}">
                                     </div>
                                     <div class="card-content">
                                       <span class="card-title" th:text="${memory.user.getFullName()}"></span>
                                       <p th:text="${memory.body}"></p>
-                                      <p th:text="${memory.createdAt}"></p>
+                                      <p th:text="${memory.getCreatedDate()}"></p>
+                                      <div th:replace="partials/modal.html :: comment-modal"></div>
                                     </div>
                                     <div class="card-action">
                                       <div th:if="${memory.getNumberOfComments()} != null">
-                                                  <a class="activator" href="#!" th:text="${memory.getNumberOfComments()}"></a>
-                                                </div>
-                                                  <a class='modal-trigger' th:href="'#' + ${memory.getId()}" >Add Comment</a>
-                                                <th:block th:if="${user.getId()} == ${memory.getUser().getId()}">
-                                                    <a th:href="'#edit' + ${memory.getId()}" class="modal-trigger right">Edit</a>
-                                                    <div th:replace="partials/modal.html :: edit-modal"></div>
-                                                    <a th:href="'#delete' + ${memory.getId()}" class="right modal-trigger">Delete</a>
-                                                    <div th:replace="partials/modal.html :: delete-modal"></div>
-                                                </th:block>
+                                          <a class="activator" href="#!" th:text="${memory.getNumberOfComments()}"></a>
+                                        </div>
+                                          <a class='modal-trigger' th:href="'#addComment' + ${memory.getId()}" >Add Comment</a>
+
+                                        <th:block th:if="${user.getId()} == ${memory.getUser().getId()}">
+                                            <a th:href="'#edit' + ${memory.getId()}" class="modal-trigger right"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Edit">edit</i></a>
+                                            <div th:replace="partials/modal.html :: edit-memory-modal"></div>
+                                            <a th:href="'#delete' + ${memory.getId()}" class="right modal-trigger"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Delete">delete</i></a>
+                                            <div th:replace="partials/modal.html :: delete-memory-modal"></div>
+                                        </th:block>
                                     </div>
                                     <div class="card-reveal">
+
                                         <span class="card-title">Comments<i class="material-icons right">close</i></span>
                                         <div th:each="comment : ${memory.getComments()}">
-                                            <h6 th:text="${comment.user.getFullName()}"></h6>
-                                            <p th:text="${comment.body}"></p>
+                                            <th:block th:switch="${user.getId()} == ${comment.getUser().getId()}">
+                                                <div th:case="true">
+                                                    <h6 th:text="${comment.user.getFullName()}"></h6>
+                                                    <p th:text="${comment.body}"></p>
+                                                    <p>
+                                                        <span th:text="${comment.getCreatedDate()}"></span>
+                                                        <a th:href="'#editC' + ${comment.getId()}" class="modal-trigger"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Edit">edit</i></a>
+                                                        <div th:replace="partials/modal.html :: edit-comment-modal"></div>
+                                                        <a th:href="'#deleteC' + ${comment.getId()}" class="modal-trigger"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Delete">delete</i></a>
+                                                        <div th:replace="partials/modal.html :: delete-comment-modal"></div>
+                                                    </p>
+                                                </div>
+                                                <div th:case="*">
+                                                    <h6 th:text="${comment.user.getFullName()}"></h6>
+                                                    <p th:text="${comment.body}"></p>
+                                                    <p th:text="${comment.getCreatedDate()}"></p>
+                                                </div>
+                                            </th:block>
                                         </div>
+
                                     </div>
                                 </div>
-                                <div th:replace="partials/modal.html :: comment-modal"></div>
                             </div>
                         </th:block>
                     </div>
