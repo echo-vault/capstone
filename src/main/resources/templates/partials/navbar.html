@@ -16,9 +16,6 @@
                 <li>
                     <a th:href="@{/search}"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Search">search</i></a>
                 </li>
-                <li>
-                    <a th:href="@{/about}">About</a>
-                </li>
                 <li sec:authorize="isAnonymous()">
                     <a th:href="@{/login}"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Login">exit_to_app</i></a>
                 </li>
