@@ -7,10 +7,14 @@
 <main>
     <!--    carousel-->
 
-        <div class="carousel">
+        <div class="carousel hide">
             <div class="carousel-fixed-item center"><h1 th:text="${echo.getFullName()}"></h1></div>
             <a th:each="image : ${echo.getImages()}" class="carousel-item" th:href="'#' + ${echo.getImages().indexOf(image) + 1} + '!'"><img th:src="${image.path}"></a>
         </div>
+
+    <div class="container">
+        <i class="material-icons tooltipped view_carousel" data-position="bottom" data-tooltip="Search">view_carousel</i>
+    </div>
 
 
 
