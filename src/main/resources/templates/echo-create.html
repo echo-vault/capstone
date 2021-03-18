@@ -9,7 +9,7 @@
 <div class="container">
 
     <form th:action="@{/echo-create}" th:method="post" th:object="${echo} " enctype="multipart/form-data" >
-<!--        <form action="#">-->
+
             <div class="file-field input-field">
                 <div class="btn">
                     <span>Profile</span>
@@ -19,9 +19,10 @@
                     <input class="file-path validate" type="text">
                 </div>
             </div>
-<!--        </form>-->
 
-<!--        <form action="#">-->
+
+
+
             <div class="file-field input-field">
                 <div class="btn">
                     <span>Background</span>
@@ -31,9 +32,9 @@
                     <input class="file-path validate" type="text">
                 </div>
             </div>
-<!--        </form>-->
 
-<!--        <form action="#">-->
+
+
             <div class="file-field input-field">
                 <div class="btn">
                     <span>Carousel</span>
@@ -43,13 +44,23 @@
                     <input class="file-path validate" type="text" placeholder="Upload one or more images">
                 </div>
             </div>
-<!--        </form>-->
+
+        <a class="material-icons modal-trigger" href="#modal1">help</a>
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4>Images</h4>
+                <p>Click PROFILE to upload an image of your remembered loved one to display as the main profile image of the echo. Click BACKGROUND to upload a background image that will display behind the profile image. Click CAROUSEL to uplaod as many images as you would like to display in the image carousel at the top of the echo page </p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col s12">
                 <div class="row">
                     <div class="input-field col s6">
-                        <input placeholder="Placeholder" id="first_name" type="text" class="validate" th:field="*{firstName}" >
+                        <input id="first_name" type="text" class="validate" th:field="*{firstName}" >
                         <label for="first_name">First Name</label>
                         <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="red-text"/>
 
@@ -58,23 +69,40 @@
                         <input id="last_name" type="text" class="validate" th:field="*{lastName}">
                         <label for="last_name">Last Name</label>
                         <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="red-text"/>
-
-                    </div>
                     </div>
                 </div>
-</div>
-        <div>
+            </div>
+        </div>
+    <div>
         <label for="birthdate">Birthdate</label>
             <input type="text" class="datepicker" id="birthdate" th:field="*{birthDate}">
             <p th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}" class="red-text"/>
-
+            <a class="material-icons modal-trigger" href="#modal2">help</a>
+            <div id="modal2" class="modal">
+                <div class="modal-content">
+                    <h4>Birth Date</h4>
+                    <p>Click in the field to pop up a calendar and choose the month, day and year that your loved one was born.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                </div>
         </div>
+    </div>
 
         <div>
-        <label for="passingdate">Passingdate</label>
+        <label for="passingdate">Passing Date</label>
             <input type="text" class="datepicker" id="passingdate" th:field="*{deathDate}">
             <p th:if="${#fields.hasErrors('deathDate')}" th:errors="*{deathDate}" class="red-text"/>
-
+            <a class="material-icons modal-trigger" href="#modal3">help</a>
+            <div id="modal3" class="modal">
+                <div class="modal-content">
+                    <h4>Passing Date</h4>
+                    <p>Click in the field to pop up a calendar and choose the month, day and year that your loved one passed away</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                </div>
+            </div>
         </div>
 
         <div class="row">
@@ -82,15 +110,35 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <textarea id="textarea1" class="materialize-textarea" th:field="*{summary}"></textarea>
+            <a class="material-icons modal-trigger" href="#modal4">help</a>
                         <label for="textarea1">Life Story</label>
                     </div>
                 </div>
             </div>
         </div>
+            <div id="modal4" class="modal">
+                <div class="modal-content">
+                    <h4>Life Story</h4>
+                    <p>Tell us how you would like your loved one remembered</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                </div>
+            </div>
 
         <div class="input-field">
          <label for="burialaddress">resting Place</label>
          <input type="text" name="burialaddress" id="burialaddress" th:field="*{restingPlace}">
+            <a class="material-icons modal-trigger" href="#modal5">help</a>
+            <div id="modal5" class="modal">
+                <div class="modal-content">
+                    <h4>Resting Place</h4>
+                    <p>Tell us where your loved one is resting for those that would like to visit</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                </div>
+            </div>
         </div>
 
         <div class="input-field col s12">
@@ -136,7 +184,17 @@
         <div class="input-field">
             <label for="link3">Link 3</label>
             <input type="text" name="link3" id="link3">
+            <a class="material-icons modal-trigger" href="#modal6">help</a>
         </div>
+            <div id="modal6" class="modal">
+                <div class="modal-content">
+                    <h4>Helpful Links</h4>
+                    <p>We have provided three different categories for links to add to the echo page. DONATIONS for a gofundme.com type of site for friends and family to help out with expenses, FLOWERS for a site for friends and family to purchase and send flowers and SERVICES DETAILS for a link to any services details you would like to share.  </p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                </div>
+            </div>
 
 <!--        <div class="input-field col s12">-->
 <!--            <select>-->
