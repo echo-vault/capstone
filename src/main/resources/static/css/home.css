@@ -7,10 +7,45 @@
     color:darkblue;
 }
 
+
+.input-field {
+    padding: 20px !important;
+
+}
+
+.card-content{
+    height: 130px;
+}
+
+.card-action {
+    height: 100px;
+
+}
+
+.echo-vault-intro{
+    padding: 50px;
+    border-radius: 50%;
+    width: 50%;
+    margin-top: -30px;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+
+}
+
+
 .user-profile-img {
     padding-top: 1.5em;
 }
 
+
 .delete-modal {
     width: max-content;
 }
+
+
+.icon{
+    width: 2em;
+    margin: 1em;
+}
+

@@ -15,6 +15,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Array;
@@ -59,7 +61,7 @@ public class EchoController {
     }
 
     @PostMapping("/echo-create")
-    public String saveFile(@ModelAttribute Echo echo,
+    public String saveFile(@ModelAttribute @Validated Echo echo, Errors validation,
                            @RequestParam(name = "profileImg") MultipartFile profileImg,
                            @RequestParam(name = "bgImg") MultipartFile bgImg,
                            @RequestParam(name = "image") ArrayList<MultipartFile> images,
@@ -71,6 +73,11 @@ public class EchoController {
                            @RequestParam(name = "link3", defaultValue = "") String link3,
                            Model model)
         {
+            if(validation.hasErrors()){
+                model.addAttribute("errors", validation);
+                model.addAttribute("echo", echo);
+                return "echo-create";
+            }
          if (profileImg != null) {
             String filename = profileImg.getOriginalFilename();
             String filepath = Paths.get(uploadPath, filename).toString();
@@ -82,7 +89,9 @@ public class EchoController {
                 e.printStackTrace();
 
             }
-        }
+         } else {
+                echo.setProfileImage("/img/genericProfileImage.png");
+         }
         if (bgImg != null) {
             String filename = bgImg.getOriginalFilename();
             String filepath = Paths.get(uploadPath, filename).toString();
@@ -310,15 +319,83 @@ public class EchoController {
     }
 
     @PostMapping("/memory")
-    public String createMemory(@ModelAttribute Memory memory,
+    public String createMemory(@ModelAttribute @Validated Memory memory,
+                                Errors validation,
+                                Model model,
+                                @RequestParam(name = "memoryImg") MultipartFile memoryImg,
                                 @RequestParam(name = "echoId") long echoId,
                                 @RequestParam(name = "userId") long userId
                                 ){
+        if(memory.getBody() == null || memory.getBody().equals("")){
+            System.out.println("Something went wrong");
+            validation.rejectValue(
+                    "body",
+                    "memory.body",
+                    "Memory must have content!"
+            );
+        }
+        if(validation.hasErrors()){
+            model.addAttribute("errors", validation);
+            model.addAttribute("memory", memory);
+
+            Echo echo = echoDao.getOne(echoId);
+            User user = userService.getLoggedInUser();
+            model.addAttribute("user", user);
+            model.addAttribute("memory", new Memory());
+            model.addAttribute("comment", new Comment());
+            model.addAttribute("echo", echo);
+            return "echo";
+        }
+        if (memoryImg != null) {
+            String filename = memoryImg.getOriginalFilename();
+            String filepath = Paths.get(uploadPath, filename).toString();
+            File destinationFile = new File(filepath);
+            try {
+                memoryImg.transferTo(destinationFile);
+                memory.setImage("/uploads/" + filename);
+            } catch (IOException e) {
+                e.printStackTrace();
+
+            }
+        }
         memory.setCreatedAt(new Date());
         memory.setUser(userDao.getOne(userId));
         memory.setEcho(echoDao.getOne(echoId));
         memoryDao.save(memory);
         return "redirect:/echo/" + memory.getEcho().getId();
+    }
+
+    @PostMapping("/memory/delete")
+    public String deleteMemory(@RequestParam(name="deleteMemoryId")long memoryId,
+                               @RequestParam(name="memoryEchoId")long echoId){
+        Memory m = memoryDao.getOne(memoryId);
+        memoryDao.delete(m);
+        return "redirect:/echo/" + echoId;
+    }
+
+    @PostMapping("/memory/edit")
+    public String editMemory(@RequestParam(name="editMemoryId")long memoryId,
+                             @RequestParam(name="memoryEchoId")long echoId,
+                             @RequestParam(name="memoryImage")String memoryImage,
+                             @RequestParam(name="body")String body,
+                             @RequestParam(name="memoryImg")MultipartFile uploadedFile){
+        Memory m = memoryDao.getOne(memoryId);
+        m.setBody(body);
+        m.setUpdatedAt(new Date());
+        m.setImage(memoryImage);
+        if(uploadedFile != null) {
+            String fileName = uploadedFile.getOriginalFilename();
+            String filePath = Paths.get(uploadPath, fileName).toString();
+            File destinationFile = new File(filePath);
+            try {
+                uploadedFile.transferTo(destinationFile);
+                m.setImage("/uploads/" + fileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        memoryDao.save(m);
+        return "redirect:/echo/" + echoId;
     }
 
     @PostMapping("/comment")
@@ -332,6 +409,26 @@ public class EchoController {
         commentDao.save(comment);
         return "redirect:/echo/" + comment.getMemory().getEcho().getId();
     }
+
+    @PostMapping("/comment/delete")
+    public String deleteComment(@RequestParam(name="deleteCommentId")long commentId,
+                                @RequestParam(name="commentEchoId")long echoId){
+        Comment c = commentDao.getOne(commentId);
+        commentDao.delete(c);
+        return "redirect:/echo/" + echoId;
+    }
+
+    @PostMapping("/comment/edit")
+    public String editComment(@RequestParam(name="editCommentId")long commentId,
+                                @RequestParam(name="commentEchoId")long echoId,
+                             @RequestParam(name="body")String body){
+        Comment c = commentDao.getOne(commentId);
+        c.setBody(body);
+        c.setUpdatedAt(new Date());
+        commentDao.save(c);
+        return "redirect:/echo/" + echoId;
+    }
+
 
 }
 

@@ -37,13 +37,13 @@ public class SearchController {
         List<Echo> foundEchos = echoDao.findAll();
         List<Echo> matchedEchos = new ArrayList<>();
         for(Echo e : foundEchos){
-            if(e.getLastName().equals(search)){
+            if(e.getLastName().equalsIgnoreCase(search)){
                 matchedEchos.add(e);
             }
-            if(e.getFirstName().equals(search)){
+            if(e.getFirstName().equalsIgnoreCase(search)){
                 matchedEchos.add(e);
             }
-            if(e.getFullName().equals(search)){
+            if(e.getFullName().equalsIgnoreCase(search)){
                 matchedEchos.add(e);
             }
         }

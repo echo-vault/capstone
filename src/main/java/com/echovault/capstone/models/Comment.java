@@ -1,5 +1,6 @@
 package com.echovault.capstone.models;
 
+import com.echovault.capstone.Util.TimeUtil;
 import jdk.jfr.Unsigned;
 
 import javax.persistence.*;
@@ -88,5 +89,13 @@ public class Comment {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getCreatedDate(){
+        return TimeUtil.formatDate(this.createdAt);
+    }
+
+    public String getUpdatedDate(){
+        return TimeUtil.formatDate(this.updatedAt);
     }
 }

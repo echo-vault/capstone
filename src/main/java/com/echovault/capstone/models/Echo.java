@@ -1,8 +1,10 @@
 package com.echovault.capstone.models;
 
+import com.echovault.capstone.Util.TimeUtil;
 import jdk.jfr.Unsigned;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.List;
 
@@ -16,9 +18,11 @@ public class Echo {
     private long id;
 
     @Column(nullable = false)
+    @NotBlank(message = "First name can not be blank")
     private String firstName;
 
     @Column(nullable = false)
+    @NotBlank(message = "Last name can not be blank")
     private String lastName;
 
     @Column(nullable = false)
@@ -30,9 +34,11 @@ public class Echo {
     private Date updatedAt;
 
     @Column(nullable = false)
+    @NotBlank(message = "Please enter a birth date")
     private String birthDate;
 
     @Column(nullable = false)
+    @NotBlank(message = "Please enter a passing date")
     private String deathDate;
 
     @Column
@@ -196,6 +202,14 @@ public class Echo {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getCreatedDate(){
+        return TimeUtil.formatDate(this.createdAt);
+    }
+
+    public String getUpdatedDate(){
+        return TimeUtil.formatDate(this.updatedAt);
     }
 
 
