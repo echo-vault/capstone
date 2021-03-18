@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -125,24 +128,175 @@ public class EchoController {
             }
         }
         if(link1.length() > 0 && linkName1.length() > 0) {
-            Link link = new Link();
-            link.setName(linkName1);
-            link.setUrl(link1);
-            link.setEcho(echo);
-            linkDao.save(link);
-        } else if(link2.length() > 0 && linkName2.length() > 0) {
-            Link link = new Link();
-            link.setName(linkName2);
-            link.setUrl(link2);
-            link.setEcho(echo);
-            linkDao.save(link);
-        } else if(link3.length() > 0 && linkName3.length() > 0) {
-            Link link = new Link();
-            link.setName(linkName3);
-            link.setUrl(link3);
-            link.setEcho(echo);
-            linkDao.save(link);
+            Link linkA = new Link();
+            linkA.setName(linkName1);
+            linkA.setUrl(link1);
+            linkA.setEcho(echo);
+            linkDao.save(linkA);
         }
+        if(link2.length() > 0 && linkName2.length() > 0) {
+            Link linkB = new Link();
+            linkB.setName(linkName2);
+            linkB.setUrl(link2);
+            linkB.setEcho(echo);
+            linkDao.save(linkB);
+        }
+        if(link3.length() > 0 && linkName3.length() > 0) {
+            Link linkC = new Link();
+            linkC.setName(linkName3);
+            linkC.setUrl(link3);
+            linkC.setEcho(echo);
+            linkDao.save(linkC);
+        }
+        return "redirect:/echo/" + echo.getId();
+    }
+
+    @GetMapping("/echo/{id}/edit")
+    public String showEditForm(Model model, @PathVariable long id) {
+        Echo echo = echoDao.getOne(id);
+        User sessionUser = userService.getLoggedInUser();
+        User user = userDao.getOne(sessionUser.getId());
+        model.addAttribute("echo", echo);
+        return "echo-edit";
+    }
+
+    @PostMapping("/echo/{id}/edit")
+    public String editEcho(@PathVariable long id,
+                           @ModelAttribute Echo echoToUpdate,
+                           @RequestParam(name = "profileImg", required = false) MultipartFile profileImg,
+                           @RequestParam(name = "bgImg", required = false) MultipartFile bgImg,
+                           @RequestParam(name = "image", required = false) ArrayList<MultipartFile> images,
+                           @RequestParam(name = "linkName1", defaultValue = "") String linkName1,
+                           @RequestParam(name = "link1", defaultValue = "") String link1,
+                           @RequestParam(name = "linkName2", defaultValue = "") String linkName2,
+                           @RequestParam(name = "link2", defaultValue = "") String link2,
+                           @RequestParam(name = "linkName3", defaultValue = "") String linkName3,
+                           @RequestParam(name = "link3", defaultValue = "") String link3) {
+
+        Echo echo = echoDao.getOne(id);
+        echo.setImages(echoToUpdate.getImages());
+        echo.setRestingPlace(echoToUpdate.getRestingPlace());
+        echo.setBirthDate(echoToUpdate.getBirthDate());
+        echo.setDeathDate(echoToUpdate.getDeathDate());
+        echo.setMemories(echoToUpdate.getMemories());
+        echo.setFirstName(echoToUpdate.getFirstName());
+        echo.setLastName(echoToUpdate.getLastName());
+        if(!echoToUpdate.getSummary().isEmpty()) {
+            echo.setSummary(echoToUpdate.getSummary());
+        }
+
+
+        if (!profileImg.isEmpty()) {
+            String filename = profileImg.getOriginalFilename();
+            String filepath = Paths.get(uploadPath, filename).toString();
+            File destinationFile = new File(filepath);
+            try {
+                profileImg.transferTo(destinationFile);
+                echo.setProfileImage("/uploads/" + filename);
+            } catch (IOException e) {
+                e.printStackTrace();
+
+            }
+        } else {
+            if(echo.getProfileImage().isEmpty())
+                echo.setProfileImage("/img/sunset1.jpg");
+
+        }
+        if (!bgImg.isEmpty()) {
+            String filename = bgImg.getOriginalFilename();
+            String filepath = Paths.get(uploadPath, filename).toString();
+            File destinationFile = new File(filepath);
+            try {
+                bgImg.transferTo(destinationFile);
+                echo.setBackgroundImage("/uploads/" + filename);
+            } catch (IOException e) {
+                e.printStackTrace();
+
+            }
+        } else {
+            if(echo.getBackgroundImage().isEmpty())
+            echo.setBackgroundImage("/img/sunset1.jpg");
+        }
+        if (!images.isEmpty()) {
+            for(MultipartFile image: images){
+                System.out.println(image);
+                if(!image.isEmpty()) {
+                    String filename = image.getOriginalFilename();
+                    String filepath = Paths.get(uploadPath, filename).toString();
+                    File destinationFile = new File(filepath);
+                    try {
+                        image.transferTo(destinationFile);
+                        Image img = new Image();
+                        img.setPath("/uploads/" + filename);
+                        img.setEcho(echo);
+                        imageDao.save(img);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+
+                    }
+                }
+            }
+        }
+        //UPDATING LINKS
+        List<Link> links = echo.getLinks();
+
+        if(links != null) {
+            if (links.get(0) != null) {
+                if (link1.length() > 0 && linkName1.length() > 0) {
+                    Link linkA = linkDao.getOne(links.get(0).getId());
+                    linkA.setName(linkName1);
+                    linkA.setUrl(link1);
+                    linkA.setEcho(echo);
+                    linkDao.save(linkA);
+                }
+            }
+
+            if (links.get(1) != null) {
+                if (link2.length() > 0 && linkName2.length() > 0) {
+                    Link linkB = linkDao.getOne(links.get(1).getId());
+                    linkB.setName(linkName2);
+                    linkB.setUrl(link2);
+                    linkB.setEcho(echo);
+                    linkDao.save(linkB);
+                }
+            }
+
+            if (links.get(2) != null) {
+                if (link3.length() > 0 && linkName3.length() > 0) {
+                    Link linkC = linkDao.getOne(links.get(2).getId());
+                    linkC.setName(linkName3);
+                    linkC.setUrl(link3);
+                    linkC.setEcho(echo);
+                    linkDao.save(linkC);
+                }
+            }
+        }else {
+            if (link1.length() > 0 && linkName1.length() > 0) {
+                Link linkA = new Link();
+                linkA.setName(linkName1);
+                linkA.setUrl(link1);
+                linkA.setEcho(echo);
+                linkDao.save(linkA);
+            }
+
+            if (link2.length() > 0 && linkName2.length() > 0) {
+                Link linkB = new Link();
+                linkB.setName(linkName1);
+                linkB.setUrl(link1);
+                linkB.setEcho(echo);
+                linkDao.save(linkB);
+            }
+
+            if (link3.length() > 0 && linkName3.length() > 0) {
+                Link linkC = new Link();
+                linkC.setName(linkName1);
+                linkC.setUrl(link1);
+                linkC.setEcho(echo);
+                linkDao.save(linkC);
+            }
+        }
+
+        echoDao.save(echo);
         return "redirect:/echo/" + echo.getId();
     }
 
@@ -155,6 +309,13 @@ public class EchoController {
         model.addAttribute("comment", new Comment());
         model.addAttribute("echo", echo);
         return "echo";
+    }
+
+    @PostMapping("/echo/{id}/delete")
+    public String deleteEcho(@PathVariable long id, RedirectAttributes redirectAttributes){
+        echoDao.deleteById(id);
+        redirectAttributes.addFlashAttribute("success", "Echo successfully deleted.");
+        return "redirect:/profile";
     }
 
     @PostMapping("/memory")

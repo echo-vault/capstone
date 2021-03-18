@@ -39,7 +39,13 @@
 }
 
 
+.delete-modal {
+    width: max-content;
+}
+
+
 .icon{
     width: 2em;
     margin: 1em;
 }
+
