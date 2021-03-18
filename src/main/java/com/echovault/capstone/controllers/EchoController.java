@@ -153,7 +153,7 @@ public class EchoController {
 
     @PostMapping("/echo/{id}/edit")
     public String editEcho(@PathVariable long id,
-                           @ModelAttribute Echo updatedEcho,
+                           @ModelAttribute Echo echoToUpdate,
                            @RequestParam(name = "profileImg", required = false) MultipartFile profileImg,
                            @RequestParam(name = "bgImg", required = false) MultipartFile bgImg,
                            @RequestParam(name = "image", required = false) ArrayList<MultipartFile> images,
@@ -166,19 +166,20 @@ public class EchoController {
 
         Echo echo = echoDao.getOne(id);
 //        model.addAttribute("echo", echo);
-//        echo.setBackgroundImage(updatedEcho.getBackgroundImage());
-//        echo.setProfileImage(updatedEcho.getProfileImage());
-        echo.setImages(updatedEcho.getImages());
-        echo.setLinks(updatedEcho.getLinks());
-        echo.setRestingPlace(updatedEcho.getRestingPlace());
-        echo.setBirthDate(updatedEcho.getBirthDate());
-        echo.setDeathDate(updatedEcho.getDeathDate());
-        echo.setMemories(updatedEcho.getMemories());
-        echo.setFirstName(updatedEcho.getFirstName());
-        echo.setLastName(updatedEcho.getLastName());
-        if(!updatedEcho.getSummary().isEmpty()) {
-            echo.setSummary(updatedEcho.getSummary());
+//        echo.setBackgroundImage(echoToUpdate.getBackgroundImage());
+//        echo.setProfileImage(echoToUpdate.getProfileImage());
+        echo.setImages(echoToUpdate.getImages());
+        echo.setLinks(echoToUpdate.getLinks());
+        echo.setRestingPlace(echoToUpdate.getRestingPlace());
+        echo.setBirthDate(echoToUpdate.getBirthDate());
+        echo.setDeathDate(echoToUpdate.getDeathDate());
+        echo.setMemories(echoToUpdate.getMemories());
+        echo.setFirstName(echoToUpdate.getFirstName());
+        echo.setLastName(echoToUpdate.getLastName());
+        if(!echoToUpdate.getSummary().isEmpty()) {
+            echo.setSummary(echoToUpdate.getSummary());
         }
+
 
         if (!profileImg.isEmpty()) {
             String filename = profileImg.getOriginalFilename();
@@ -231,27 +232,71 @@ public class EchoController {
                 }
             }
         }
-        if(link1.length() > 0 && linkName1.length() > 0) {
-            Link linkA = new Link();
-            linkA.setName(linkName1);
-            linkA.setUrl(link1);
-            linkA.setEcho(echo);
-            linkDao.save(linkA);
+        //UPDATING LINKS
+        List<Link> links = echo.getLinks();
+
+        //FIRST LINK
+
+        if(links != null) {
+            if (links.get(0) != null) {
+                if (link1.length() > 0 && linkName1.length() > 0) {
+                    Link linkA = linkDao.getOne(links.get(0).getId());
+                    linkA.setName(linkName1);
+                    linkA.setUrl(link1);
+                    linkA.setEcho(echo);
+                    linkDao.save(linkA);
+                }
+            }
+
+            if (links.get(1) != null) {
+                if (link2.length() > 0 && linkName2.length() > 0) {
+                    Link linkB = linkDao.getOne(links.get(1).getId());
+                    linkB.setName(linkName1);
+                    linkB.setUrl(link1);
+                    linkB.setEcho(echo);
+                    linkDao.save(linkB);
+                }
+            }
+
+            if (links.get(2) != null) {
+                if (link3.length() > 0 && linkName3.length() > 0) {
+                    Link linkC = linkDao.getOne(links.get(2).getId());
+                    linkC.setName(linkName1);
+                    linkC.setUrl(link1);
+                    linkC.setEcho(echo);
+                    linkDao.save(linkC);
+                }
+            }
+        }else {
+            if (link1.length() > 0 && linkName1.length() > 0) {
+                Link linkA = new Link();
+                linkA.setName(linkName1);
+                linkA.setUrl(link1);
+                linkA.setEcho(echo);
+                linkDao.save(linkA);
+            }
+
+            //SECOND LINK
+
+            if (link2.length() > 0 && linkName2.length() > 0) {
+                Link linkB = new Link();
+                linkB.setName(linkName1);
+                linkB.setUrl(link1);
+                linkB.setEcho(echo);
+                linkDao.save(linkB);
+            }
+
+            //THIRD LINK
+
+            if (link3.length() > 0 && linkName3.length() > 0) {
+                Link linkC = new Link();
+                linkC.setName(linkName1);
+                linkC.setUrl(link1);
+                linkC.setEcho(echo);
+                linkDao.save(linkC);
+            }
         }
-        if(link2.length() > 0 && linkName2.length() > 0) {
-            Link linkB = new Link();
-            linkB.setName(linkName2);
-            linkB.setUrl(link2);
-            linkB.setEcho(echo);
-            linkDao.save(linkB);
-        }
-        if(link3.length() > 0 && linkName3.length() > 0) {
-            Link linkC = new Link();
-            linkC.setName(linkName3);
-            linkC.setUrl(link3);
-            linkC.setEcho(echo);
-            linkDao.save(linkC);
-        }
+
         echoDao.save(echo);
         return "redirect:/echo/" + echo.getId();
     }
