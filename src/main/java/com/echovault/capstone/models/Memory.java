@@ -1,5 +1,6 @@
 package com.echovault.capstone.models;
 
+import com.echovault.capstone.Util.TimeUtil;
 import jdk.jfr.Unsigned;
 
 import javax.persistence.*;
@@ -117,5 +118,13 @@ public class Memory {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public String getCreatedDate(){
+        return TimeUtil.formatDate(this.createdAt);
+    }
+
+    public String getUpdatedDate(){
+        return TimeUtil.formatDate(this.updatedAt);
     }
 }
