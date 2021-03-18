@@ -12,7 +12,11 @@
         $(document).ready(function() {
             $('.carousel').carousel();
             M.textareaAutoResize($('#textarea1'));
-            $('.datepicker').datepicker();
+            $('.datepicker').datepicker({
+                format: 'mmmm dd yyyy',
+                yearRange: [1900, 2021],
+                maxDate: new Date()
+            });
             $('select').formSelect();
             function autoplay() {
                 $('.carousel').carousel('next');

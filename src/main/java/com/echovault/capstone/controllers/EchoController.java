@@ -166,16 +166,24 @@ public class EchoController {
                                 @RequestParam(name = "userId") long userId
                                 ){
         if(memory.getBody() == null || memory.getBody().equals("")){
+            System.out.println("Something went wrong");
             validation.rejectValue(
                     "body",
-                    "memory.boy",
+                    "memory.body",
                     "Memory must have content!"
             );
         }
         if(validation.hasErrors()){
             model.addAttribute("errors", validation);
             model.addAttribute("memory", memory);
-            return "echo/" + memory.getEcho().getId();
+
+            Echo echo = echoDao.getOne(echoId);
+            User user = userService.getLoggedInUser();
+            model.addAttribute("user", user);
+            model.addAttribute("memory", new Memory());
+            model.addAttribute("comment", new Comment());
+            model.addAttribute("echo", echo);
+            return "echo";
         }
         if (memoryImg != null) {
             String filename = memoryImg.getOriginalFilename();
