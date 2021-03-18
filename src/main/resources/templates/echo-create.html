@@ -89,8 +89,9 @@
         </div>
 
         <div class="input-field">
-         <label for="burialaddress">resting Place</label>
-         <input type="text" name="burialaddress" id="burialaddress" th:field="*{restingPlace}">
+         <label for="burialaddress">Resting Place</label>
+         <input type="hidden" name="burialaddress" id="burialaddress" th:field="*{restingPlace}">
+            <div id="map"></div>
         </div>
 
         <div class="input-field col s12">
