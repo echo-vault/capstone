@@ -170,6 +170,12 @@ public class EchoController {
 //        echo.setProfileImage(updatedEcho.getProfileImage());
         echo.setImages(updatedEcho.getImages());
         echo.setLinks(updatedEcho.getLinks());
+        echo.setRestingPlace(updatedEcho.getRestingPlace());
+        echo.setBirthDate(updatedEcho.getBirthDate());
+        echo.setDeathDate(updatedEcho.getDeathDate());
+        echo.setMemories(updatedEcho.getMemories());
+        echo.setFirstName(updatedEcho.getFirstName());
+        echo.setLastName(updatedEcho.getLastName());
         if(!updatedEcho.getSummary().isEmpty()) {
             echo.setSummary(updatedEcho.getSummary());
         }
