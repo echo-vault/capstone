@@ -3,6 +3,7 @@ package com.echovault.capstone.controllers;
 import com.echovault.capstone.StorageService;
 import com.echovault.capstone.Util.Password;
 import com.echovault.capstone.Util.TLSEmail;
+import com.echovault.capstone.models.Echo;
 import com.echovault.capstone.models.User;
 import com.echovault.capstone.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,14 @@ import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.List;
 
 @Controller
 public class HomeController {
 
     private final UserRepository userDao;
     private final PasswordEncoder encoder;
+    private final EchoRepository echoDao;
 //    private final StorageService storageService;
 
 //    @Autowired
@@ -37,9 +40,10 @@ public class HomeController {
 //    }
 
 
-    public HomeController(UserRepository userDao, PasswordEncoder encoder) {
+    public HomeController(UserRepository userDao, PasswordEncoder encoder, EchoRepository echoDao) {
         this.userDao = userDao;
         this.encoder = encoder;
+        this.echoDao = echoDao;
     }
 
     @Value("${file-upload-path}")
@@ -51,9 +55,13 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String home(){
+    public String home(Model model){
+        List<Echo> echoList = echoDao.findAll();
+        model.addAttribute("echo", echoList);
         return "home";
     }
+
+
 
     @GetMapping("/about")
     public String about(){
