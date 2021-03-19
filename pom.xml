@@ -91,7 +91,7 @@
 <!--        <dependency>-->
 <!--            <groupId>com.mapbox.mapboxsdk</groupId>-->
 <!--            &lt;!&ndash; Replace `DESIRED_JAVA_SDK_PACKAGE` with the name of one of the packages listed in the next section&ndash;&gt;-->
-<!--            <artifactId>Java 11</artifactId> -->
+<!--            <artifactId>DESIRED JAVA SDK PACKAGE</artifactId> -->
 <!--            <version>5.6.0</version>-->
 <!--        </dependency>-->
 

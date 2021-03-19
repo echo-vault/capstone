@@ -91,6 +91,10 @@
         <div class="input-field">
          <label for="burialaddress">Resting Place</label>
          <input type="hidden" name="burialaddress" id="burialaddress" th:field="*{restingPlace}">
+        </div>
+
+        <div class="container">
+            <div id="geocoder" class="geocoder"></div>
             <div id="map"></div>
         </div>
 
