@@ -31,7 +31,7 @@
                     <div class="card-content">
                       <span class="card-title center">
                           Life Story
-                          <th:block th:if="${echo.getImages()} != null">
+                          <th:block th:if="${echo.getImages().size()} > 0">
                               <a href="#!" class="btn-floating btn-large waves-effect waves-amber waves-lighten-4 amber lighten-2 right view_carousel" style="display: flex; align-items: center">
                                   <i class="material-icons tooltipped" data-position="bottom" data-tooltip="View Slideshow">view_carousel</i>
                               </a>
@@ -49,7 +49,7 @@
 
 
             <div class="col hide-on-small-and-down m3 memory-posters">
-                <h4 class="center">Posters</h4>
+                <h4 class="center">Guest Book</h4>
                 <div class="row">
                     <div class="col s12 center" th:each="memory : ${echo.getMemories()}">
                         <div class="chip">
