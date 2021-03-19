@@ -3,7 +3,6 @@
     background-repeat: no-repeat;
     background-size: cover;
 
-    height: 160px;
     color:darkblue;
 }
 
@@ -23,16 +22,13 @@
 }
 
 .echo-vault-intro{
-    padding: 50px;
-    border-radius: 50%;
-    width: 50%;
-    margin-top: -30px;
-    margin-right: auto;
-    margin-left: auto;
-    display: flex;
-
+    width: 20em;
 }
 
+.echo-vault-logo{
+    margin-top: -30px;
+
+}
 
 .user-profile-img {
     padding-top: 1.5em;
@@ -47,5 +43,14 @@
 .icon{
     width: 2em;
     margin: 1em;
+}
+
+
+.home-page-buttons{
+    margin: 10px;
+}
+
+.search-home{
+    width: 200px;
 }
 

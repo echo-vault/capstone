@@ -6,9 +6,13 @@
 <header th:fragment="navbar">
 
     <nav>
+
+      
+
         <div class="nav-wrapper">
             <a th:href="@{/}" class="brand-logo valign-wrapper" onclick="M.toast({html: '<img th:src=\'@{/img/echovaultlogo.png}\'>'})">EchoVault</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li>
                     <a th:href="@{/}"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Home">home</i></a>
