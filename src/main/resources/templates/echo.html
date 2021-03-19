@@ -7,30 +7,36 @@
 <main>
     <!--    carousel-->
 
-        <div class="carousel">
-            <div class="carousel-fixed-item center"><h1 th:text="${echo.getFullName()}"></h1></div>
+        <div class="carousel hide">
             <a th:each="image : ${echo.getImages()}" class="carousel-item" th:href="'#' + ${echo.getImages().indexOf(image) + 1} + '!'"><img th:src="${image.path}"></a>
         </div>
-
 
 
     <div class="container">
         <div class="row">
             <div class="col s12 m6">
-                <div class="card profile-card large hoverable">
+                <div class="card profile-card large hoverable grey lighten-4">
                     <div class="card-image background-image">
                       <img th:src="${echo.backgroundImage}" style="max-height: max-content">
                     </div>
                     <img class="circle profile-image responsive-img" th:src="${echo.profileImage}" style="max-height: 200px">
                     <div class="card-content profile-content" style="margin-top: auto">
+                      <h6 class="center" th:text="${echo.getFullName()}"></h6>
                       <p class="center" th:text="${echo.getDisplayedDates()}" ></p>
                     </div>
                 </div>
             </div>
             <div class="col s12 m6 valign-wrapper">
-                <div class="card summary-card large hoverable">
+                <div class="card summary-card large hoverable grey lighten-4">
                     <div class="card-content">
-                      <span class="card-title center">Life Story</span>
+                      <span class="card-title center">
+                          Life Story
+                          <th:block th:if="${echo.getImages()} != null">
+                              <a href="#!" class="btn-floating btn-large waves-effect waves-amber waves-lighten-4 amber lighten-2 right view_carousel" style="display: flex; align-items: center">
+                                  <i class="material-icons tooltipped" data-position="bottom" data-tooltip="View Slideshow">view_carousel</i>
+                              </a>
+                          </th:block>
+                      </span>
                       <p th:text="${echo.summary}"></p>
                     </div>
                 </div>
@@ -40,6 +46,8 @@
 
     <div class="container">
         <div class="row">
+
+
             <div class="col hide-on-small-and-down m3 memory-posters">
                 <h4 class="center">Posters</h4>
                 <div class="row">
@@ -72,7 +80,7 @@
                                             <input class="file-path validate" type="text">
                                           </div>
                                         </div>
-                                      </div>
+                                    </div>
                                     <input type="hidden" name="echoId" th:value="${echo.getId()}">
                                     <input type="hidden" name="userId" th:value="${user.getId()}">
                                     <button class="waves-effect waves-amber waves-lighten-4 btn amber lighten-2" type="submit">Submit
@@ -87,7 +95,7 @@
                         <th:block th:switch="${memory.getImage()} == null">
 <!--                            Memory does not have an image   -->
                             <div th:case="true">
-                                <div class="card hoverable">
+                                <div class="card hoverable grey lighten-4">
                                     <div class="card-content">
                                         <span class="card-title" th:text="${memory.user.getFullName()}"></span>
                                       <p th:text="${memory.body}"></p>
@@ -102,7 +110,7 @@
 
                                         <th:block th:if="${user.getId()} == ${memory.getUser().getId()}">
                                                 <a th:href="'#edit' + ${memory.getId()}" class="modal-trigger right"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="edit">edit</i></a>
-                                                <a th:href="'#delete' + ${memory.getId()}" class="right modal-trigger"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Delete">delete</i></a>
+                                                <a th:href="'#delete' + ${memory.getId()}" class="right modal-trigger"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="delete">delete</i></a>
                                                 <div th:replace="partials/modal.html :: edit-memory-modal"></div>
                                                 <div th:replace="partials/modal.html :: delete-memory-modal"></div>
                                         </th:block>
@@ -116,8 +124,8 @@
                                                     <p th:text="${comment.body}"></p>
                                                     <p>
                                                         <span th:text="${comment.getCreatedDate()}"></span>
-                                                        <a th:href="'#editC' + ${comment.getId()}" class="modal-trigger"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Edit">edit</i></a>
-                                                        <a th:href="'#deleteC' + ${comment.getId()}" class="modal-trigger"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Delete">delete</i></a>
+                                                        <a th:href="'#editC' + ${comment.getId()}" class="modal-trigger"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="edit">edit</i></a>
+                                                        <a th:href="'#deleteC' + ${comment.getId()}" class="modal-trigger"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="delete">delete</i></a>
                                                         <div th:replace="partials/modal.html :: edit-comment-modal"></div>
                                                         <div th:replace="partials/modal.html :: delete-comment-modal"></div>
                                                     </p>
@@ -134,7 +142,7 @@
                             </div>
 <!--                            Memory has an image -->
                             <div th:case="*">
-                                <div class="card hoverable">
+                                <div class="card hoverable grey lighten-4">
                                     <div class="card-image">
                                       <img th:src="${memory.getImage()}">
                                     </div>
@@ -151,9 +159,9 @@
                                           <a class='modal-trigger' th:href="'#addComment' + ${memory.getId()}" >Add Comment</a>
 
                                         <th:block th:if="${user.getId()} == ${memory.getUser().getId()}">
-                                            <a th:href="'#edit' + ${memory.getId()}" class="modal-trigger right"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Edit">edit</i></a>
+                                            <a th:href="'#edit' + ${memory.getId()}" class="modal-trigger right"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="edit">edit</i></a>
                                             <div th:replace="partials/modal.html :: edit-memory-modal"></div>
-                                            <a th:href="'#delete' + ${memory.getId()}" class="right modal-trigger"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Delete">delete</i></a>
+                                            <a th:href="'#delete' + ${memory.getId()}" class="right modal-trigger"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="delete">delete</i></a>
                                             <div th:replace="partials/modal.html :: delete-memory-modal"></div>
                                         </th:block>
                                     </div>
@@ -167,9 +175,9 @@
                                                     <p th:text="${comment.body}"></p>
                                                     <p>
                                                         <span th:text="${comment.getCreatedDate()}"></span>
-                                                        <a th:href="'#editC' + ${comment.getId()}" class="modal-trigger"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Edit">edit</i></a>
+                                                        <a th:href="'#editC' + ${comment.getId()}" class="modal-trigger"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="edit">edit</i></a>
                                                         <div th:replace="partials/modal.html :: edit-comment-modal"></div>
-                                                        <a th:href="'#deleteC' + ${comment.getId()}" class="modal-trigger"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Delete">delete</i></a>
+                                                        <a th:href="'#deleteC' + ${comment.getId()}" class="modal-trigger"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="delete">delete</i></a>
                                                         <div th:replace="partials/modal.html :: delete-comment-modal"></div>
                                                     </p>
                                                 </div>
