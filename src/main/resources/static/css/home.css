@@ -22,11 +22,14 @@
 }
 
 .echo-vault-intro{
-    width: 20em;
+    width: 15em;
+    margin-left: 40px;
+    margin-top: 150px;
 }
 
 .echo-vault-logo{
-    margin-top: -30px;
+    margin-left:30px;
+    margin-top: 30px;
 
 }
 
@@ -46,11 +49,4 @@
 }
 
 
-.home-page-buttons{
-    margin: 10px;
-}
-
-.search-home{
-    width: 200px;
-}
 
