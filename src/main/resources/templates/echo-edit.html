@@ -12,7 +12,7 @@
     <form th:action="@{/echo/{id}/edit/(id=${echo.id})}" th:method="POST" th:object="${echo}" enctype="multipart/form-data" >
 <!--        <input type="hidden" th:field="*{id}">-->
         <div class="file-field input-field">
-            <div class="btn">
+            <div class="btn waves-effect waves-amber waves-lighten-4 amber lighten-2">
                 <span>Change Profile Image</span>
                 <input type="file" name="profileImg" th:value="*{profileImage}">
 <!--                <input type="hidden" name="current-profile" th:value="${echo.profileImage}">-->
@@ -26,7 +26,7 @@
         </div>
 
         <div class="file-field input-field">
-            <div class="btn">
+            <div class="btn waves-effect waves-amber waves-lighten-4 amber lighten-2">
                 <span>Change Background Image</span>
                 <input type="file" name="bgImg" th:value="*{backgroundImage}">
 <!--                <input type="hidden" name="current-background" th:value="${echo.backgroundImage}">-->
@@ -40,7 +40,7 @@
         </div>
 
         <div class="file-field input-field">
-            <div class="btn">
+            <div class="btn waves-effect waves-amber waves-lighten-4 amber lighten-2">
                 <span>Carousel</span>
                 <input type="file" multiple  name="image" th:value="*{images}">
 <!--                <input type="hidden" name="current-carousel" th:value="${echo.images}">-->
@@ -234,7 +234,7 @@
 
 
 
-        <button class="btn waves-effect waves-light" type="submit" name="action">Save Changes
+        <button class="btn waves-effect waves-amber waves-lighten-4 amber lighten-2" type="submit" name="action">Save Changes
             <i class="material-icons right">check</i>
         </button>
     </form>
