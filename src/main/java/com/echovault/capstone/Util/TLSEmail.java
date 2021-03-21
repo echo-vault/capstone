@@ -1,5 +1,8 @@
 package com.echovault.capstone.Util;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -7,11 +10,13 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.Properties;
 
+@Service
 public class TLSEmail {
 
     static final String fromEmail = "echovault.xyz@gmail.com"; //requires valid gmail id
-    static final String password = "Jupiter1!"; // correct password for gmail id
-    final String toEmail = "will.tisdale.31@gmail.com"; // can be any email id
+
+    @Value("${spring.mail.password}")
+    public String password; // correct password for gmail id
 
     /**
      * Outgoing Mail (SMTP) Server
@@ -19,7 +24,7 @@ public class TLSEmail {
      * Use Authentication: Yes
      * Port for TLS/STARTTLS: 587
      */
-    public static void sendEmail(
+    public void sendEmail(
             final String toEmail, String subject, String body) throws ServletException, IOException  // can be any email id
     {
         Properties props = new Properties();
