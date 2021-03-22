@@ -1,14 +1,11 @@
 package com.echovault.capstone.controllers;
 
-import com.echovault.capstone.StorageService;
 import com.echovault.capstone.Util.Password;
 import com.echovault.capstone.Util.TLSEmail;
 import com.echovault.capstone.models.Echo;
 import com.echovault.capstone.models.User;
 import com.echovault.capstone.repositories.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +29,8 @@ public class HomeController {
     private final UserRepository userDao;
     private final PasswordEncoder encoder;
     private final EchoRepository echoDao;
+    private final TLSEmail tlsEmail;
+
 //    private final StorageService storageService;
 
 //    @Autowired
@@ -40,10 +39,11 @@ public class HomeController {
 //    }
 
 
-    public HomeController(UserRepository userDao, PasswordEncoder encoder, EchoRepository echoDao) {
+    public HomeController(UserRepository userDao, PasswordEncoder encoder, EchoRepository echoDao, TLSEmail tlsEmail) {
         this.userDao = userDao;
         this.encoder = encoder;
         this.echoDao = echoDao;
+        this.tlsEmail = tlsEmail;
     }
 
     @Value("${file-upload-path}")
@@ -75,7 +75,7 @@ public class HomeController {
     }
 
     @PostMapping("/register")
-    public String createUser(@ModelAttribute @Validated User user, Errors validation, @RequestParam(name = "user-profile-img")MultipartFile uploadedFile, @RequestParam(name = "confirm") String confirm, Model model){
+    public String createUser(@ModelAttribute @Validated User user, Errors validation, @RequestParam(name = "user-profile-img")MultipartFile uploadedFile, @RequestParam(name = "confirm") String confirm, Model model) throws ServletException, IOException {
 //        User user = userDao.findById(principal.getId()).get();
 //        model.addAttribute("user", user);
         for (User u: userDao.findAll()){
@@ -125,6 +125,12 @@ public class HomeController {
         String hash = encoder.encode(password);
         user.setPassword(hash);
         userDao.save(user);
+        String subject = "Thank You For Registering";
+        String body = "Hello, " + user.getFirstName() +
+                "! \n Thank you for registering with Echo Vault. You now have access to " +
+                "creating Echos. These are pages dedicated to your loved ones. Share the link with " +
+                "friends and family so they can share their memories with everyone.";
+        tlsEmail.sendEmail(user.getEmail(), subject, body);
         return "redirect:/login";
     }
 
@@ -143,9 +149,10 @@ public class HomeController {
         User user = userDao.findByEmail(email);
         String randomPassword = Password.randomGen();
         String body = "Hello " + user.getFirstName() + ", your temporary password is "+ randomPassword +"\n\nPlease go to http://localhost:8080/reset-password";
+//        String body = "Hello " + user.getFirstName() + ", your temporary password is "+ randomPassword +"\n\nPlease go to http://echovault.xyz/reset-password";
         String subject = "Reset Password";
         if(user != null){
-            TLSEmail.sendEmail(user.getEmail(), subject, body);
+            tlsEmail.sendEmail(user.getEmail(), subject, body);
             String hash = encoder.encode(randomPassword);
             user.setPassword(hash);
             userDao.save(user);

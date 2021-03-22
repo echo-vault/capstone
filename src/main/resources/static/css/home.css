@@ -1,16 +1,11 @@
-/*.jumbotron {*/
-/*    background-image: url("../img/sunset1.jpg");*/
-/*    background-repeat: no-repeat;*/
-/*    background-size: cover;*/
 
-/*    color:darkblue;*/
-/*}*/
-
-
-.input-field {
-    padding: 20px !important;
-
+.jumbotron {
+    background-image: url("../img/sunset1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color:darkblue;
 }
+
 
 .card-content{
     height: 130px;
