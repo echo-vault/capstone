@@ -18,7 +18,6 @@
     />
     <script>
         $(document).ready(function() {
-            $('.carousel').carousel();
             M.textareaAutoResize($('#textarea1'));
             $('.datepicker').datepicker({
                 format: 'mmmm dd yyyy',
@@ -30,7 +29,6 @@
                 $('.carousel').carousel('next');
                 setTimeout(autoplay, 4500);
             }
-            autoplay()
             M.updateTextFields();
             $('#logout').click(function(){
                 $('#logoutForm').submit();
@@ -42,15 +40,23 @@
                 $('.editMemoryForm').submit();
             })
             $('.modal').modal();
-            let divWidth = $('.profile-card').width();
-            $('.summary-card').css('min-width', divWidth+'px');
+            // let divWidth = $('.profile-card').width();
+            // $('.summary-card').css('min-width', divWidth+'px');
+            // function adjustCardWidth(){
+            //     $('.summary-card').css('min-width', divWidth+'px');
+            // }
+            // document.getElementsByTagName('body').addEventListener("resize", adjustCardWidth)
             $('.tooltipped').tooltip();
             $('.sidenav').sidenav();
             $('.view_carousel').click(function(){
-                $('.carousel').toggleClass('hide')
+                $('.carousel').toggleClass('hide');
+                $('.carousel').carousel();
+                autoplay();
             })
-
-
+            $('.carousel.carousel-slider').carousel({
+                indicators: true,
+                fullWidth: true,
+            });
         });
     </script>
 </div>

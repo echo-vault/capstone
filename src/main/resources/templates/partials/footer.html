@@ -5,15 +5,16 @@
 <body>
 
 <div th:fragment="footer">
-<footer class="page-footer">
-    <div class="footer-copyright">
+<footer class="page-footer light-blue accent-1">
+    <div class="footer-copyright light-blue darken-4">
         <div class="container">
             © 2021 Echo Vault Inc.
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            <a th:href="@{/about}" class="right">About Us</a>
         </div>
     </div>
 </footer>
 </div>
+
 
 
 
@@ -42,13 +43,16 @@
             </div>
           </div>
           <div class="footer-copyright">
+        <div th:fragment="echo-footer" >
+        <div class="page-footer light-blue accent-1">
+          <div class="footer-copyright light-blue darken-4">
             <div class="container">
             © 2021 Echo Vault Inc.
-<!--            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>-->
+                    <a th:href="@{/about}" class="right">About Us</a>
             </div>
           </div>
         </div>
-
+        </div>
 
 
 

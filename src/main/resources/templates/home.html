@@ -1,62 +1,91 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <div th:replace="partials/head.html :: head('Welcome')"></div>
 
 <body>
 <nav th:replace="partials/navbar.html :: navbar"></nav>
 
 
-<div class="jumbotron">
-    <div><p>Echos are familiarly known as reflections of sound. Remember your loved one by echoing their memory where the reflection never ends, Echo Vault.
-    </p></div>
-</div>
+<main class="carousel carousel-slider center">
+    <div class="carousel-fixed-item center">
+        <a class="btn waves-effect white grey-text darken-text-2">Next Slide</a>
+    </div>
+    <div class="carousel-item slide-1 white-text" href="slide-2">
 
-
-<div>
-    <div class="col s12 m5">
-        <div class="card echo-vault-intro teal">
-            <div class="circle teal large">
-                <span class="white-text">Echos are familiarly known as reflections of sound. Remember your loved one by echoing their memory where the reflection never ends, Echo Vault.
-                </span>
-            </div>
+        <div class="echo-vault-logo">
+            <img class="logo" src="img/echovaultlogo.png" alt="Echo Vault Logo">
+        </div>
+        <div class="echo-vault-intro white-text left-align">
+            <h4>Echoes are familiarly known as reflections of sound. Remember your loved one by echoing their memory where the reflection never ends.</h4>
         </div>
     </div>
-</div>
-
-<div class="row">
-    <div class="col s12 m6">
-        <div class="card blue-grey darken-1">
-            <div class="card-content white-text">
-                <span class="card-title">Register and Login</span>
-                <p>Register with Echo Vault to be able to add an echo, add a memory, post an image, or comment on an echo</p>
-            </div>
-            <div class="card-action">
-                <a th:href="@{/register}">Register</a>
-                <a th:href="@{/login}">Login</a>
-
-            </div>
-        </div>
+    <div class="carousel-item slide-2" href="#two!">
+        <h2>To view an Echo, create an Echo or add a Memory, please Register for an account and Login</h2>
+            <a class="btn home-buttons" th:href="@{/register}">Register</a>
+            <a class="btn home-buttons" th:href="@{/login}">Login</a>
     </div>
-    <div class="col s12 m6">
-        <div class="card blue-grey darken-1">
-            <div class="card-content white-text">
-                <span class="card-title">Search Echos</span>
-                <p>Search for an Echo by first or last name</p>
-            </div>
-            <div class="card-action">
-                <form th:action="@{/search}" method="post">
-                    <div class="input-field" >
-                        <input id="search" type="search" required name="search">
-                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                        <i class="material-icons">close</i>
+    <div class="carousel-item slide-3 white-text" href="#three!">
+        <h2>Create an Echo to remember your loved one</h2>
+        <div class="row">
+            <div class="col s12 m6">
+                <h2 class="center">Add Photos</h2>
+                <div class="card profile-card large">
+                    <div class="card-image background-image">
+                        <img src="img/sunset1.jpg" style="max-height: max-content">
                     </div>
-                </form>
+                    <img class="circle profile-image" src="img/eleanor.jpg" style="max-height: 200px">
+                    <div class="card-content profile-content">
+                        <div class="echo-profile-card-info">
+                            <p class="card-title center">Grandma Smith</p>
+                            <p class="center">Jan 01, 1920 - March 03, 2021</p>
+                        </div>
+                    </div>
 
-
+                </div>
             </div>
+            <p class="white-text">This is your third panel</p>
+
         </div>
     </div>
-</div>
+    <div class="carousel-item blue white-text" href="#four!">
+        <h2>Fourth Panel</h2>
+        <p class="white-text">This is your fourth panel</p>
+    </div>
+</main>
+
+
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col s12 m6">-->
+<!--<div class="echo-vault-logo">-->
+<!--    <img class="logo" src="img/echovaultlogo.png" alt="Echo Vault Logo">-->
+<!--</div>-->
+<!--<div class="echo-vault-intro white-text left-align">-->
+<!--    <p>Echos are familiarly known as reflections of sound. Remember your loved one by echoing their memory where the reflection never ends.</p>-->
+<!--</div>-->
+<!--            </div>-->
+<!--            <div class="col s12 m6">-->
+<!--                <div class="carousel carousel-slider">-->
+<!--                    <div class="carousel-item" th:each="echo : ${echos}" th:href="'#'+${echo.getId()}">-->
+<!--                        <div class="card profile-card large">-->
+<!--                            <div class="card-image background-image">-->
+<!--                                <img th:src="${echo.backgroundImage}" style="max-height: max-content">-->
+<!--                            </div>-->
+<!--                            <img class="circle profile-image" th:src="${echo.profileImage}" style="max-height: 200px">-->
+<!--                            <div class="card-content profile-content">-->
+<!--                                <a class="card-title center" th:text="${echo.getFullName()}" th:href="@{/echo/{id}(id = ${echo.getId()})}"></a>-->
+<!--                                <p class="center" th:text="${echo.getDisplayedDates()}"></p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+
+
 
 <div th:replace="partials/footer.html :: footer"></div>
 <div th:replace="partials/scripts.html :: scripts"></div>

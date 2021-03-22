@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="partials/head :: head('Create Echo')">
-
 </head>
 <body>
-
 <nav th:replace="partials/navbar :: navbar"></nav>
+<main class="createbg">
 <div class="container">
 
     <form th:action="@{/echo-create}" th:method="post" th:object="${echo} " enctype="multipart/form-data" >
-<!--        <form action="#">-->
-            <div class="file-field input-field">
-                <div class="btn">
+            <div class = "pd card hoverable grey lighten-4">
+                <h4 class="input-field col s12">IMAGES<a class="material-icons modal-trigger right grey lighten-4 z-depth-1" href="#modal1">help</a></h4>
+
+
+            <div class="file-field">
+                <div class="btn waves-effect waves-amber waves-lighten-4 light-blue darken-2">
+
                     <span>Profile</span>
                     <input type="file" name="profileImg">
                 </div>
@@ -19,11 +22,9 @@
                     <input class="file-path validate" type="text">
                 </div>
             </div>
-<!--        </form>-->
 
-<!--        <form action="#">-->
             <div class="file-field input-field">
-                <div class="btn">
+                <div class=" btn waves-effect waves-amber waves-lighten-4 light-blue darken-2">
                     <span>Background</span>
                     <input type="file" name="bgImg">
                 </div>
@@ -31,11 +32,11 @@
                     <input class="file-path validate" type="text">
                 </div>
             </div>
-<!--        </form>-->
 
-<!--        <form action="#">-->
+
+
             <div class="file-field input-field">
-                <div class="btn">
+                <div class="btn waves-effect waves-amber waves-lighten-4 light-blue darken-2">
                     <span>Carousel</span>
                     <input type="file" multiple  name="image">
                 </div>
@@ -43,49 +44,58 @@
                     <input class="file-path validate" type="text" placeholder="Upload one or more images">
                 </div>
             </div>
-<!--        </form>-->
+
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4>Images</h4>
+                <p class="flow-text">Click PROFILE to upload an image of your remembered loved one to display as the main profile image of the echo. Click BACKGROUND to upload a background image that will display behind the profile image. Click CAROUSEL to upload as many images as you would like to display in the image carousel at the top of the echo page </p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close btn waves-effect waves-amber waves-lighten-4 amber lighten-2">Close</a>
+            </div>
+        </div>
+    </div>
+     <div class =" pd card hoverable grey lighten-4">
+         <h4 class="input-field col s12">DETAILS <a class="material-icons modal-trigger right z-depth-1 grey lighten-2" href="#modal5">help</a></h4>
 
         <div class="row">
             <div class="col s12">
                 <div class="row">
                     <div class="input-field col s6">
-                        <input placeholder="Placeholder" id="first_name" type="text" class="validate" th:field="*{firstName}" >
-                        <label for="first_name">First Name</label>
+                        <input id="first_name" type="text" class="validate" th:field="*{firstName}" >
+                        <label for="first_name" class="black-text">First Name</label>
                         <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="red-text"/>
-
                     </div>
+
                     <div class="input-field col s6">
                         <input id="last_name" type="text" class="validate" th:field="*{lastName}">
-                        <label for="last_name">Last Name</label>
+                        <label for="last_name" class="black-text">Last Name</label>
                         <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="red-text"/>
-
-                    </div>
                     </div>
                 </div>
-</div>
-        <div>
-        <label for="birthdate">Birthdate</label>
+        </div>
+        <div class="input-field col s6">
+        <label for="birthdate" class="black-text">Birthdate</label>
             <input type="text" class="datepicker" id="birthdate" th:field="*{birthDate}">
             <p th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}" class="red-text"/>
-
         </div>
 
-        <div>
-        <label for="passingdate">Passingdate</label>
+        <div class="input-field col s6">
+        <label for="passingdate" class="black-text">Passing Date</label>
             <input type="text" class="datepicker" id="passingdate" th:field="*{deathDate}">
             <p th:if="${#fields.hasErrors('deathDate')}" th:errors="*{deathDate}" class="red-text"/>
-
         </div>
-
+     </div>
         <div class="row">
             <div class="col s12">
                 <div class="row">
                     <div class="input-field col s12">
                         <textarea id="textarea1" class="materialize-textarea" th:field="*{summary}"></textarea>
-                        <label for="textarea1">Life Story</label>
+                        <label for="textarea1" class="black-text">Life Story</label>
                     </div>
                 </div>
             </div>
+
         </div>
 
         <div class="input-field">
@@ -96,89 +106,86 @@
         <div class="container">
             <div id="geocoder" class="geocoder"></div>
             <div id="map"></div>
+         </div>
+         <div class="input-field col s12">
+         <label for="burialaddress" class="black-text">Resting Place</label>
+         <input type="text" name="burialaddress" id="burialaddress" th:field="*{restingPlace}">
+            <div id="modal5" class="modal">
+                <div class="modal-content">
+                    <h4>Details</h4>
+                    <p class="flow-text">Provide details about your remembered loved one</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close btn waves-effect waves-amber waves-lighten-4 amber lighten-2">Close</a>
+                </div>
+            </div>
         </div>
-
-        <div class="input-field col s12">
+    </div>
+        <div class ="pd card hoverable grey lighten-4">
+            <h4 class="input-field col s12">Links <a class="material-icons modal-trigger right z-depth-1 grey lighten-2"  href="#modal6">help</a></h4>
+        <div class="row">
+        <div class="col s6">
             <select name="linkName1">
                 <option value="" disabled selected>Choose What kind of link to add.</option>
                 <option value="Donations">Donations</option>
                 <option value="Flowers/Condolences">Flowers/Condolences</option>
                 <option value="Services Details">Services Details</option>
             </select>
-            <label>Helpful Links</label>
         </div>
 
-            <div class="input-field">
-                <label for="link1">Link 1</label>
-                <input type="text" name="link1" id="link1">
+            <div class="col s6">
+<!--                <label for="link1" class="black-text">Link</label>-->
+                <input type="text" name="link1" id="link1" placeholder="Link">
             </div>
-
-        <div class="input-field col s12">
+        </div>
+        <div class="row">
+        <div class="col s6">
             <select name="linkName2">
                 <option value="" disabled selected>Choose What kind of link to add.</option>
                 <option value="Donations">Donations</option>
                 <option value="Flowers/Condolences">Flowers/Condolences</option>
                 <option value="Services Details">Services Details</option>
             </select>
-            <label>Helpful Links</label>
         </div>
 
-        <div class="input-field">
-            <label for="link2">Link 2</label>
-            <input type="text" name="link2" id="link2">
+        <div class="col s6">
+<!--            <label for="link2" class="black-text">Link</label>-->
+            <input type="text" name="link2" id="link2" placeholder="Link">
         </div>
-
-        <div class="input-field col s12">
+        </div>
+        <div class="row">
+        <div class="col s6">
             <select name="linkName3">
                 <option value="" disabled selected>Choose What kind of link to add.</option>
                 <option value="Donations">Donations</option>
                 <option value="Flowers/Condolences">Flowers/Condolences</option>
                 <option value="Services Details">Services Details</option>
             </select>
-            <label>Helpful Links</label>
         </div>
 
-        <div class="input-field">
-            <label for="link3">Link 3</label>
-            <input type="text" name="link3" id="link3">
+        <div class="col s6">
+<!--            <label for="link3" class="black-text">Link</label>-->
+            <input type="text" name="link3" id="link3" placeholder="Link">
         </div>
+            </div>
+            <div id="modal6" class="modal">
+                <div class="modal-content">
+                    <h4>Helpful Links</h4>
+                    <p class="flow-text">We have provided three different categories for links to add to the echo page. DONATIONS for a gofundme.com type of site for friends and family to help out with expenses, FLOWERS for a site for friends and family to purchase and send flowers and SERVICES DETAILS for a link to any services details you would like to share.  </p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close btn waves-effect waves-amber waves-lighten-4 amber lighten-2">Close</a>
+                </div>
+            </div>
 
-<!--        <div class="input-field col s12">-->
-<!--            <select>-->
-<!--                <option value="" disabled selected>Choose What kind of link to add.</option>-->
-<!--                <option value="1">Donations</option>-->
-<!--                <option value="2">Flowers/Condolences</option>-->
-<!--                <option value="3">Services Details</option>-->
-<!--            </select>-->
-<!--            <label>Helpful Links</label>-->
-<!--        </div>-->
-
-<!--        <div class="input-field">-->
-<!--            <label for="link2">Link 2</label>-->
-<!--            <input type="text" name="link2" id="link2" th:field="*{links}">-->
-<!--        </div>-->
-
-<!--        <div class="input-field col s12">-->
-<!--            <select>-->
-<!--                <option value="" disabled selected>Choose What kind of link to add.</option>-->
-<!--                <option value="1">Donations</option>-->
-<!--                <option value="2">Flowers/Condolences</option>-->
-<!--                <option value="3">Services Details</option>-->
-<!--            </select>-->
-<!--            <label>Helpful Links</label>-->
-<!--        </div>-->
-
-<!--        <div class="input-field">-->
-<!--            <label for="link3">Link 3</label>-->
-<!--            <input type="text" name="link3" id="link3" th:field="*{links}">-->
-<!--        </div>-->
-
-        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+        <button class="btn waves-effect waves-amber waves-lighten-4 light-blue darken-2" type="submit" name="action">Submit
             <i class="material-icons right">send</i>
         </button>
+        </div>
     </form>
 
 </div>
+</main>
 <div th:replace="partials/scripts :: scripts"></div>
 <script>
     let mapOptions = {

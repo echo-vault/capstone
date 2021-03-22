@@ -12,7 +12,7 @@
     <form th:action="@{/echo/{id}/edit/(id=${echo.id})}" th:method="POST" th:object="${echo}" enctype="multipart/form-data" >
 <!--        <input type="hidden" th:field="*{id}">-->
         <div class="file-field input-field">
-            <div class="btn">
+            <div class="btn waves-effect waves-amber waves-lighten-4 amber lighten-2">
                 <span>Change Profile Image</span>
                 <input type="file" name="profileImg" th:value="*{profileImage}">
 <!--                <input type="hidden" name="current-profile" th:value="${echo.profileImage}">-->
@@ -26,7 +26,7 @@
         </div>
 
         <div class="file-field input-field">
-            <div class="btn">
+            <div class="btn waves-effect waves-amber waves-lighten-4 amber lighten-2">
                 <span>Change Background Image</span>
                 <input type="file" name="bgImg" th:value="*{backgroundImage}">
 <!--                <input type="hidden" name="current-background" th:value="${echo.backgroundImage}">-->
@@ -40,7 +40,7 @@
         </div>
 
         <div class="file-field input-field">
-            <div class="btn">
+            <div class="btn waves-effect waves-amber waves-lighten-4 amber lighten-2">
                 <span>Carousel</span>
                 <input type="file" multiple  name="image" th:value="*{images}">
 <!--                <input type="hidden" name="current-carousel" th:value="${echo.images}">-->
@@ -64,16 +64,21 @@
                 </div>
             </div>
         </div>
-        <div>
-            <label for="birthdate">Birthdate</label>
-            <input type="text" class="datepicker" id="birthdate" th:field="*{birthDate}">
-        </div>
+        <div class="row">
+            <div class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="birthdate">Birthdate</label>
+                        <input type="text" class="datepicker" id="birthdate" th:field="*{birthDate}">
+                    </div>
 
-        <div>
-            <label for="passingdate">Date of Passing</label>
-            <input type="text" class="datepicker" id="passingdate" th:field="*{deathDate}">
+                    <div class="input-field col s6">
+                        <label for="passingdate">Date of Passing</label>
+                        <input type="text" class="datepicker" id="passingdate" th:field="*{deathDate}">
+                    </div>
+               </div>
+            </div>
         </div>
-
         <div class="row">
             <div class="col s12">
                 <div class="row">
@@ -90,52 +95,140 @@
             <input type="text" name="burialaddress" id="burialaddress" th:field="*{restingPlace}">
         </div>
 <!--        <input type="hidden" name="current-links" th:value="${echo.getLinks()}">-->
-        <div class="input-field col s12">
-            <select name="linkName1">
-                <option value="" disabled selected>Choose What kind of link to add.</option>
-                <option value="Donations">Donations</option>
-                <option value="Flowers/Condolences">Flowers/Condolences</option>
-                <option value="Services Details">Services Details</option>
-            </select>
-            <label>Helpful Links</label>
-        </div>
 
-        <div class="input-field">
-            <label for="link1">Link 1</label>
-            <input type="text" name="link1" id="link1" th:value="${echo.getLinks().get(0).getUrl()}">
-        </div>
+        <th:block th:switch="${echo.getLinks().size()} > 0">
+            <div th:case="true">
+                <div class="row" th:each="link : ${echo.getLinks()}">
+                    <div class="input-field col s12 m6">
+                        <select th:name="'linkName' + ${echo.getLinks().indexOf(link)}">
+                            <option th:value="${link.getName()}" th:text="${link.getName()}" selected></option>
+                            <option value="Donations">Donations</option>
+                            <option value="Flowers/Condolences">Flowers/Condolences</option>
+                            <option value="Services Details">Services Details</option>
+                        </select>
+                        <label>Link Type</label>
+                    </div>
 
-        <div class="input-field col s12">
-            <select name="linkName2">
-                <option value="" disabled selected>Choose What kind of link to add.</option>
-                <option value="Donations">Donations</option>
-                <option value="Flowers/Condolences">Flowers/Condolences</option>
-                <option value="Services Details">Services Details</option>
-            </select>
-            <label>Helpful Links</label>
-        </div>
+                    <div class="input-field col s12 m6">
+                        <label for="link">Link</label>
+                        <input type="text" th:name="'link' + ${echo.getLinks().indexOf(link)}" id="link" th:value="${link.getUrl()}">
+                    </div>
+                </div>
+            </div>
+            <div th:case="*">
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <select name="linkName0">
+                            <option value="" disabled selected>Choose What kind of link to add.</option>
+                            <option value="Donations">Donations</option>
+                            <option value="Flowers/Condolences">Flowers/Condolences</option>
+                            <option value="Services Details">Services Details</option>
+                        </select>
+                        <label>Link Type</label>
+                    </div>
 
-        <div class="input-field">
-            <label for="link2">Link 2</label>
-            <input type="text" name="link2" id="link2" th:value="${echo.getLinks().get(1).getUrl()}">
-        </div>
+                    <div class="input-field col s12 m6">
+                        <label for="link1">Link 1</label>
+                        <input type="text" name="link0" id="link1">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <select name="linkName1">
+                            <option value="" disabled selected>Choose What kind of link to add.</option>
+                            <option value="Donations">Donations</option>
+                            <option value="Flowers/Condolences">Flowers/Condolences</option>
+                            <option value="Services Details">Services Details</option>
+                        </select>
+                        <label>Link Type</label>
+                    </div>
 
-        <div class="input-field col s12">
-            <select name="linkName3">
-                <option value="" disabled selected>Choose What kind of link to add.</option>
-                <option value="Donations">Donations</option>
-                <option value="Flowers/Condolences">Flowers/Condolences</option>
-                <option value="Services Details">Services Details</option>
-            </select>
-            <label>Helpful Links</label>
-        </div>
+                    <div class="input-field col s12 m6">
+                        <label for="link1">Link</label>
+                        <input type="text" name="link1" id="link1">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <select name="linkName2">
+                            <option value="" disabled selected>Choose What kind of link to add.</option>
+                            <option value="Donations">Donations</option>
+                            <option value="Flowers/Condolences">Flowers/Condolences</option>
+                            <option value="Services Details">Services Details</option>
+                        </select>
+                        <label>Link Type</label>
+                    </div>
 
-        <div class="input-field">
-            <label for="link3">Link 3</label>
-            <input type="text" name="link3" id="link3" th:value="${echo.getLinks().get(2).getUrl()}">
-        </div>
+                    <div class="input-field col s12 m6">
+                        <label for="link2">Link</label>
+                        <input type="text" name="link2" id="link2">
+                    </div>
+                </div>
+            </div>
+            <div th:if="${echo.getLinks().size()} == 1">
 
-        <button class="btn waves-effect waves-light" type="submit" name="action">Save Changes
+
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            <select name="linkName1">
+                                <option value="" disabled selected>Choose What kind of link to add.</option>
+                                <option value="Donations">Donations</option>
+                                <option value="Flowers/Condolences">Flowers/Condolences</option>
+                                <option value="Services Details">Services Details</option>
+                            </select>
+                        <label>Link Type</label>
+                        </div>
+
+                        <div class="input-field col s12 m6">
+                            <label for="link1">Link</label>
+                            <input type="text" name="link1" id="link1">
+                        </div>
+                    </div>
+
+
+                <div class="row">
+
+                    <div class="input-field col s12 m6">
+                        <select name="linkName2">
+                            <option value="" disabled selected>Choose What kind of link to add.</option>
+                            <option value="Donations">Donations</option>
+                            <option value="Flowers/Condolences">Flowers/Condolences</option>
+                            <option value="Services Details">Services Details</option>
+                        </select>
+                        <label>Link Type</label>
+                    </div>
+
+                    <div class="input-field col s12 m6">
+                        <label for="link2">Link</label>
+                        <input type="text" name="link2" id="link2">
+                    </div>
+
+                </div>
+
+            </div>
+            <div th:if="${echo.getLinks().size()} == 2">
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <select name="linkName2">
+                            <option value="" disabled selected>Choose What kind of link to add.</option>
+                            <option value="Donations">Donations</option>
+                            <option value="Flowers/Condolences">Flowers/Condolences</option>
+                            <option value="Services Details">Services Details</option>
+                        </select>
+                        <label>Link Type</label>
+                    </div>
+
+                    <div class="input-field col s12 m6">
+                        <label for="link2">Link</label>
+                        <input type="text" name="link2" id="link2">
+                    </div>
+                </div>
+            </div>
+        </th:block>
+
+
+
+        <button class="btn waves-effect waves-amber waves-lighten-4 amber lighten-2" type="submit" name="action">Save Changes
             <i class="material-icons right">check</i>
         </button>
     </form>
