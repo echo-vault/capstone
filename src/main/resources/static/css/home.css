@@ -17,11 +17,11 @@
 }
 
 .echo-vault-intro{
-    width: 13em;
-    /*margin-left: 40px;*/
-    margin-top: 150px;
-    font-family: "Sofia", sans-serif;
-    font-size: 150%
+    width: 17em;
+    text-align: center;
+    margin: auto;
+    font-family: 'Tangerine', serif;
+    font-size: large;
 }
 
 .echo-vault-logo{
@@ -45,5 +45,14 @@
     margin: 1em;
 }
 
+.slide-1 {
+    padding-top: 100px;
+    background: rgb(2,63,111);
+    background: radial-gradient(circle, rgba(2,63,111,1) 50%, rgba(128,216,255,1) 86%, rgba(255,213,79,1) 97%, rgba(255,236,179,1) 100%);
+}
 
-
+.slide-2 {
+    background: rgb(255,213,79);
+    background: radial-gradient(circle, rgba(255,213,79,1) 13%, rgba(255,236,179,1) 100%);
+    color: #01579B;
+}

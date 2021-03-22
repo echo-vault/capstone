@@ -5,16 +5,21 @@
 <body>
 <nav th:replace="partials/navbar.html :: navbar"></nav>
 
-<main>
-<div class="carousel carousel-slider center">
+
+<main class="carousel carousel-slider center">
     <div class="carousel-fixed-item center">
-        <a class="btn waves-effect white grey-text darken-text-2">button</a>
+        <a class="btn waves-effect white grey-text darken-text-2">Next Slide</a>
     </div>
-    <div class="carousel-item red white-text" href="#one!">
-        <h2>First Panel</h2>
-        <p class="white-text">This is your first panel</p>
+    <div class="carousel-item slide-1 white-text" href="slide-2">
+
+        <div class="echo-vault-logo">
+            <img class="logo" src="img/echovaultlogo.png" alt="Echo Vault Logo">
+        </div>
+        <div class="echo-vault-intro white-text left-align">
+            <h4>Echoes are familiarly known as reflections of sound. Remember your loved one by echoing their memory where the reflection never ends.</h4>
+        </div>
     </div>
-    <div class="carousel-item amber white-text" href="#two!">
+    <div class="carousel-item slide-2" href="#two!">
         <h2>Second Panel</h2>
         <p class="white-text">This is your second panel</p>
     </div>
@@ -26,18 +31,18 @@
         <h2>Fourth Panel</h2>
         <p class="white-text">This is your fourth panel</p>
     </div>
-</div>
 </main>
+
 
 <!--    <div class="container">-->
 <!--        <div class="row">-->
 <!--            <div class="col s12 m6">-->
-<!--                <div class="echo-vault-logo">-->
-<!--                    <img class="logo" src="img/echovaultlogo.png" alt="Echo Vault Logo">-->
-<!--                </div>-->
-<!--                <div class="echo-vault-intro white-text left-align">-->
-<!--                    <p>Echos are familiarly known as reflections of sound. Remember your loved one by echoing their memory where the reflection never ends.</p>-->
-<!--                </div>-->
+<!--<div class="echo-vault-logo">-->
+<!--    <img class="logo" src="img/echovaultlogo.png" alt="Echo Vault Logo">-->
+<!--</div>-->
+<!--<div class="echo-vault-intro white-text left-align">-->
+<!--    <p>Echos are familiarly known as reflections of sound. Remember your loved one by echoing their memory where the reflection never ends.</p>-->
+<!--</div>-->
 <!--            </div>-->
 <!--            <div class="col s12 m6">-->
 <!--                <div class="carousel carousel-slider">-->
