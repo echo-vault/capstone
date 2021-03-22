@@ -4,10 +4,20 @@
 <body>
 <nav th:replace="partials/navbar.html :: navbar"></nav>
 
-    <main>
-        <div class="container">
-            <h1 class="center">A temporary password was sent. Please follow the link to reset your password.</h1>
+    <main class="loginbg light-blue-text text-darken-4" style="display: flex;flex-direction: column;justify-content: center;align-items: center">
+        <div></div>
+        <div class="container loginForm">
+            <div class="row">
+                <div class="col m2 hide-on-small-only"></div>
+                <div class="col s12 m6 offset-m1">
+                    <h1 class="center ">A temporary password was sent. Please follow the link to reset your password.</h1>
+                </div>
+                <div class="col m2 hide-on-small-only"></div>
+            </div>
         </div>
+        <div></div>
+
+
     </main>
 
 <div th:replace="partials/footer.html :: footer"></div>
