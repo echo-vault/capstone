@@ -6,6 +6,9 @@
     color:darkblue;
 }
 
+.pd {
+    padding: 20px;
+}
 
 .card-content{
     height: 130px;
