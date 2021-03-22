@@ -352,5 +352,29 @@
 
 <div th:replace="partials/footer.html :: footer"></div>
 <div th:replace="partials/scripts.html :: scripts"></div>
+<script>
+    function geocode(search, token) {
+        let baseUrl = 'https://api.mapbox.com';
+        let endPoint = '/geocoding/v5/mapbox.places/';
+        return fetch(baseUrl + endPoint + encodeURIComponent(search) + '.json' + "?" + 'access_token=' + token)
+            .then(function(res) {
+                return res.json();
+                // to get all the data from the request, comment out the following three lines...
+            }).then(function(data) {
+                console.log(data.features[0])
+                return data.features[0].center;
+            });
+    }
+
+    geocode($("#burialaddress").text(), mapboxToken).then(function(e){
+        console.log(e)
+        console.log(e.join(","))
+        let eFixed = e.join(",");
+        let path = 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s+01579B(' + eFixed + ')/' + eFixed + ',10/500x300?access_token=' + mapboxToken;
+        $("#staticmap").attr("src", path);
+    });
+
+
+</script>
 </body>
 </html>

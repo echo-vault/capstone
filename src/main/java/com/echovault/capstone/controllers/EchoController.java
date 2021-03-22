@@ -62,7 +62,8 @@ public class EchoController {
     }
 
     @PostMapping("/echo-create")
-    public String saveFile(@ModelAttribute @Validated Echo echo, Errors validation,
+    public String saveFile(@ModelAttribute @Validated Echo echo,
+                           Errors validation,
                            @RequestParam(name = "profileImg") MultipartFile profileImg,
                            @RequestParam(name = "bgImg") MultipartFile bgImg,
                            @RequestParam(name = "image") ArrayList<MultipartFile> images,
@@ -72,6 +73,7 @@ public class EchoController {
                            @RequestParam(name = "link2", defaultValue = "") String link2,
                            @RequestParam(name = "linkName3", defaultValue = "") String linkName3,
                            @RequestParam(name = "link3", defaultValue = "") String link3,
+//                           @RequestParam(name = "restingPlace", defaultValue = "") String restingPlace,
                            Model model)
         {
             if(validation.hasErrors()){
@@ -126,6 +128,12 @@ public class EchoController {
                 }
             }
         }
+
+//        if(restingPlace != null){
+//            echo.setRestingPlace(restingPlace);
+//            echoDao.save(echo);
+//        }
+
         if(link1.length() > 0 && linkName1.length() > 0) {
             Link linkA = new Link();
             linkA.setName(linkName1);
