@@ -17,12 +17,14 @@
 
 
 
-        <div class="page-footer light-blue accent-1" th:fragment="echo-footer" >
+
+        <div class="page-footer" th:fragment="echo-footer" >
           <div class="container">
             <div class="row">
               <div class="col l6 s12">
                 <h5 class="white-text">Location</h5>
-                <p class="grey-text text-lighten-4" th:text="${echo.restingPlace}"></p>
+<!--                  <div class="burial-address-display"></div>-->
+                <p class="grey-text text-lighten-4" th:text="${echo.restingPlace}" id="burialaddress"></p>
               </div>
               <div class="col l4 offset-l2 s12">
                   <div th:if="${echo.getLinks().size()} > 0">
@@ -37,6 +39,9 @@
               </div>
             </div>
           </div>
+          <div class="footer-copyright">
+        <div th:fragment="echo-footer" >
+        <div class="page-footer light-blue accent-1">
           <div class="footer-copyright light-blue darken-4">
             <div class="container">
             © 2021 Echo Vault Inc.
@@ -44,7 +49,7 @@
             </div>
           </div>
         </div>
-
+        </div>
 
 
 
