@@ -1,114 +1,114 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-    <div th:fragment="comment-modal" th:id="'addComment' + ${memory.getId()}" class="modal large-modal">
-        <h2 class="center">Add a comment</h2>
+    <div th:fragment="comment-modal" th:id="'addComment' + ${memory.getId()}" class="modal grey lighten-4">
         <form th:action="@{/comment}" method="post" th:object="${comment}">
-            <div class="modal-content">
-
+            <div class="modal-content" style="padding-bottom: 0 !important;">
+                <div class="row" style="margin-bottom: 0 !important;">
                     <div class="input-field col s12">
-                        <textarea id="textarea1" class="materialize-textarea" th:field="*{body}"></textarea>
+                        <textarea id="commentText" class="materialize-textarea" th:field="*{body}"></textarea>
+                        <label for="commentText">Add A Comment...</label>
                     </div>
                     <input type="hidden" name="memoryId" th:value="${memory.getId()}">
                     <input type="hidden" name="userId" th:value="${user.getId()}">
-
+                </div>
             </div>
             <div class="modal-footer">
-              <a href="#!" class="waves-effect waves-amber waves-lighten-4 btn amber lighten-2">Cancel</a>
-              <button type="submit" class="waves-effect waves-amber waves-lighten-4 btn amber lighten-2">Add Comment</button>
+              <a href="#!" class="left modal-close waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">Cancel</a>
+              <button type="submit" class="right waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">Add Comment</button>
             </div>
         </form>
     </div>
 
-    <div th:fragment="edit-memory-modal" th:id="'edit' + ${memory.getId()}" class="modal large-modal">
-        <form th:action="@{/memory/edit}" method="post" class="col s12" enctype="multipart/form-data">
-            <div class="modal-content">
-            <h4 class="center">Edit your Memory</h4>
-            <div class="row">
-                <div class="input-field col s12">
-                  <textarea class="materialize-textarea" name="body" th:text="${memory.body}"></textarea>
-                  <input type="hidden" th:value="${memory.getId()}" name="editMemoryId">
-                  <input type="hidden" th:value="${memory.getEcho().getId()}" name="memoryEchoId">
-                  <input type="hidden" th:value="${memory.getImage()}" name="memoryImage">
+    <div th:fragment="edit-memory-modal" th:id="'edit' + ${memory.getId()}" class="modal grey lighten-4">
+        <form th:action="@{/memory/edit}" method="post" enctype="multipart/form-data">
+            <div class="modal-content" style="padding-bottom: 0 !important;">
+                <div class="row" style="margin-bottom: 0 !important;">
+                    <div class="input-field col s9">
+                        <textarea id="editBody" class="materialize-textarea" name="body" th:text="${memory.body}"></textarea>
+                        <label for="editBody">Edit Your Memory...</label>
+                    </div>
+                    <div class="file-field input-field col s3">
+                         <div class="waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4" style="width: 100%">
+                             <span>Edit Photo<i class="material-icons left">image</i></span>
+                             <input type="file" name="memoryImg">
+                         </div>
+                         <div class="file-path-wrapper">
+                             <input class="file-path validate" type="hidden">
+                         </div>
+                     </div>
+                    <input type="hidden" th:value="${memory.getId()}" name="editMemoryId">
+                    <input type="hidden" th:value="${memory.getEcho().getId()}" name="memoryEchoId">
+                    <input type="hidden" th:value="${memory.getImage()}" name="memoryImage">
                 </div>
-                <div class="file-field input-field col s12">
-                  <div class="waves-effect waves-amber waves-lighten-4 btn amber lighten-2">
-                    <span>Upload Image</span>
-                    <input type="file" name="memoryImg">
-                  </div>
-                  <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text">
-                  </div>
-                </div>
-              </div>
             </div>
             <div class="modal-footer">
-              <a href="#!" class="modal-close waves-effect waves-amber waves-lighten-4 btn amber lighten-2">Cancel</a>
-              <button type="submit" class="waves-effect waves-amber waves-lighten-4 btn amber lighten-2">Submit</button>
+              <a href="#!" class="left modal-close waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">Cancel</a>
+              <button type="submit" class="right waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">Submit</button>
             </div>
         </form>
     </div>
 
+    <div th:fragment="edit-comment-modal" th:id="'editC' + ${comment.getId()}" class="modal grey lighten-4">
+        <form th:action="@{/comment/edit}" method="post" enctype="multipart/form-data">
+            <div class="modal-content" style="padding-bottom: 0 !important;">
+                <div class="row" style="margin-bottom: 0 !important;">
+                    <div class="input-field col s12">
+                      <textarea id="editComment" class="materialize-textarea" name="body" th:text="${comment.body}"></textarea>
+                        <label for="editComment">Edit Your Comment...</label>
+                    </div>
+                    <input type="hidden" th:value="${comment.getId()}" name="editCommentId">
+                    <input type="hidden" th:value="${comment.getMemory.getEcho().getId()}" name="commentEchoId">
+                </div>
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class="left modal-close waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">Cancel</a>
+              <button type="submit" class="right waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">Submit</button>
+            </div>
+        </form>
+    </div>
 
-    <div th:fragment="delete-memory-modal" th:id="'delete' + ${memory.getId()}" class="modal">
+    <div th:fragment="delete-memory-modal" th:id="'delete' + ${memory.getId()}" class="modal grey lighten-4">
         <form th:action="@{/memory/delete}" method="post">
-        <div class="modal-content">
-          <h4>Are you sure you want to delete this memory?</h4>
-            <input type="hidden" th:value="${memory.getId()}" name="deleteMemoryId">
-            <input type="hidden" th:value="${memory.getEcho().getId()}" name="memoryEchoId">
-        </div>
-        <div class="modal-footer">
-          <a href="#!" class="modal-close waves-effect waves-amber waves-lighten-4 btn amber lighten-2">No</a>
-          <button type="submit" class="waves-effect waves-amber waves-lighten-4 btn amber lighten-2">Yes</button>
-        </div>
+            <div class="modal-content" style="padding-bottom: 0 !important;">
+                <h4>Are you sure you want to delete this memory?</h4>
+                <input type="hidden" th:value="${memory.getId()}" name="deleteMemoryId">
+                <input type="hidden" th:value="${memory.getEcho().getId()}" name="memoryEchoId">
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class="left modal-close waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">No</a>
+              <button type="submit" class="right waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">Yes</button>
+            </div>
         </form>
-  </div>
+    </div>
 
-    <div th:fragment="delete-comment-modal" th:id="'deleteC' + ${comment.getId()}" class="modal">
-            <form th:action="@{/comment/delete}" method="post">
-            <div class="modal-content">
-              <h6>Delete?</h6>
+    <div th:fragment="delete-comment-modal" th:id="'deleteC' + ${comment.getId()}" class="modal grey lighten-4">
+        <form th:action="@{/comment/delete}" method="post">
+            <div class="modal-content" style="padding-bottom: 0 !important;">
+                <h4>Delete?</h4>
                 <input type="hidden" th:value="${comment.getId()}" name="deleteCommentId">
                 <input type="hidden" th:value="${comment.getMemory.getEcho().getId()}" name="commentEchoId">
             </div>
             <div class="modal-footer">
-              <a href="#!" class="modal-close waves-effect waves-amber waves-lighten-4 btn amber lighten-2">No</a>
-              <button type="submit" class="waves-effect waves-amber waves-lighten-4 btn amber lighten-2">Yes</button>
-            </div>
-            </form>
-      </div>
-
-        <div th:fragment="edit-comment-modal" th:id="'editC' + ${comment.getId()}" class="modal large-modal">
-        <form th:action="@{/comment/edit}" method="post" class="col s12" >
-            <div class="modal-content">
-            <h6 class="center">Edit Comment</h6>
-            <div class="row">
-                <div class="input-field col s12">
-                  <textarea class="materialize-textarea" name="body" th:text="${comment.body}"></textarea>
-                  <input type="hidden" th:value="${comment.getId()}" name="editCommentId">
-                  <input type="hidden" th:value="${comment.getMemory.getEcho().getId()}" name="commentEchoId">
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <a href="#!" class="modal-close waves-effect waves-amber waves-lighten-4 btn amber lighten-2">Cancel</a>
-              <button type="submit" class="waves-effect waves-amber waves-lighten-4 btn amber lighten-2">Submit</button>
+              <a href="#!" class="left modal-close waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">No</a>
+              <button type="submit" class="right waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">Yes</button>
             </div>
         </form>
     </div>
 
-    <div th:fragment="delete-modal" th:id="${echo.id}" class="modal small delete-modal">
-        <div class="modal-content">
-            <h4>Delete This Echo?</h4>
-            <p>Keep in mind that this action cannot be undone.</p>
-        </div>
-        <div class="modal-footer">
-            <form th:action="@{/echo/{id}/delete/(id=${echo.id})}" th:method="POST">
-                <button type="submit" class="modal-close waves-effect waves-red btn red darken-2">Delete</button>
-            </form>
-                <button class="modal-close waves-effect waves-amber waves-lighten-4 amber lighten-2 btn">Cancel</button>
-        </div>
+    <div th:fragment="delete-modal" th:id="${echo.id}" class="modal grey lighten-4">
+        <form th:action="@{/echo/{id}/delete/(id=${echo.id})}" method="post">
+            <div class="modal-content" style="padding-bottom: 0 !important;">
+                <h4>Delete This Echo?</h4>
+                <p>Keep in mind that this action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class="left modal-close waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">No</a>
+              <button type="submit" class="right waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">Yes</button>
+            </div>
+        </form>
     </div>
+
 
 
 

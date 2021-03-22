@@ -123,6 +123,9 @@ public class Memory {
     public String getCreatedDate(){
         return TimeUtil.formatDate(this.createdAt);
     }
+    public String getCreatedTime(){
+        return TimeUtil.formatTime(this.createdAt);
+    }
 
     public String getUpdatedDate(){
         return TimeUtil.formatDate(this.updatedAt);

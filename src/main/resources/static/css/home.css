@@ -5,14 +5,13 @@
     color:darkblue;
 }
 
-.card-content{
-    height: 130px;
-}
+/*.card-content{*/
+/*    height: 130px;*/
+/*}*/
 
-.card-action {
-    height: 100px;
-
-}
+/*.card-action {*/
+/*    height: 100px;*/
+/*}*/
 
 .echo-vault-intro{
     width: 20em;
@@ -33,10 +32,10 @@
 }
 
 
-.icon{
-    width: 2em;
-    margin: 1em;
-}
+/*.icon{*/
+/*    width: 2em;*/
+/*    margin: 1em;*/
+/*}*/
 
 
 .home-page-buttons{

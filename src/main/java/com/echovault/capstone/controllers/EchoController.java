@@ -370,6 +370,16 @@ public class EchoController {
     public String viewEcho(Model model, @PathVariable long id){
         Echo echo = echoDao.getOne(id);
         User user = userService.getLoggedInUser();
+        List<User> commenters = new ArrayList<>();
+        List<Memory> memories = echo.getMemories();
+        if(memories.size() > 1){
+            for(Memory m: memories){
+                if(!(commenters.contains(m.getUser()))){
+                    commenters.add(m.getUser());
+                }
+            }
+            model.addAttribute("commenters", commenters);
+        }
         model.addAttribute("user", user);
         model.addAttribute("memory", new Memory());
         model.addAttribute("comment", new Comment());
