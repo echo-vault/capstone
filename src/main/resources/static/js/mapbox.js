@@ -8,14 +8,6 @@ let mapOptions = {
     zoom: 10 // starting zoom
 }
 
-// let map2Options = {
-//     accessToken: mapboxToken,
-//     container: "map2",
-//     style: 'mapbox://styles/mapbox/streets-v11',
-//     center: [-98.4916, 29.4252],
-//     zoom: 10
-// }
-
 let map = new mapboxgl.Map(mapOptions);
 
 
@@ -42,44 +34,28 @@ var geocoder = new MapboxGeocoder({
     mapboxgl: mapboxgl
 });
 
-// map.addControl(geocoder);
-
 document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
-
-// geocoderControl.on(select, function(){
-//     let search = $('.mapboxgl-ctrl-geocoder--input').innerText;
-//
-//     console.log(search);
-//     console.log(geocode(search, mapboxToken));
-// })
-//
-// $('.mapboxgl-ctrl-geocoder--input').change(function(){
-//
-//     let search = $('.mapboxgl-ctrl-geocoder--input').innerHTML;
-//
-//     console.log(search);
-//     console.log(geocode(search, mapboxToken));
-// })
 
 geocoder.on("result", e => {
     console.log(e.result);
     console.log(e.result.place_name);
-    $("#burialaddress").html(e.result.place_name);
+    $("#burialaddress").val(e.result.place_name);
 })
 
-let map2 = new mapboxgl.Map(map2Options);
+// let map2 = new mapboxgl.Map(map2Options);
+//
+// let burialMarkerOptions = {
+//     color: "blue",
+//     draggable: false
+// }
+//
+// let burialMarker = new mapboxgl.Marker(burialMarkerOptions)
+//     .setLngLat(geocode($("#burialaddress").innerText ,mapboxToken))
+//     .addTo(map2);
 
-let burialMarkerOptions = {
-    color: "blue",
-    draggable: false
-}
+let path = 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/' + geocode($("#burialaddress").val() ,mapboxToken) + '/500x300?access_token=' + mapboxToken  + 'alt=""';
 
-let burialMarker = new mapboxgl.Marker(burialMarkerOptions)
-    .setLngLat(geocode($("#burialaddress").innerText ,mapboxToken))
-    .addTo(map2);
-
-let path = 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/' + geocode($("#burialaddress").innerText ,mapboxToken) + '/500x300?access_token=' + mapboxToken  + 'alt=""';
-
+$("#staticmap").attr("src", path);
 
 //Pass in an address, returns coordinates
 function geocode(search, token) {

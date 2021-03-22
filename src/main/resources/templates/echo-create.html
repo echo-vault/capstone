@@ -180,5 +180,48 @@
 
 </div>
 <div th:replace="partials/scripts :: scripts"></div>
+<script>
+    let mapOptions = {
+        accessToken: mapboxToken,
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+        center: [-98.4916, 29.4252], // starting position [lng, lat]
+        zoom: 10 // starting zoom
+    }
+
+    let map = new mapboxgl.Map(mapOptions);
+
+
+
+    //GEOLOCATE
+    let geolocate = new mapboxgl.GeolocateControl({
+        positionOptions: {
+            enableHighAccuracy: true
+        },
+        trackUserLocation: false
+    });
+    map.addControl(geolocate);
+    map.on('load', function() {
+        geolocate.trigger();
+    });
+
+    //GEOCODE
+    var geocoder = new MapboxGeocoder({
+        accessToken: mapboxToken,
+        marker: {
+            color: 'blue',
+            draggable: 'false'
+        },
+        mapboxgl: mapboxgl
+    });
+
+    document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+
+    geocoder.on("result", e => {
+        console.log(e.result);
+        console.log(e.result.place_name);
+        $("#burialaddress").val(e.result.place_name);
+    })
+</script>
 </body>
 </html>
