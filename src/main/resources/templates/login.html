@@ -4,27 +4,47 @@
 <body>
 <nav th:replace="partials/navbar.html :: navbar"></nav>
 
-    <main>
-        <div class="container">
-            <h1 class="center">log in</h1>
+    <main style="display: flex;flex-direction: column;justify-content: center;align-items: center" class="loginbg">
+        <div></div>
+        <div class="container" id="loginForm">
+            <div class="row">
+                <div class="col s2"></div>
+                <div class="col s4 offset-s2">
+                    <div class="row" style="margin-bottom: 0 !important;">
+                        <div class="col s6">
+                            <h3 class="right light-blue-text accent-1-text">Login</h3>
+                        </div>
+                        <div class="col s6">
+                            <img class="left" th:src="@{/img/echovaultlogo.png}" style="height: 100px">
+                        </div>
+                    </div>
+                    <hr style="width: 75%" class="light-blue darken-4">
+                    <form th:action="@{/login}" method="post">
+                        <div class="input-field">
+                            <label for="username">Username</label>
+                            <input id="username" name="username" type="text">
+                        </div>
+                        <div class="input-field">
+                            <label for="password">Password</label>
+                            <input id="password" name="password" type="password">
+                        </div>
+                        <button style="width: 100%" class="light-blue-text accent-1-text btn waves-effect waves-amber waves-lighten-4 amber lighten-2" type="submit" name="action">
+                            Log In
+                        </button>
+                    </form>
+                    <div class="row" style="margin-bottom: 0 !important;">
+                        <div class="col s6">
+                            <p><a th:href="@{/register}">Register</a></p>
+                        </div>
+                        <div class="col s6">
+                            <p><a class="right" th:href="@{/forgot}">Forgot Password?</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s2"></div>
+            </div>
         </div>
-        <div class="container">
-        <form th:action="@{/login}" method="post">
-            <label for="username">Username</label>
-            <input id="username" name="username" type="text">
-            <br>
-            <label for="password">Password</label>
-            <input id="password" name="password" type="password">
-            <br>
-            <button class="btn waves-effect waves-light" type="submit" name="action">
-                Log In
-            </button>
-        </form>
-        </div>
-        <div class="container">
-            <p>Don't have an account? Sign up <a th:href="@{/register}">here</a></p>
-            <a th:href="@{/forgot}">Forgot Password?</a>
-        </div>
+        <div></div>
     </main>
 
 <div th:replace="partials/footer.html :: footer"></div>
