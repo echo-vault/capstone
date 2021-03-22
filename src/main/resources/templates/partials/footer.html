@@ -25,9 +25,6 @@
                 <h5 class="white-text">Location</h5>
 <!--                  <div class="burial-address-display"></div>-->
                 <p class="grey-text text-lighten-4" th:text="${echo.restingPlace}" id="burialaddress"></p>
-                  <div class="container">
-                      <img id="staticmap" alt="something">
-                  </div>
               </div>
               <div class="col l4 offset-l2 s12">
                   <div th:if="${echo.getLinks().size()} > 0">
