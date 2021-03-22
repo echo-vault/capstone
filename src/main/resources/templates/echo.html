@@ -219,7 +219,8 @@
     geocode($("#burialaddress").text(), mapboxToken).then(function(e){
         console.log(e)
         console.log(e.join(","))
-        let path = 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/' + e.join(",") + ',10/500x300?access_token=' + mapboxToken;
+        let eFixed = e.join(",");
+        let path = 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s+01579B(' + eFixed + ')/' + eFixed + ',10/500x300?access_token=' + mapboxToken;
         $("#staticmap").attr("src", path);
     });
 
