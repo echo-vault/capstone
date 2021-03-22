@@ -101,6 +101,7 @@
 .slide-3{
     background: rgb(128,216,255);
     background: radial-gradient(circle, rgba(128,216,255,1) 13%, rgba(1,87,155,1) 98%);
+    color: #01579B;
 }
 
 #map{
@@ -130,6 +131,11 @@
 /*}*/
 
 .echo-profile-card-info{
+    color: #01579B;
+}
+
+
+.life-story-home{
     color: #01579B;
 }
 
