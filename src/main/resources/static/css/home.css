@@ -1,10 +1,10 @@
-.jumbotron {
-    background-image: url("../img/sunset1.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+/*.jumbotron {*/
+/*    background-image: url("../img/sunset1.jpg");*/
+/*    background-repeat: no-repeat;*/
+/*    background-size: cover;*/
 
-    color:darkblue;
-}
+/*    color:darkblue;*/
+/*}*/
 
 
 .input-field {
@@ -23,14 +23,14 @@
 
 .echo-vault-intro{
     width: 13em;
-    margin-left: 40px;
+    /*margin-left: 40px;*/
     margin-top: 150px;
     font-family: "Sofia", sans-serif;
     font-size: 150%
 }
 
 .echo-vault-logo{
-    margin-left:50px;
+    /*margin-left:50px;*/
     margin-top: 30px;
 
 }

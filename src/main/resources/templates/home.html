@@ -5,35 +5,63 @@
 <body>
 <nav th:replace="partials/navbar.html :: navbar"></nav>
 
-<main class="jumbotron">
-    <div class="row">
-        <div class="col s12 m6">
-            <div class="echo-vault-logo">
-                <img class="logo" src="img/echovaultlogo.png" alt="Echo Vault Logo">
-            </div>
-            <div class="echo-vault-intro white-text left-align">
-                <p>Echos are familiarly known as reflections of sound. Remember your loved one by echoing their memory where the reflection never ends.</p>
-            </div>
-            <div class="col s12 m6" th:each="echo : ${echos}">
-                <div class="carousel">
-                    <div class="card profile-card medium">
-                        <div class="card-image background-image">
-                            <img th:src="${echo.backgroundImage}" style="max-height: max-content">
-                        </div>
-                        <img class="circle profile-image" th:src="${echo.profileImage}" style="max-height: 200px">
-                        <div class="card-content profile-content">
-                            <a class="card-title center" th:text="${echo.getFullName()}" th:href="@{/echo/{id}(id = ${echo.getId()})}"></a>
-                            <p class="center" th:text="${echo.getDisplayedDates()}"></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
+<main>
+<div class="carousel carousel-slider center">
+    <div class="carousel-fixed-item center">
+        <a class="btn waves-effect white grey-text darken-text-2">button</a>
     </div>
-
+    <div class="carousel-item red white-text" href="#one!">
+        <h2>First Panel</h2>
+        <p class="white-text">This is your first panel</p>
+    </div>
+    <div class="carousel-item amber white-text" href="#two!">
+        <h2>Second Panel</h2>
+        <p class="white-text">This is your second panel</p>
+    </div>
+    <div class="carousel-item green white-text" href="#three!">
+        <h2>Third Panel</h2>
+        <p class="white-text">This is your third panel</p>
+    </div>
+    <div class="carousel-item blue white-text" href="#four!">
+        <h2>Fourth Panel</h2>
+        <p class="white-text">This is your fourth panel</p>
+    </div>
+</div>
 </main>
+
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col s12 m6">-->
+<!--                <div class="echo-vault-logo">-->
+<!--                    <img class="logo" src="img/echovaultlogo.png" alt="Echo Vault Logo">-->
+<!--                </div>-->
+<!--                <div class="echo-vault-intro white-text left-align">-->
+<!--                    <p>Echos are familiarly known as reflections of sound. Remember your loved one by echoing their memory where the reflection never ends.</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col s12 m6">-->
+<!--                <div class="carousel carousel-slider">-->
+<!--                    <div class="carousel-item" th:each="echo : ${echos}" th:href="'#'+${echo.getId()}">-->
+<!--                        <div class="card profile-card large">-->
+<!--                            <div class="card-image background-image">-->
+<!--                                <img th:src="${echo.backgroundImage}" style="max-height: max-content">-->
+<!--                            </div>-->
+<!--                            <img class="circle profile-image" th:src="${echo.profileImage}" style="max-height: 200px">-->
+<!--                            <div class="card-content profile-content">-->
+<!--                                <a class="card-title center" th:text="${echo.getFullName()}" th:href="@{/echo/{id}(id = ${echo.getId()})}"></a>-->
+<!--                                <p class="center" th:text="${echo.getDisplayedDates()}"></p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+
+
+
 <div th:replace="partials/footer.html :: footer"></div>
 <div th:replace="partials/scripts.html :: scripts"></div>
 </body>

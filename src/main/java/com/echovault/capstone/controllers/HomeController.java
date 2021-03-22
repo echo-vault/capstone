@@ -57,7 +57,7 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model){
         List<Echo> echoList = echoDao.findAll();
-        model.addAttribute("echo", echoList);
+        model.addAttribute("echos", echoList);
         return "home";
     }
 
