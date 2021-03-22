@@ -7,8 +7,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/home.css}" />
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong">
-    <!--    <link type="text/css" rel="stylesheet" href="../../static/css/materialize.min.css" media="screen,projection"/>-->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Tangerine|Niconne">
     <style>
         body {
             display: flex;
@@ -31,15 +31,8 @@
         .background-image{
             margin-bottom: -75px;
         }
-        .profile-content{
-            /*margin-top: -25px;*/
-        }
-        /*.memory-posters {*/
-        /*    height: 800px;*/
-        /*}*/
         .scrollable {
-            min-height: 430px;
-            max-height: 440px;
+            max-height: 600px;
             overflow-y: auto;
         }
         .large-modal { width: 30% !important ; height: 30% !important ; }
@@ -48,15 +41,25 @@
         }
         .loginbg {
             background: rgb(255,213,79);
-background: radial-gradient(circle, rgba(255,213,79,1) 11%, rgba(255,236,179,1) 26%, rgba(128,216,255,1) 42%, rgba(1,87,155,1) 93%);
+            background: radial-gradient(circle, rgba(255,213,79,1) 11%, rgba(255,236,179,1) 26%, rgba(128,216,255,1) 42%, rgba(1,87,155,1) 93%);
         }
-        #loginForm {
+        .loginForm {
             background: transparent !important;
         }
+
 
         .createbg{
             background: rgb(1,87,155);
             background: linear-gradient(90deg, rgba(1,87,155,1) 1%, rgba(128,216,255,1) 5%, rgba(255,235,173,1) 10%, rgba(255,217,95,1) 16%, rgba(255,236,179,1) 48%, rgba(255,213,79,1) 84%, rgba(255,235,173,1) 90%, rgba(128,216,255,1) 95%, rgba(1,87,155,1) 100%);
+        }
+
+        .echoBg{
+           background: rgb(1,87,155);
+            background: linear-gradient(270deg, rgba(1,87,155,1) 3%, rgba(128,216,255,1) 10%, rgba(255,236,179,1) 18%, rgba(255,213,79,1) 48%, rgba(255,236,179,1) 80%, rgba(128,216,255,1) 88%, rgba(1,87,155,1) 96%);
+        }
+        .profileBg {
+            background: rgb(1,87,155);
+        background: linear-gradient(270deg, rgba(1,87,155,1) 3%, rgba(128,216,255,1) 10%, rgba(255,236,179,1) 18%, rgba(255,213,79,1) 48%, rgba(255,236,179,1) 80%, rgba(128,216,255,1) 88%, rgba(1,87,155,1) 96%);
         }
 
     </style>

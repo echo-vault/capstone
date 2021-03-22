@@ -98,26 +98,20 @@
 
         <th:block th:switch="${echo.getLinks().size()} > 0">
             <div th:case="true">
-                <div th:each="link : ${echo.getLinks()}">
-                    <div class="row">
-                        <div class="col s12">
-                            <div class="row">
-                                <div class="input-field col s12 m6">
-                                    <select th:name="'linkName' + ${echo.getLinks().indexOf(link)}">
-                                        <option th:value="${link.getName()}" th:text="${link.getName()}" selected></option>
-                                        <option value="Donations">Donations</option>
-                                        <option value="Flowers/Condolences">Flowers/Condolences</option>
-                                        <option value="Services Details">Services Details</option>
-                                    </select>
-                                    <label>Link Type</label>
-                                </div>
+                <div class="row" th:each="link : ${echo.getLinks()}">
+                    <div class="input-field col s12 m6">
+                        <select th:name="'linkName' + ${echo.getLinks().indexOf(link)}">
+                            <option th:value="${link.getName()}" th:text="${link.getName()}" selected></option>
+                            <option value="Donations">Donations</option>
+                            <option value="Flowers/Condolences">Flowers/Condolences</option>
+                            <option value="Services Details">Services Details</option>
+                        </select>
+                        <label>Link Type</label>
+                    </div>
 
-                                <div class="input-field col s12 m6">
-                                    <label for="link">Link</label>
-                                    <input type="text" th:name="'link' + ${echo.getLinks().indexOf(link)}" id="link" th:value="${link.getUrl()}">
-                                </div>
-                            </div>
-                        </div>
+                    <div class="input-field col s12 m6">
+                        <label for="link">Link</label>
+                        <input type="text" th:name="'link' + ${echo.getLinks().indexOf(link)}" id="link" th:value="${link.getUrl()}">
                     </div>
                 </div>
             </div>
@@ -176,18 +170,18 @@
 
                     <div class="row">
                         <div class="input-field col s12 m6">
-                            <select name="linkName1!">
-                        <option value="" disabled selected>Choose What kind of link to add.</option>
-                        <option value="Donations">Donations</option>
-                        <option value="Flowers/Condolences">Flowers/Condolences</option>
-                        <option value="Services Details">Services Details</option>
-                    </select>
-                    <label>Link Type</label>
+                            <select name="linkName1">
+                                <option value="" disabled selected>Choose What kind of link to add.</option>
+                                <option value="Donations">Donations</option>
+                                <option value="Flowers/Condolences">Flowers/Condolences</option>
+                                <option value="Services Details">Services Details</option>
+                            </select>
+                        <label>Link Type</label>
                         </div>
 
-                        <div class="input-field m6">
+                        <div class="input-field col s12 m6">
                             <label for="link1">Link</label>
-                            <input type="text" name="link1!" id="link1">
+                            <input type="text" name="link1" id="link1">
                         </div>
                     </div>
 
@@ -195,19 +189,19 @@
                 <div class="row">
 
                     <div class="input-field col s12 m6">
-                    <select name="linkName2!">
-                        <option value="" disabled selected>Choose What kind of link to add.</option>
-                        <option value="Donations">Donations</option>
-                        <option value="Flowers/Condolences">Flowers/Condolences</option>
-                        <option value="Services Details">Services Details</option>
-                    </select>
-                    <label>Link Type</label>
-                </div>
+                        <select name="linkName2">
+                            <option value="" disabled selected>Choose What kind of link to add.</option>
+                            <option value="Donations">Donations</option>
+                            <option value="Flowers/Condolences">Flowers/Condolences</option>
+                            <option value="Services Details">Services Details</option>
+                        </select>
+                        <label>Link Type</label>
+                    </div>
 
-                <div class="input-field col s12 m6">
-                    <label for="link2">Link</label>
-                    <input type="text" name="link2!" id="link2">
-                </div>
+                    <div class="input-field col s12 m6">
+                        <label for="link2">Link</label>
+                        <input type="text" name="link2" id="link2">
+                    </div>
 
                 </div>
 
@@ -215,19 +209,19 @@
             <div th:if="${echo.getLinks().size()} == 2">
                 <div class="row">
                     <div class="input-field col s12 m6">
-                    <select name="linkName2">
-                        <option value="" disabled selected>Choose What kind of link to add.</option>
-                        <option value="Donations">Donations</option>
-                        <option value="Flowers/Condolences">Flowers/Condolences</option>
-                        <option value="Services Details">Services Details</option>
-                    </select>
-                    <label>Link Type</label>
-                </div>
+                        <select name="linkName2">
+                            <option value="" disabled selected>Choose What kind of link to add.</option>
+                            <option value="Donations">Donations</option>
+                            <option value="Flowers/Condolences">Flowers/Condolences</option>
+                            <option value="Services Details">Services Details</option>
+                        </select>
+                        <label>Link Type</label>
+                    </div>
 
-                <div class="input-field col s12 m6">
-                    <label for="link2">Link</label>
-                    <input type="text" name="link2" id="link2">
-                </div>
+                    <div class="input-field col s12 m6">
+                        <label for="link2">Link</label>
+                        <input type="text" name="link2" id="link2">
+                    </div>
                 </div>
             </div>
         </th:block>

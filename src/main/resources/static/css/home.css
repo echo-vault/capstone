@@ -6,25 +6,18 @@
     color:darkblue;
 }
 
+
 .pd {
     padding: 20px;
 }
 
-.card-content{
-    height: 130px;
-}
-
-.card-action {
-    height: 100px;
-
-}
-
 .echo-vault-intro{
-    width: 13em;
-    /*margin-left: 40px;*/
-    margin-top: 150px;
-    font-family: "Sofia", sans-serif;
-    font-size: 150%
+    padding-right: 100px;
+    padding-left: 100px;
+    text-align: center;
+    margin: auto;
+    font-family: 'Niconne', serif;
+    font-size: large;
 }
 
 .echo-vault-logo{
@@ -42,11 +35,32 @@
     width: max-content;
 }
 
-
-.icon{
-    width: 2em;
-    margin: 1em;
+.slide-1 {
+    padding-top: 10%;
+    background: rgb(2,63,111);
+    background: radial-gradient(circle, rgba(2,63,111,1) 50%, rgba(128,216,255,1) 86%, rgba(255,213,79,1) 97%, rgba(255,236,179,1) 100%);
 }
 
+.slide-2 {
+    padding-top: 30%;
+    padding-right: 100px;
+    padding-left: 100px;
+    background: rgb(255,213,79);
+    background: radial-gradient(circle, rgba(255,213,79,1) 13%, rgba(255,236,179,1) 100%);
+    color: #01579B;
+    /*font-family: 'Niconne', serif;*/
+}
 
+.home-buttons{
+    font-family: sans-serif;
+    background-color: #01579B;
+}
 
+.slide-3{
+    background: rgb(128,216,255);
+    background: radial-gradient(circle, rgba(128,216,255,1) 13%, rgba(1,87,155,1) 98%);
+}
+
+.echo-profile-card-info{
+    color: #01579B;
+}
