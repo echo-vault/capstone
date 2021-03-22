@@ -6,6 +6,11 @@
     color:darkblue;
 }
 
+
+.pd {
+    padding: 20px;
+}
+
 .echo-vault-intro{
     padding-right: 100px;
     padding-left: 100px;
