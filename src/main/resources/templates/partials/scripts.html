@@ -28,7 +28,6 @@
                 $('.carousel').carousel('next');
                 setTimeout(autoplay, 4500);
             }
-            M.updateTextFields();
             $('#logout').click(function(){
                 $('#logoutForm').submit();
             })
@@ -56,6 +55,7 @@
                 indicators: true,
                 fullWidth: true,
             });
+            M.updateTextFields();
         });
     </script>
 </div>
