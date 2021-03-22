@@ -9,7 +9,7 @@
 
       
 
-        <div class="nav-wrapper">
+        <div class="nav-wrapper light-blue darken-4">
             <a th:href="@{/}" class="brand-logo valign-wrapper" onclick="M.toast({html: '<img th:src=\'@{/img/echovaultlogo.png}\'>'})">EchoVault</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
@@ -24,7 +24,7 @@
                     <a th:href="@{/login}"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Login">exit_to_app</i></a>
                 </li>
                 <li sec:authorize="isAuthenticated()">
-                    <a id="echo-create" th:href="@{/echo-create}"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Create Echo">build</i></a>
+                    <a id="echo-create" th:href="@{/echo-create}"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Create Echo">add</i></a>
                 </li>
                 <li sec:authorize="isAuthenticated()">
                     <a id="view-profile" th:href="@{/profile}"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Profile">account_circle</i></a>
@@ -47,7 +47,7 @@
             <a th:href="@{/login}"><i class="material-icons">exit_to_app</i>Login</a>
         </li>
         <li sec:authorize="isAuthenticated()">
-            <a id="echo-create" th:href="@{/echo-create}"><i class="material-icons">build</i>Create Echo</a>
+            <a id="echo-create" th:href="@{/echo-create}"><i class="material-icons">add</i>Create Echo</a>
         </li>
         <li sec:authorize="isAuthenticated()">
             <a id="view-profile" th:href="@{/profile}"><i class="material-icons">account_circle</i>Profile</a>

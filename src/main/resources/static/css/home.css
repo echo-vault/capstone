@@ -1,16 +1,11 @@
+
 .jumbotron {
     background-image: url("../img/sunset1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-
     color:darkblue;
 }
 
-
-.input-field {
-    padding: 20px !important;
-
-}
 
 .card-content{
     height: 130px;
@@ -22,11 +17,16 @@
 }
 
 .echo-vault-intro{
-    width: 20em;
+    width: 13em;
+    /*margin-left: 40px;*/
+    margin-top: 150px;
+    font-family: "Sofia", sans-serif;
+    font-size: 150%
 }
 
 .echo-vault-logo{
-    margin-top: -30px;
+    /*margin-left:50px;*/
+    margin-top: 30px;
 
 }
 
@@ -46,11 +46,4 @@
 }
 
 
-.home-page-buttons{
-    margin: 10px;
-}
-
-.search-home{
-    width: 200px;
-}
 
