@@ -39,7 +39,6 @@ public class HomeController {
 //    }
 
 
-
     public HomeController(UserRepository userDao, PasswordEncoder encoder, EchoRepository echoDao, TLSEmail tlsEmail) {
         this.userDao = userDao;
         this.encoder = encoder;
