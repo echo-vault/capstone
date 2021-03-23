@@ -51,9 +51,14 @@
                                     <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="red-text"/>
                                 </div>
                             </div>
-                            <div>
-                                <label for="user-profile-img" class="custom-file-upload">Upload a profile image</label>
-                                <input id="user-profile-img" name="user-profile-img" type="file" />
+                            <div class="file-field input-field">
+                                <div class="btn waves-effect waves-amber waves-lighten-4 amber lighten-2">
+                                    <span>Upload a Profile Image</span>
+                                    <input type="file" name="user-profile-img" th:value="*{image}">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
                             </div>
                             <button class="btn waves-effect waves-amber waves-lighten-4 amber lighten-2 padded-btn" type="submit" name="action">Submit
                                 <i class="material-icons right">send</i>
