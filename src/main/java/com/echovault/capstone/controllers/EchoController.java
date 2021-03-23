@@ -380,7 +380,7 @@ public class EchoController {
         User user = userService.getLoggedInUser();
         List<User> commenters = new ArrayList<>();
         List<Memory> memories = echo.getMemories();
-        if(memories.size() > 1){
+        if(memories.size() > 0){
             for(Memory m: memories){
                 if(!(commenters.contains(m.getUser()))){
                     commenters.add(m.getUser());
