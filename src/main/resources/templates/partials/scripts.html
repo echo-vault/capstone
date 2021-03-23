@@ -61,11 +61,9 @@
             });
 
             function autoplayhome() {
-                setTimeout(function(){
-                    $('.carousel.carousel-slider').carousel('next');
-                }, 7500);
+                $('.carousel.carousel-slider').carousel('next');
             }
-            autoplayhome();
+            setInterval(autoplayhome, 5000);
             M.updateTextFields();
 
         });
