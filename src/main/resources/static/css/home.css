@@ -87,14 +87,9 @@
 }
 
 .form-background {
-<<<<<<< HEAD
-    background: rgb(128,216,255);
-    background: linear-gradient(90deg, rgba(128,216,255,0.6741071428571428) 3%, rgba(20,106,170,0.758140756302521) 40%, rgba(1,87,155,0.7721463585434174) 50%, rgba(14,100,165,0.758140756302521) 60%, rgba(128,216,255,0.665703781512605) 97%);
-=======
     background-color: #b2e5ff;
     background-image: url("https://www.transparenttextures.com/patterns/black-thread-light.png");
     color: #01579B;
->>>>>>> 2e6657cf951b725019e00263d1056441d0194920
 }
 
 .padded-btn{
@@ -108,10 +103,6 @@
     text-align: left;
     padding: 5px 5px;
 }
-
-/*input[type="file"]{*/
-/*    display: none;*/
-/*}*/
 
 .custom-file-upload {
     border: 1px solid black;
@@ -145,29 +136,36 @@
     margin-top: 10px;
 }
 
+.map-container{
+    display: flex;
+    margin-top: 1em;
+}
+
+.map-inner-container{
+    justify-content: center;
+    align-items: center;
+}
+
 .geocoder {
-    display:block;
+    display: block;
     z-index: 1;
     width: 100%;
     left: 50%;
     top: 10px;
 }
 
-/*.mapboxgl-ctrl-geocoder--icon {*/
-/*    justify-self: flex-end;*/
+.mapboxgl-ctrl-geocoder {
+    min-width: 100%!important;
+    padding: 0.5em;
+}
 
-/*}*/
-
-/*#map2 {*/
-/*    display: block;*/
-/*    width: 50%;*/
-/*    height: 300px;*/
-/*}*/
+.mapboxgl-ctrl-geocoder--icon {
+    visibility: hidden;
+}
 
 .echo-profile-card-info{
     color: #01579B;
 }
-
 
 .life-story-home{
     color: #01579B;
