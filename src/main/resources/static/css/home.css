@@ -14,9 +14,9 @@
 .echo-vault-intro{
     max-width: 20em;
     display: flex;
-    justify-content: left;
+    justify-content: right;
     align-items: center;
-    padding-top: 200px;
+    padding-top: 150px;
     font-family: 'Tangerine', serif;
     font-size: large;
 
@@ -52,21 +52,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: auto;
-    background: rgb(255,213,79);
-    background: linear-gradient(90deg, rgba(255,213,79,0.6003588935574229) 48%, rgba(255,236,179,0.3454569327731093) 89%);
+    /*margin: auto;*/
+    /*background-color: #b2e5ff;*/
+    /*background-image: url("https://www.transparenttextures.com/patterns/black-thread-light.png");*/
+    background-image: url("../img/grandparents.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     color: #01579B;
-
 }
 
 .register-home{
-    padding: 20px;
-    margin: auto;
+    padding: 10px;
+    background: rgba(255,255,255, 0.4);
 }
 
 .home-buttons{
     font-family: sans-serif;
-    background-color: #01579B;
+    background-color: #FFD54F;
+    color: #01579B;
     margin: auto;
 
 }
@@ -118,8 +121,8 @@
 }
 
 .slide-4{
-    background: rgb(255,213,79);
-    background: linear-gradient(90deg, rgba(255,213,79,0.7600227591036415) 40%, rgba(255,236,179,1) 97%);
+    background-color: #b2e5ff;
+    background-image: url("https://www.transparenttextures.com/patterns/black-thread-light.png");
     color: #01579B;
 }
 
