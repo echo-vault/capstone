@@ -96,7 +96,7 @@
     margin: 10px 5px;
 }
 
-.register-form{
+.register-form, .edit-form{
     display: inline-block;
     margin-left: auto;
     margin-right: auto;
