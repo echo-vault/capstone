@@ -146,19 +146,20 @@ public class HomeController {
     }
 
     @PostMapping("/forgot")
-    public String forgotPassword(@RequestParam(name = "email") String email) throws ServletException, IOException {
+    public String forgotPassword(@RequestParam(name = "email") String email, Model model) throws ServletException, IOException {
         User user = userDao.findByEmail(email);
+        if(user != null){
         String randomPassword = Password.randomGen();
 //        String body = "Hello " + user.getFirstName() + ", your temporary password is "+ randomPassword +"\n\nPlease go to http://localhost:8080/reset-password";
         String body = "Hello " + user.getFirstName() + ", your temporary password is "+ randomPassword +"\n\nPlease go to http://echovault.xyz/reset-password";
         String subject = "Reset Password";
-        if(user != null){
             tlsEmail.sendEmail(user.getEmail(), subject, body);
             String hash = encoder.encode(randomPassword);
             user.setPassword(hash);
             userDao.save(user);
             return "email-sent";
         }
+        model.addAttribute("error", true);
         return "forgot-password";
     }
 
