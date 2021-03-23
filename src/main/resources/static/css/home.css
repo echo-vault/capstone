@@ -12,20 +12,20 @@
 }
 
 .echo-vault-intro{
-    max-width: 20em;
+    padding: 10em;
     display: flex;
-    justify-content: right;
-    align-items: center;
-    padding-top: 150px;
+    justify-content: center;
+    /*align-items: center;*/
+    /*padding-top: 150px;*/
     font-family: 'Tangerine', serif;
     font-size: large;
 
 }
 
 .echo-vault-logo{
-    padding-top: 50px;
+    padding-top: 30px;
     display: flex;
-    align-items: center;
+    /*align-items: center;*/
     justify-content: left;
 
 }
@@ -40,7 +40,7 @@
 }
 
 .slide-1 {
-    background-image: url("../img/sunset1.jpg");
+    background-image: url("../img/mountain.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     /*padding-top: 10%;*/
@@ -114,16 +114,29 @@
 }
 
 .slide-3{
-    background-color: #b2e5ff;
-    background-image: url("https://www.transparenttextures.com/patterns/black-thread-light.png");
-    color: #01579B;
+    background-image: url("../img/blue-flowers.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
 
 }
 
 .slide-4{
-    background-color: #b2e5ff;
-    background-image: url("https://www.transparenttextures.com/patterns/black-thread-light.png");
-    color: #01579B;
+    background-image: url("../img/orange-flowers.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+
+}
+.home-card{
+    margin: auto;
+}
+
+.slide-5{
+    background-image: url("../img/landscape.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
 }
 
 .memory-form-home{
