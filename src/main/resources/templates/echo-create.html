@@ -193,7 +193,10 @@
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
         center: [-98.4916, 29.4252], // starting position [lng, lat]
-        zoom: 10 // starting zoom
+        zoom: 10,
+        dragPan: false,
+        doubleClickZoom: false,
+        touchZoomRotate: false
     }
 
     let map = new mapboxgl.Map(mapOptions);
