@@ -83,7 +83,7 @@
              </div>
         </div>
         <div class="row" th:if="${echo.getMemories().size()} > 0">
-            <div class="col hide-on-small-and-down m3 grey lighten-4" style="background: transparent">
+            <div class="col hide-on-small-and-down m3 card hoverable grey lighten-4" style="background: transparent">
                 <h4 class="center">Guest Book</h4>
                 <div class="row">
                     <div class="col s12 center" th:each="c : ${commenters}">
@@ -309,35 +309,33 @@
         </div>
     </div>
 
-
-
     <div class="container">
         <div class="row">
-            <div class="hide-on-small col m2"></div>
-            <div class="col s12 m4">
-
-                    <div th:if="${echo.getRestingPlace()} != null">
-                    <h5>Resting Place</h5>
-                    <p id="burialaddress" th:text="${echo.restingPlace}"></p>
+            <div class="col s12 m7">
+                <th:block th:if="${echo.getRestingPlace()} != null">
+                    <div class="row">
+                        <div class="col s12">
+                            <h5>Resting Place</h5>
+                        </div>
+                        <div class="col s12">
+                            <img class="responsive-img" id="staticmap" style="border: 5px solid #f5f5f5">
+                        </div>
+                        <div class="col s12">
+                            <p id="burialaddress" th:text="${echo.restingPlace}"></p>
+                        </div>
                     </div>
-                <div class="container">
-                    <img id="staticmap" alt="something">
-                </div>
-
+                </th:block>
             </div>
-            <div class="col m2 offset-m2 s12" style="display: flex;justify-content: center">
-                <div th:if="${echo.getLinks().size()} > 0">
-
-                        <h5>Links</h5>
-                        <ul>
-                            <li th:each="link : ${echo.getLinks()}">
-                                <a th:href="${link.url}" th:text="${link.name}" target="_blank"></a>
-                            </li>
-                        </ul>
-
-                </div>
+            <div class="col m4 offset-m1 s12">
+                <th:block class="right" th:if="${echo.getLinks().size()} > 0">
+                    <h5>Links</h5>
+                    <ul>
+                        <li th:each="link : ${echo.getLinks()}">
+                            <a th:href="${link.url}" th:text="${link.name}" target="_blank"></a>
+                        </li>
+                    </ul>
+                </th:block>
             </div>
-            <div class="hide-on-small col m2"></div>
         </div>
     </div>
 
@@ -368,20 +366,19 @@
                 return res.json();
                 // to get all the data from the request, comment out the following three lines...
             }).then(function(data) {
-                console.log(data.features[0])
+                // console.log(data.features[0])
                 return data.features[0].center;
             });
     }
 
     geocode($("#burialaddress").text(), mapboxToken).then(function(e){
-        console.log(e)
-        console.log(e.join(","))
+        // console.log(e)
+        // console.log(e.join(","))
         let eFixed = e.join(",");
         let path = 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s+01579B(' + eFixed + ')/' + eFixed + ',10/500x300?access_token=' + mapboxToken;
         $("#staticmap").attr("src", path);
     });
-
-
 </script>
+
 </body>
 </html>

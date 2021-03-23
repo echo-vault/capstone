@@ -87,15 +87,21 @@
 }
 
 .form-background {
+<<<<<<< HEAD
     background: rgb(128,216,255);
     background: linear-gradient(90deg, rgba(128,216,255,0.6741071428571428) 3%, rgba(20,106,170,0.758140756302521) 40%, rgba(1,87,155,0.7721463585434174) 50%, rgba(14,100,165,0.758140756302521) 60%, rgba(128,216,255,0.665703781512605) 97%);
+=======
+    background-color: #b2e5ff;
+    background-image: url("https://www.transparenttextures.com/patterns/black-thread-light.png");
+    color: #01579B;
+>>>>>>> 2e6657cf951b725019e00263d1056441d0194920
 }
 
 .padded-btn{
     margin: 10px 5px;
 }
 
-.register-form{
+.register-form, .edit-form{
     display: inline-block;
     margin-left: auto;
     margin-right: auto;
@@ -114,8 +120,8 @@
 }
 
 .slide-3{
-    background: rgb(1,87,155);
-    background: linear-gradient(90deg, rgba(1,87,155,0.6675857843137255) 40%, rgba(128,216,255,0.692795868347339) 97%);
+    background-color: #b2e5ff;
+    background-image: url("https://www.transparenttextures.com/patterns/black-thread-light.png");
     color: #01579B;
 
 }
