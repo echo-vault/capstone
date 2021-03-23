@@ -107,6 +107,7 @@ public class EchoController {
         }
         echo.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         echo.setCreatedAt(new Date());
+        System.out.println(echo.getSummary().equals("") + "or" + echo.getSummary());
         echoDao.save(echo);
         if (images != null) {
             for(MultipartFile image: images){
