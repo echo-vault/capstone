@@ -54,11 +54,19 @@
                 $('.carousel').carousel();
                 autoplay();
             })
+
             $('.carousel.carousel-slider').carousel({
                 indicators: true,
                 fullWidth: true,
             });
+
+            function autoplayhome() {
+                $('.carousel.carousel-slider').carousel('next');
+                setTimeout(autoplay, 4500);
+            }
+
             M.updateTextFields();
+
         });
     </script>
 </div>
