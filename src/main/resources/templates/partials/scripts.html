@@ -28,8 +28,10 @@
                 $('.carousel').carousel('next');
                 setTimeout(autoplay, 4500);
             }
-            M.updateTextFields();
             $('#logout').click(function(){
+                $('#logoutForm').submit();
+            })
+            $('#logout2').click(function(){
                 $('#logoutForm').submit();
             })
             $('.deleteMemory').click(function(){
@@ -57,10 +59,14 @@
                 indicators: true,
                 fullWidth: true,
             });
+
             function autoplayhome() {
                 $('.carousel.carousel-slider').carousel('next');
                 setTimeout(autoplay, 4500);
             }
+
+            M.updateTextFields();
+
         });
     </script>
 </div>
