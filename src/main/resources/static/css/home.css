@@ -12,10 +12,11 @@
 }
 
 .echo-vault-intro{
-    padding: 10em;
+    padding-left: 10em;
+    padding-right: 10em;
     display: flex;
     justify-content: center;
-    /*align-items: center;*/
+    align-items: center;
     /*padding-top: 150px;*/
     font-family: 'Tangerine', serif;
     font-size: large;
@@ -123,6 +124,9 @@
     background-size: cover;
     color: white;
 
+}
+.home-profile-card-info{
+    padding-bottom: 10px;
 }
 
 .slide-4{
