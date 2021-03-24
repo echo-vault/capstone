@@ -108,10 +108,6 @@
     padding: 5px 5px;
 }
 
-/*input[type="file"]{*/
-/*    display: none;*/
-/*}*/
-
 .custom-file-upload {
     border: 1px solid black;
     display: inline-block;
@@ -160,29 +156,36 @@
     margin-top: 10px;
 }
 
+.map-container{
+    display: flex;
+    margin-top: 1em;
+}
+
+.map-inner-container{
+    justify-content: center;
+    align-items: center;
+}
+
 .geocoder {
-    display:block;
+    display: block;
     z-index: 1;
     width: 100%;
     left: 50%;
     top: 10px;
 }
 
-/*.mapboxgl-ctrl-geocoder--icon {*/
-/*    justify-self: flex-end;*/
+.mapboxgl-ctrl-geocoder {
+    min-width: 100%!important;
+    padding: 0.5em;
+}
 
-/*}*/
-
-/*#map2 {*/
-/*    display: block;*/
-/*    width: 50%;*/
-/*    height: 300px;*/
-/*}*/
+.mapboxgl-ctrl-geocoder--icon {
+    visibility: hidden;
+}
 
 .echo-profile-card-info{
     color: #01579B;
 }
-
 
 .life-story-home{
     color: #01579B;
@@ -196,5 +199,11 @@
 .echovault-nav{
     margin-left: 20px;
     font-family: 'Tangerine', serif;
+}
+
+.blue-texture{
+    background-color: #b2e5ff;
+    background-image: url("https://www.transparenttextures.com/patterns/black-thread-light.png");
+    color: #01579B;
 }
 

@@ -37,6 +37,10 @@
             max-height: 600px;
             overflow-y: auto;
         }
+        .scrollable-card {
+            max-height: 400px;
+            overflow-y: auto;
+        }
         .large-modal { width: 30% !important ; height: 30% !important ; }
         .hide {
             display: none;
@@ -68,7 +72,25 @@
             background: rgb(128,216,255);
             background: linear-gradient(0deg, rgba(128,216,255,1) 0%, rgba(1,87,155,1) 12%, rgba(128,216,255,1) 15%, rgba(1,87,155,1) 100%);
         }
+          .ratio {
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 0;
+            padding-bottom: 100%;
+            position: relative;
+            width: 100%;
+          }
 
+          .img-circle {
+            border-radius: 50%;
+          }
+
+          .img-responsive {
+            display: block;
+            height: auto;
+            max-width: 60%;
+          }
     </style>
 </head>
 <body>
