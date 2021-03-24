@@ -184,3 +184,9 @@
     font-family: 'Tangerine', serif;
 }
 
+.blue-texture{
+    background-color: #b2e5ff;
+    background-image: url("https://www.transparenttextures.com/patterns/black-thread-light.png");
+    color: #01579B;
+}
+
