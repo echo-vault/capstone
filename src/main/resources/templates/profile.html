@@ -2,6 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="partials/head :: head('Hello, ' + ${user.getFirstName()})"></head>
 <body>
+
+<ul id="slide-out" class="sidenav">
+    <li><div class="user-view">
+        <div class="background">
+            <img src="images/office.jpg">
+        </div>
+        <a href="#user"><img class="circle" th:src="@{'' + ${user.image}}"></a>
+        <a href="#name"><span class="white-text name" th:text="${user.getFullName()}"></span></a>
+        </div>
+    </li>
+    <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+    <li><a href="#!">Second Link</a></li>
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">Subheader</a></li>
+    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+</ul>
+<a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
 <main class="blue-texture">
     <nav th:replace="partials/navbar :: navbar"></nav>
     <div class="container">
