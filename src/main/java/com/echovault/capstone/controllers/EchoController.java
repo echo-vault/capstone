@@ -65,6 +65,7 @@ public class EchoController {
                            @RequestParam(name = "profileImg") MultipartFile profileImg,
                            @RequestParam(name = "bgImg") MultipartFile bgImg,
                            @RequestParam(name = "image") ArrayList<MultipartFile> images,
+                           @RequestParam(name = "summary", defaultValue = "") String summary,
                            @RequestParam(name = "linkName1", defaultValue = "") String linkName1,
                            @RequestParam(name = "link1", defaultValue = "") String link1,
                            @RequestParam(name = "linkName2", defaultValue = "") String linkName2,
@@ -107,10 +108,13 @@ public class EchoController {
         }
         echo.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         echo.setCreatedAt(new Date());
+        if (summary.equals("")){
+            summary = "Here you can talk about how your loved one can be remembered. Tell us about their passions. Tell us about their accomplishments. Tell us what they stood for most. Let everyone know how they lived with a life story.";
+        }
+        echo.setSummary(summary);
         echoDao.save(echo);
         if (images != null) {
             for(MultipartFile image: images){
-                System.out.println(image);
                 String filename = image.getOriginalFilename();
                 String filepath = Paths.get(uploadPath, filename).toString();
                 File destinationFile = new File(filepath);
@@ -314,12 +318,6 @@ public class EchoController {
         linkNames.add(linkName0);
         linkNames.add(linkName1);
         linkNames.add(linkName2);
-        System.out.println(linkName0);
-        System.out.println(linkName1);
-        System.out.println(linkName2);
-        System.out.println(links);
-        System.out.println(linkUrls);
-        System.out.println(linkNames);
         int count = 0;
         for(int i = 0; i < links.size(); i++) {
             count += 1;
@@ -334,7 +332,6 @@ public class EchoController {
 
         }
         if(count == 0){
-            System.out.println("count was 0");
             if (linkUrls.get(0).length() > 0 && linkNames.get(0).length() > 0) {
                     Link l = new Link();
                     l.setName(linkNames.get(0));
@@ -346,7 +343,6 @@ public class EchoController {
             count += 1;
         }
         if(count == 1){
-            System.out.println("count was 1");
            if (linkUrls.get(1).length() > 0 && linkNames.get(1).length() > 0) {
                     Link l = new Link();
                     l.setName(linkNames.get(1));
@@ -358,7 +354,6 @@ public class EchoController {
             count += 1;
         }
         if(count == 2){
-            System.out.println("count was 2");
             if (linkUrls.get(2).length() > 0 && linkNames.get(2).length() > 0) {
                     Link l = new Link();
                     l.setName(linkNames.get(2));
@@ -409,7 +404,6 @@ public class EchoController {
                                 @RequestParam(name = "userId") long userId
                                 ){
         if(memory.getBody() == null || memory.getBody().equals("")){
-            System.out.println("Something went wrong");
             validation.rejectValue(
                     "body",
                     "memory.body",

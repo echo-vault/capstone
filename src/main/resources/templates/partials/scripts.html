@@ -62,9 +62,12 @@
 
             function autoplayhome() {
                 $('.carousel.carousel-slider').carousel('next');
-                setTimeout(autoplayhome, 7500);
             }
+
             // autoplayhome();
+
+            setInterval(autoplayhome, 10000);
+
             M.updateTextFields();
 
         });

@@ -9,49 +9,11 @@
     <div class="footer-copyright light-blue darken-4">
         <div class="container">
             © 2021 Echo Vault Inc.
-            <a th:href="@{/about}" class="right">About Us</a>
+            <a class="white-text right" th:href="@{/about}">About Us</a>
         </div>
     </div>
 </footer>
 </div>
-
-
-
-
-        <div class="page-footer" th:fragment="echo-footer" >
-          <div class="container">
-            <div class="row">
-              <div class="col l6 s12">
-                <h5 class="white-text">Location</h5>
-<!--                  <div class="burial-address-display"></div>-->
-                <p class="grey-text text-lighten-4" th:text="${echo.restingPlace}" id="burialaddress"></p>
-              </div>
-              <div class="col l4 offset-l2 s12">
-                  <div th:if="${echo.getLinks().size()} > 0">
-                    <h5 class="white-text">Links</h5>
-                    <ul>
-
-                      <li th:each="link : ${echo.getLinks()}">
-                          <a class="white-text" th:href="${link.url}" th:text="${link.name}" target="_blank"></a>
-                      </li>
-                    </ul>
-                  </div>
-              </div>
-            </div>
-          </div>
-          <div class="footer-copyright">
-        <div th:fragment="echo-footer" >
-        <div class="page-footer light-blue accent-1">
-          <div class="footer-copyright light-blue darken-4">
-            <div class="container">
-            © 2021 Echo Vault Inc.
-                    <a th:href="@{/about}" class="right">About Us</a>
-            </div>
-          </div>
-        </div>
-        </div>
-
-
 
 </body>
 </html>
