@@ -49,7 +49,7 @@ public class SearchController {
         }
         model.addAttribute("echos", matchedEchos);
 
-        return "Search";
+        return "search";
     }
 
 }
