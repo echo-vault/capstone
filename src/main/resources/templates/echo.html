@@ -7,10 +7,9 @@
 <main class="blue-texture">
     <!--    carousel-->
 
-        <div class="carousel hide">
-            <a th:each="image : ${echo.getImages()}" class="carousel-item" th:href="'#' + ${echo.getImages().indexOf(image) + 1} + '!'"><img th:src="${image.path}"></a>
-        </div>
-
+    <div class="carousel hide">
+        <a th:each="image : ${echo.getImages()}" class="carousel-item materialboxed" th:href="'#' + ${echo.getImages().indexOf(image) + 1} + '!'"><img class="slideshowLG" th:src="${image.path}"></a>
+    </div>
 
     <div class="container">
         <div class="row">
@@ -150,7 +149,7 @@
                                                     <div class="row" style="margin-bottom: 0 !important;">
                                                         <div class="col s6">
                                                             <a th:href="'#addComment' + ${memory.getId()}" class="modal-trigger light-blue-text text-darken-4">
-                                                              <i class="material-icons tooltipped" data-position="bottom" data-tooltip="Add Comment">add</i>
+                                                              <i class="material-icons tooltipped" data-position="bottom" data-tooltip="Add Comment">comment</i>
                                                             </a>
 <!--                                                            <div th:replace="partials/modal.html :: comment-modal"></div>-->
                                                         </div>
@@ -238,7 +237,7 @@
                                                     <div class="row" style="margin-bottom: 0 !important;">
                                                         <div class="col s6">
                                                             <a th:href="'#addComment' + ${memory.getId()}" class="modal-trigger light-blue-text text-darken-4">
-                                                              <i class="material-icons tooltipped" data-position="bottom" data-tooltip="Add Comment">add</i>
+                                                              <i class="material-icons tooltipped" data-position="bottom" data-tooltip="Add Comment">comment</i>
                                                             </a>
 <!--                                                            <div th:replace="partials/modal.html :: comment-modal"></div>-->
                                                         </div>
@@ -313,25 +312,42 @@
         <div class="row">
             <div class="col s12 m7">
                 <th:block th:if='${!(echo.getRestingPlace().equals(""))}'>
-                    <div class="row">
+                    <div class="row card hoverable grey lighten-4">
                         <div class="col s12">
-                            <h5>Resting Place</h5>
+                            <h5 class="center">Resting Place</h5>
+                        </div>
+                        <div class="col s12" style="display: flex;align-items: center;justify-content: center;">
+                            <img class="responsive-img" id="staticmap" style="border: 5px solid #01579B">
                         </div>
                         <div class="col s12">
-                            <img class="responsive-img" id="staticmap" style="border: 5px solid #f5f5f5">
-                        </div>
-                        <div class="col s12">
-                            <p id="burialaddress" th:text="${echo.restingPlace}"></p>
+                            <p class="center" id="burialaddress" th:text="${echo.restingPlace}"></p>
                         </div>
                     </div>
                 </th:block>
             </div>
-            <div class="col m4 offset-m1 s12">
+            <div class="col m4 offset-m1 s12 card hoverable grey lighten-4"  style="display: flex;align-items: center;justify-content: center; flex-direction: column">
                 <th:block class="right" th:if="${echo.getLinks().size()} > 0">
                     <h5>Links</h5>
                     <ul>
-                        <li th:each="link : ${echo.getLinks()}">
-                            <a th:href="${link.url}" th:text="${link.name}" target="_blank"></a>
+                        <li th:each="link : ${echo.getLinks()}" style="margin-bottom: 10px">
+                            <th:block th:if='${link.getName().equals("Donations")}'>
+                                <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
+                                    <i class="material-icons">attach_money</i>
+                                    <span th:text="${link.name}" ></span>
+                                </a>
+                            </th:block>
+                            <th:block th:if='${link.getName().equals("Flowers/Condolences")}'>
+                                <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
+                                    <i class="material-icons">filter_vintage</i>
+                                    <span th:text="${link.name}" ></span>
+                                </a>
+                            </th:block>
+                            <th:block th:if='${link.getName().equals("Services Details")}'>
+                                <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
+                                    <i class="material-icons">details</i>
+                                    <span th:text="${link.name}" ></span>
+                                </a>
+                            </th:block>
                         </li>
                     </ul>
                 </th:block>
