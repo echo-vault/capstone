@@ -52,23 +52,17 @@
             $('.view_carousel').click(function(){
                 $('.carousel').toggleClass('hide');
                 $('.carousel').carousel();
-                autoplay();
+                autoplay()
             })
-
             $('.carousel.carousel-slider').carousel({
                 indicators: true,
                 fullWidth: true,
             });
-
             function autoplayhome() {
                 $('.carousel.carousel-slider').carousel('next');
             }
-
             setInterval(autoplayhome, 10000);
-
-
             M.updateTextFields();
-
         });
     </script>
 </div>
