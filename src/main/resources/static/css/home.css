@@ -33,7 +33,16 @@
 }
 
 .user-profile-img {
-    padding-top: 1.5em;
+    padding: .5em;
+    height: 10em;
+    /*margin: 10px;*/
+
+}
+
+.profile-info-card{
+    background: #01579B;
+    color: white;
+    padding-bottom: 10px;
 }
 
 
@@ -226,5 +235,8 @@
     background-image: url("../img/backgrnd-black-thread-light.png");
     color: #01579B;
 }
+
+
+
 
 
