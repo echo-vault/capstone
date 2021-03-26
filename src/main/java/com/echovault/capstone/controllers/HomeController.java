@@ -130,8 +130,8 @@ public class HomeController {
             }
         }
         String password = user.getPassword();
-        String hash = encoder.encode(password);
-        user.setPassword(hash);
+          String hash = encoder.encode(password);
+          user.setPassword(hash);
         userDao.save(user);
         String subject = "Thank You For Registering";
         String body = "Hello, " + user.getFirstName() +

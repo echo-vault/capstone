@@ -8,6 +8,11 @@ import com.echovault.capstone.models.Echo;
 import com.echovault.capstone.models.User;
 import com.echovault.capstone.models.Image;
 import com.echovault.capstone.repositories.*;
+import org.hibernate.*;
+import org.hibernate.graph.RootGraph;
+import org.hibernate.procedure.ProcedureCall;
+import org.hibernate.query.NativeQuery;
+import org.hibernate.stat.SessionStatistics;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -17,17 +22,26 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
+import java.sql.Connection;
+import java.util.*;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.FlushModeType;
+import javax.persistence.LockModeType;
+import javax.persistence.StoredProcedureQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.metamodel.Metamodel;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.List;
 
 @Controller
 public class EchoController {
@@ -242,64 +256,6 @@ public class EchoController {
             }
         }
         //UPDATING LINKS
-//        List<Link> links = echo.getLinks();
-//
-//        if(links != null) {
-//            if (links.get(0) != null) {
-//                if (link0.length() > 0 && linkName0.length() > 0) {
-//                    Link linkA = linkDao.getOne(links.get(0).getId());
-//                    linkA.setName(linkName0);
-//                    linkA.setUrl(link0);
-//                    linkA.setEcho(echo);
-//                    linkDao.save(linkA);
-//                }
-//            }
-//
-//            if (links.get(1) != null) {
-//                if (link1.length() > 0 && linkName1.length() > 0) {
-//                    Link linkB = linkDao.getOne(links.get(1).getId());
-//                    linkB.setName(linkName2);
-//                    linkB.setUrl(link2);
-//                    linkB.setEcho(echo);
-//                    linkDao.save(linkB);
-//                }
-//            }
-//
-//            if (links.get(2) != null) {
-//                if (link2.length() > 0 && linkName2.length() > 0) {
-//                    Link linkC = linkDao.getOne(links.get(2).getId());
-//                    linkC.setName(linkName2);
-//                    linkC.setUrl(link2);
-//                    linkC.setEcho(echo);
-//                    linkDao.save(linkC);
-//                }
-//            }
-//        }else {
-//            if (link0.length() > 0 && linkName0.length() > 0) {
-//                Link linkA = new Link();
-//                linkA.setName(linkName0);
-//                linkA.setUrl(link0);
-//                linkA.setEcho(echo);
-//                linkDao.save(linkA);
-//            }
-//
-//            if (link1.length() > 0 && linkName1.length() > 0) {
-//                Link linkB = new Link();
-//                linkB.setName(linkName1);
-//                linkB.setUrl(link1);
-//                linkB.setEcho(echo);
-//                linkDao.save(linkB);
-//            }
-//
-//            if (link2.length() > 0 && linkName2.length() > 0) {
-//                Link linkC = new Link();
-//                linkC.setName(linkName2);
-//                linkC.setUrl(link2);
-//                linkC.setEcho(echo);
-//                linkDao.save(linkC);
-//            }
-//        }
-        //UPDATING LINKS
         List<Link> links = echo.getLinks();
         List<String> linkUrls = new ArrayList<>();
         if(link0.length() > 0 && !(link0.substring(0,4).equals("http"))){
@@ -381,6 +337,8 @@ public class EchoController {
             }
             model.addAttribute("commenters", commenters);
         }
+        System.out.println("user: " + user);
+        System.out.println("userId: " + user.getId());
         model.addAttribute("user", user);
         model.addAttribute("memory", new Memory());
         model.addAttribute("comment", new Comment());
@@ -403,6 +361,9 @@ public class EchoController {
                                 @RequestParam(name = "echoId") long echoId,
                                 @RequestParam(name = "userId") long userId
                                 ){
+        if(userId == 0){
+            return "redirect:/login";
+        }
         if(memory.getBody() == null || memory.getBody().equals("")){
             validation.rejectValue(
                     "body",

@@ -15,6 +15,14 @@ public class UserService {
     }
 
     public User getLoggedInUser(){
-        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        try {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            return user;
+        } catch (ClassCastException e){
+            e.printStackTrace();
+        }
+         User user = new User();
+        user.setId(0);
+        return user;
     }
 }

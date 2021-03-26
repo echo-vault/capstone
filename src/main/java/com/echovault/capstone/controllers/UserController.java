@@ -32,6 +32,9 @@ public class UserController {
     public String showProfile(Model model){
         User sessionUser = userService.getLoggedInUser();
         User user = userDao.getOne(sessionUser.getId());
+        if(user.getId() == 0){
+            return "login";
+        }
         model.addAttribute("echoes", user.getEchoes());
         model.addAttribute("user", user);
         return "profile";

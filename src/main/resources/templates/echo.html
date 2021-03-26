@@ -2,16 +2,40 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <div th:replace="partials/head.html :: head(${echo.getFullName()})"></div>
 <body class="light-blue-text text-darken-4">
+
 <div th:replace="partials/navbar.html :: navbar"></div>
 
 <main class="blue-texture">
-    <!--    carousel-->
 
+<!--    <th:block th:if="${echo.getImages().size()} > 0">-->
+<!--      <a href="#!" class="btn-floating btn-large waves-effect waves-amber waves-lighten-4 amber lighten-2 main-btn right view_carousel" style="display: flex; align-items: center; margin: 15px 15px 0 0; z-index: 1">-->
+<!--          <i class="material-icons tooltipped light-blue-text text-darken-4" data-position="bottom" data-tooltip="View Slideshow">view_carousel</i>-->
+<!--      </a>-->
+<!--      <a href="#!" class="hide center btn-floating btn-large waves-effect waves-amber close-btn waves-lighten-4 amber right lighten-2 view_carousel" style="display: flex; align-items: center; margin: 15px 15px 0 0; z-index: 1">-->
+<!--           <i class="material-icons tooltipped light-blue-text text-darken-4" data-position="bottom" data-tooltip="Hide Slideshow">view_carousel</i>-->
+<!--        </a>-->
+<!--    </th:block>-->
+    <!--    carousel-->
     <div class="carousel hide">
         <a th:each="image : ${echo.getImages()}" class="carousel-item materialboxed" th:href="'#' + ${echo.getImages().indexOf(image) + 1} + '!'"><img class="slideshowLG" th:src="${image.path}"></a>
     </div>
 
-    <div class="container">
+<!--    <div class="carousel carousel-slider echoCarousel hide">-->
+<!--        <div class="carousel-fixed-item center">-->
+<!--            <div class="card grey lighten-4 center" style="width: 20%; background: tr;">-->
+<!--                <h1 th:text="${echo.getFullName()}"></h1>-->
+<!--                <p class="center" th:text="${echo.getDisplayedDates()}" ></p>-->
+<!--            </div>-->
+
+<!--        </div>-->
+<!--        <div class="carousel-item" th:each="image : ${echo.getImages()}" th:href="'#' + ${echo.getImages().indexOf(image) + 1} + '!'">-->
+<!--            <div class="container center">-->
+<!--                <img th:src="${image.path}" style="max-width: 500px">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+    <div class="container slideshow-swap">
         <div class="row">
             <div class="col s12 m6">
                 <div class="card profile-card large hoverable grey lighten-4">
@@ -49,37 +73,58 @@
 
     <div class="container">
         <div class="row" th:if="${echo.getMemories().size()} == 0">
-             <div class="col s12">
-                 <div class="row memory-form card hoverable grey lighten-4">
-                     <form th:action="@{/memory}" method="post" th:object="${memory}" class="col s12" enctype="multipart/form-data" style="padding-bottom: 10px">
-                         <div class="row">
-                             <div class="input-field col s9">
-                                 <textarea id="textarea1" class="materialize-textarea" th:field="*{body}"></textarea>
-                                 <label for="textarea1">What would you like to share?</label>
-                                 <p th:if="${#fields.hasErrors('body')}" th:errors="*{body}" />
-                             </div>
-                             <div class="file-field input-field col s3">
-                                 <div class="waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4" style="width: 100%">
-                                     <span>Photo<i class="material-icons left">image</i></span>
-                                     <input type="file" name="memoryImg">
+            <th:block th:switch="${user.getId()} != 0">
+                <th:block th:case="true">
+                     <div class="col s12">
+                         <div class="row memory-form card hoverable grey lighten-4">
+                             <form th:action="@{/memory}" method="post" th:object="${memory}" class="col s12" enctype="multipart/form-data" style="padding-bottom: 10px">
+                                 <div class="row">
+                                     <div class="input-field col s9">
+                                         <textarea id="textarea1" class="materialize-textarea" th:field="*{body}"></textarea>
+                                         <label for="textarea1">What would you like to share?</label>
+                                         <p th:if="${#fields.hasErrors('body')}" th:errors="*{body}" />
+                                     </div>
+                                     <div class="file-field input-field col s3">
+                                         <div class="waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4" style="width: 100%">
+                                             <span>Photo<i class="material-icons left">image</i></span>
+                                             <input type="file" name="memoryImg">
+                                         </div>
+                                         <div class="file-path-wrapper">
+                                             <input class="file-path validate" type="hidden">
+                                         </div>
+                                     </div>
                                  </div>
-                                 <div class="file-path-wrapper">
-                                     <input class="file-path validate" type="hidden">
+                                 <div class="row">
+                                     <div class="col s12">
+                                         <input type="hidden" name="echoId" th:value="${echo.getId()}">
+                                         <input type="hidden" name="userId" th:value="${user.getId()}">
+                                         <button style="width: 100%" class="waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4" type="submit">Share A Memory...
+                                             <i class="material-icons left">cloud</i>
+                                         </button>
+                                     </div>
                                  </div>
-                             </div>
+                             </form>
                          </div>
-                         <div class="row">
+                     </div>
+                </th:block>
+                <th:block th:case="*">
+                    <div class="col s12">
+                         <div class="row card hoverable grey lighten-4">
                              <div class="col s12">
-                                 <input type="hidden" name="echoId" th:value="${echo.getId()}">
-                                 <input type="hidden" name="userId" th:value="${user.getId()}">
-                                 <button style="width: 100%" class="waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4" type="submit">Share A Memory...
-                                     <i class="material-icons left">cloud</i>
-                                 </button>
+                                 <h4 class="center">Register/Login to post a Memory or Comment</h4>
+                                 <div class="row">
+                                     <div class="col s6">
+                                        <a th:href="@{/register}" style="width: 100%" class="waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">Register</a>
+                                     </div>
+                                     <div class="col s6">
+                                        <a th:href="@{/login}" style="width: 100%" class="waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">Login</a>
+                                     </div>
+                                 </div>
                              </div>
                          </div>
-                     </form>
-                 </div>
-             </div>
+                     </div>
+                </th:block>
+             </th:block>
         </div>
         <div class="row" th:if="${echo.getMemories().size()} > 0">
             <div class="col hide-on-small-and-down m3 card hoverable grey lighten-4" style="background: transparent">
@@ -94,11 +139,13 @@
                 </div>
             </div>
             <div class="col s12 m8 offset-m1">
-                        <div class="row">
-                            <div class="col s12">
-                                <div class="row memory-form card hoverable grey lighten-4">
-                                    <form th:action="@{/memory}" method="post" th:object="${memory}" class="col s12" enctype="multipart/form-data" style="padding-bottom: 10px">
-                                        <div class="row" style="margin-bottom: 0 !important;">
+                <div class="row">
+                    <th:block th:switch="${user.getId()} != 0">
+                        <th:block th:case="true">
+                             <div class="col s12">
+                                 <div class="row memory-form card hoverable grey lighten-4">
+                                     <form th:action="@{/memory}" method="post" th:object="${memory}" class="col s12" enctype="multipart/form-data" style="padding-bottom: 10px">
+                                         <div class="row">
                                              <div class="input-field col s9">
                                                  <textarea id="textarea1" class="materialize-textarea" th:field="*{body}"></textarea>
                                                  <label for="textarea1">What would you like to share?</label>
@@ -114,7 +161,7 @@
                                                  </div>
                                              </div>
                                          </div>
-                                         <div class="row" style="margin-bottom: 0 !important;">
+                                         <div class="row">
                                              <div class="col s12">
                                                  <input type="hidden" name="echoId" th:value="${echo.getId()}">
                                                  <input type="hidden" name="userId" th:value="${user.getId()}">
@@ -123,10 +170,30 @@
                                                  </button>
                                              </div>
                                          </div>
-                                    </form>
-                                </div>
-                            </div>
+                                     </form>
+                                 </div>
+                             </div>
+                        </th:block>
+                        <th:block th:case="*">
+                            <div class="col s12">
+                                 <div class="row card hoverable grey lighten-4">
+                                     <div class="col s12">
+                                         <h4 class="center">Register/Login to post a Memory or Comment</h4>
+                                         <div class="row">
+                                             <div class="col s6">
+                                                <a th:href="@{/register}" style="width: 100%" class="waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">Register</a>
+                                             </div>
+                                             <div class="col s6">
+                                                <a th:href="@{/login}" style="width: 100%" class="waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">Login</a>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                        </th:block>
+                     </th:block>
                         </div>
+                    </th:block>
                     <div class="row scrollable">
                         <div th:each="memory : ${echo.getMemories()}" class="col s12 m6">
                             <th:block th:switch="${memory.getImage()} == null">
@@ -147,19 +214,32 @@
                                             <div class="row" style="margin-bottom: 0 !important;">
                                                 <div class="col s6">
                                                     <div class="row" style="margin-bottom: 0 !important;">
-                                                        <div class="col s6">
-                                                            <a th:href="'#addComment' + ${memory.getId()}" class="modal-trigger light-blue-text text-darken-4">
-                                                              <i class="material-icons tooltipped" data-position="bottom" data-tooltip="Add Comment">comment</i>
-                                                            </a>
-<!--                                                            <div th:replace="partials/modal.html :: comment-modal"></div>-->
-                                                        </div>
-                                                        <div class="col s6">
-                                                            <th:block th:if="${memory.getNumberOfComments()} != null">
-                                                              <a class="activator light-blue-text text-darken-4" href="#!">
-                                                                  <i class="material-icons tooltipped" data-position="bottom" data-tooltip="View Comments">remove_red_eye</i>
-                                                              </a>
+                                                        <th:block th:switch="${user.getId()} == 0">
+                                                            <th:block th:case="true">
+                                                                <div class="col s6 offset-s6">
+                                                                    <th:block th:if="${memory.getNumberOfComments()} != null">
+                                                                      <a class="activator light-blue-text text-darken-4" href="#!">
+                                                                          <i class="material-icons tooltipped" data-position="bottom" data-tooltip="View Comments">remove_red_eye</i>
+                                                                      </a>
+                                                                    </th:block>
+                                                                </div>
                                                             </th:block>
-                                                        </div>
+                                                            <th:block th:case="*">
+                                                                <div class="col s6">
+                                                                    <a th:href="'#addComment' + ${memory.getId()}" class="modal-trigger light-blue-text text-darken-4">
+                                                                      <i class="material-icons tooltipped" data-position="bottom" data-tooltip="Add Comment">comment</i>
+                                                                    </a>
+        <!--                                                            <div th:replace="partials/modal.html :: comment-modal"></div>-->
+                                                                </div>
+                                                                <div class="col s6">
+                                                                    <th:block th:if="${memory.getNumberOfComments()} != null">
+                                                                      <a class="activator light-blue-text text-darken-4" href="#!">
+                                                                          <i class="material-icons tooltipped" data-position="bottom" data-tooltip="View Comments">remove_red_eye</i>
+                                                                      </a>
+                                                                    </th:block>
+                                                                </div>
+                                                            </th:block>
+                                                        </th:block>
                                                     </div>
                                                 </div>
                                                 <div class="col s6">
@@ -235,19 +315,32 @@
                                             <div class="row" style="margin-bottom: 0 !important;">
                                                 <div class="col s6">
                                                     <div class="row" style="margin-bottom: 0 !important;">
-                                                        <div class="col s6">
-                                                            <a th:href="'#addComment' + ${memory.getId()}" class="modal-trigger light-blue-text text-darken-4">
-                                                              <i class="material-icons tooltipped" data-position="bottom" data-tooltip="Add Comment">comment</i>
-                                                            </a>
-<!--                                                            <div th:replace="partials/modal.html :: comment-modal"></div>-->
-                                                        </div>
-                                                        <div class="col s6">
-                                                            <th:block th:if="${memory.getNumberOfComments()} != null">
-                                                              <a class="activator light-blue-text text-darken-4" href="#!">
-                                                                  <i class="material-icons tooltipped" data-position="bottom" data-tooltip="View Comments">remove_red_eye</i>
-                                                              </a>
+                                                        <th:block th:switch="${user.getId()} == 0">
+                                                            <th:block th:case="true">
+                                                                <div class="col s6 offset-s6">
+                                                                    <th:block th:if="${memory.getNumberOfComments()} != null">
+                                                                      <a class="activator light-blue-text text-darken-4" href="#!">
+                                                                          <i class="material-icons tooltipped" data-position="bottom" data-tooltip="View Comments">remove_red_eye</i>
+                                                                      </a>
+                                                                    </th:block>
+                                                                </div>
                                                             </th:block>
-                                                        </div>
+                                                            <th:block th:case="*">
+                                                                <div class="col s6">
+                                                                    <a th:href="'#addComment' + ${memory.getId()}" class="modal-trigger light-blue-text text-darken-4">
+                                                                      <i class="material-icons tooltipped" data-position="bottom" data-tooltip="Add Comment">comment</i>
+                                                                    </a>
+        <!--                                                            <div th:replace="partials/modal.html :: comment-modal"></div>-->
+                                                                </div>
+                                                                <div class="col s6">
+                                                                    <th:block th:if="${memory.getNumberOfComments()} != null">
+                                                                      <a class="activator light-blue-text text-darken-4" href="#!">
+                                                                          <i class="material-icons tooltipped" data-position="bottom" data-tooltip="View Comments">remove_red_eye</i>
+                                                                      </a>
+                                                                    </th:block>
+                                                                </div>
+                                                            </th:block>
+                                                        </th:block>
                                                     </div>
                                                 </div>
                                                 <div class="col s6">
@@ -308,52 +401,54 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col s12 m7">
-                <th:block th:if='${!(echo.getRestingPlace().equals(""))}'>
-                    <div class="row card hoverable grey lighten-4">
-                        <div class="col s12">
-                            <h5 class="center">Resting Place</h5>
+    <th:block th:if='${!(echo.getRestingPlace().equals("")) or echo.getLinks().size() > 0}'>
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m7">
+                    <th:block th:if='${!(echo.getRestingPlace().equals(""))}'>
+                        <div class="row card hoverable grey lighten-4">
+                            <div class="col s12">
+                                <h5 class="center">Resting Place</h5>
+                            </div>
+                            <div class="col s12" style="display: flex;align-items: center;justify-content: center;">
+                                <img class="responsive-img" id="staticmap" style="border: 5px solid #01579B">
+                            </div>
+                            <div class="col s12">
+                                <p class="center" id="burialaddress" th:text="${echo.restingPlace}"></p>
+                            </div>
                         </div>
-                        <div class="col s12" style="display: flex;align-items: center;justify-content: center;">
-                            <img class="responsive-img" id="staticmap" style="border: 5px solid #01579B">
-                        </div>
-                        <div class="col s12">
-                            <p class="center" id="burialaddress" th:text="${echo.restingPlace}"></p>
-                        </div>
-                    </div>
-                </th:block>
-            </div>
-            <div class="col m4 offset-m1 s12 card hoverable grey lighten-4"  style="display: flex;align-items: center;justify-content: center; flex-direction: column">
-                <th:block class="right" th:if="${echo.getLinks().size()} > 0">
-                    <h5>Links</h5>
-                    <ul>
-                        <li th:each="link : ${echo.getLinks()}" style="margin-bottom: 10px">
-                            <th:block th:if='${link.getName().equals("Donations")}'>
-                                <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
-                                    <i class="material-icons">attach_money</i>
-                                    <span th:text="${link.name}" ></span>
-                                </a>
-                            </th:block>
-                            <th:block th:if='${link.getName().equals("Flowers/Condolences")}'>
-                                <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
-                                    <i class="material-icons">filter_vintage</i>
-                                    <span th:text="${link.name}" ></span>
-                                </a>
-                            </th:block>
-                            <th:block th:if='${link.getName().equals("Services Details")}'>
-                                <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
-                                    <i class="material-icons">details</i>
-                                    <span th:text="${link.name}" ></span>
-                                </a>
-                            </th:block>
-                        </li>
-                    </ul>
-                </th:block>
+                    </th:block>
+                </div>
+                <div class="col m4 offset-m1 s12 card hoverable grey lighten-4"  style="display: flex;align-items: center;justify-content: center; flex-direction: column">
+                    <th:block th:if="${echo.getLinks().size()} > 0">
+                        <h5>Links</h5>
+                        <ul>
+                            <li th:each="link : ${echo.getLinks()}" style="margin-bottom: 10px">
+                                <th:block th:if='${link.getName().equals("Donations")}'>
+                                    <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
+                                        <i class="material-icons">attach_money</i>
+                                        <span th:text="${link.name}" ></span>
+                                    </a>
+                                </th:block>
+                                <th:block th:if='${link.getName().equals("Flowers/Condolences")}'>
+                                    <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
+                                        <i class="material-icons">filter_vintage</i>
+                                        <span th:text="${link.name}" ></span>
+                                    </a>
+                                </th:block>
+                                <th:block th:if='${link.getName().equals("Services Details")}'>
+                                    <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
+                                        <i class="material-icons">details</i>
+                                        <span th:text="${link.name}" ></span>
+                                    </a>
+                                </th:block>
+                            </li>
+                        </ul>
+                    </th:block>
+                </div>
             </div>
         </div>
-    </div>
+    </th:block>
 
 <!--    Modals-->
 
