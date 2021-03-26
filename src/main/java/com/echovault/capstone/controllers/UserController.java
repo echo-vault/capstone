@@ -71,7 +71,6 @@ public class UserController {
                 model.addAttribute("message", "Oops! Something went wrong! " + e);
             }
         }
-
         user.setId(editedUser.getId());
         user.setPassword(editedUser.getPassword());
         userDao.save(user);

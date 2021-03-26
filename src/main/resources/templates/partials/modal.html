@@ -109,6 +109,47 @@
         </form>
     </div>
 
+    <div th:fragment="delete-link-modal" th:id="'deleteL' + ${link.getId()}" class="modal grey lighten-4">
+        <form th:action="@{/link/delete}" method="post">
+            <div class="modal-content" style="padding-bottom: 0 !important;">
+                <h4>Delete?</h4>
+                <input type="hidden" th:value="${link.getId()}" name="linkId">
+                <input type="hidden" th:value="${link.getEcho().getId()}" name="linkEchoId">
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class="left modal-close waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">No</a>
+              <button type="submit" class="right waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">Yes</button>
+            </div>
+        </form>
+    </div>
+
+    <div th:fragment="link-modal" th:id="'addLink' + ${echo.getId()}" class="modal grey lighten-4">
+        <form th:action="@{/link}" method="post">
+            <div class="modal-content" style="padding-bottom: 0 !important;">
+                <div class="row" style="margin-bottom: 0 !important;">
+                    <div class="input-field col s12 m6">
+                        <select name="linkName">
+                            <option value="" disabled selected>Choose What kind of link to add.</option>
+                            <option value="Donations">Donations</option>
+                            <option value="Flowers/Condolences">Flowers/Condolences</option>
+                            <option value="Services Details">Services Details</option>
+                        </select>
+                        <label>Link Type</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <label for="link1">Link 1</label>
+                        <input type="text" name="link" id="link1">
+                    </div>
+                    <input type="hidden" name="echoId" th:value="${echo.getId()}">
+                </div>
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class="left modal-close waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">Cancel</a>
+              <button type="submit" class="right waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">Add Link</button>
+            </div>
+        </form>
+    </div>
+
 
 
 

@@ -16,4 +16,10 @@ public class TimeUtil {
         String newTime = time.substring(11, 16);
         return newTime;
     }
+
+    public static void main(String[] args) {
+        Date d = new Date();
+        System.out.println(TimeUtil.formatDate(d));
+        System.out.println(TimeUtil.formatTime(d));
+    }
 }

@@ -216,6 +216,10 @@ public class Echo {
         return TimeUtil.formatDate(this.updatedAt);
     }
 
+    public String getUpdatedTime(){
+        return TimeUtil.formatTime(this.updatedAt);
+    }
+
 
 
 

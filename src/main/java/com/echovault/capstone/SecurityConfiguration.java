@@ -57,6 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .antMatchers("/", "/register", "/login", "/search", "/logout", "/echo/*")
                     .permitAll()
 
+
                 // define pages that require users to be logged in
                 .and()
                     .authorizeRequests()

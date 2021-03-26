@@ -110,10 +110,24 @@
                 <div class="row" th:each="link : ${echo.getLinks()}">
                     <div class="input-field col s12 m6">
                         <select th:name="'linkName' + ${echo.getLinks().indexOf(link)}">
-                            <option th:value="${link.getName()}" th:text="${link.getName()}" selected></option>
-                            <option value="Donations">Donations</option>
-                            <option value="Flowers/Condolences">Flowers/Condolences</option>
-                            <option value="Services Details">Services Details</option>
+                            <th:block th:if='${link.getName().equals("Donations")}'>
+                                <option value="">Choose Type</option>
+                                <option value="Donations" selected>Donations</option>
+                                <option value="Flowers/Condolences">Flowers/Condolences</option>
+                                <option value="Services Details">Services Details</option>
+                            </th:block>
+                            <th:block th:if='${link.getName().equals("Flowers/Condolences")}'>
+                                <option value="">Choose Type</option>
+                                <option value="Donations">Donations</option>
+                                <option value="Flowers/Condolences" selected>Flowers/Condolences</option>
+                                <option value="Services Details">Services Details</option>
+                            </th:block>
+                            <th:block th:if='${link.getName().equals("Services Details")}'>
+                                <option value="">Choose Type</option>
+                                <option value="Donations">Donations</option>
+                                <option value="Flowers/Condolences">Flowers/Condolences</option>
+                                <option value="Services Details" selected>Services Details</option>
+                            </th:block>
                         </select>
                         <label>Link Type</label>
                     </div>
