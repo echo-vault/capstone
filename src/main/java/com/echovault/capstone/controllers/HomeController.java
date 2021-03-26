@@ -79,7 +79,13 @@ public class HomeController {
     public String createUser(@ModelAttribute @Validated User user, Errors validation, @RequestParam(name = "user-profile-img")MultipartFile uploadedFile, @RequestParam(name = "confirm") String confirm, Model model) throws ServletException, IOException {
 //        User user = userDao.findById(principal.getId()).get();
 //        model.addAttribute("user", user);
-
+        if(!Password.goodQualityPassword(user.getPassword())){
+            validation.rejectValue(
+                    "password",
+                    "user.password",
+                    "Password must contain at least 8 characters with one uppercase letter, one lower case letter, one number and one special character "
+            );
+        }
         for (User u: userDao.findAll()){
             if(u.getUsername().equalsIgnoreCase(user.getUsername())){
                 validation.rejectValue(

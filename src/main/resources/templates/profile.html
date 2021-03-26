@@ -2,86 +2,87 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="partials/head :: head('Hello, ' + ${user.getFirstName()})"></head>
 <body>
+
 <!--Facebook-->
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0" nonce="SpIaEiMV"></script>
 <!--Facebook-->
-<main class="blue-texture">
+
+<main class="blue-texture profile-body">
+
     <nav th:replace="partials/navbar :: navbar"></nav>
-    <div class="container">
-        <div class="row">
 
+<!--    <div class="row">-->
+<!--        <div class="col s7 push-s5"><span class="flow-text">This div is 7-columns wide on pushed to the right by 5-columns.</span></div>-->
+<!--        <div class="col s5 pull-s7"><span class="flow-text">5-columns wide pulled to the left by 7-columns.</span></div>-->
+<!--    </div>-->
 
-                <div class="col s12 m5">
-                  <div class="card">
-                    <div class="card-image">
-                      <img th:src="@{'' + ${user.image}}">
-                    </div>
-                    <div class="card-content">
-                      <span class="card-title" th:text="${user.getFullName()}">Card Title</span>
-                    </div>
-                    <div class="card-action">
-                      <a th:href="@{/profile/edit}" class="waves-effect waves-amber waves-lighten-4 amber lighten-2 btn">Edit Profile</a>
-                    </div>
-                  </div>
-                </div>
-
-
-                    <div class="col s12 m7">
-                        <h2 class="center">Your Echoes</h2>
-                        <div class="row">
-                            <th:block th:if="${user.getEchoes().size()} == 0">
-                                <div class="col s12 m6" style="display: flex; justify-content: center; align-items: center">
-                                    <a th:href="@{/echo-create}" class=" center waves-effect waves-amber waves-lighten-4 amber lighten-2 btn">
-                                    Create An Echo
-                                    </a>
-                                </div>
-                            </th:block>
-                            <th:block th:if="${user.getEchoes().size()} > 0">
-                                <div class="col s12 m6" th:each="echo : ${echoes}">
-                                        <div class="card hoverable grey lighten-4">
-                                            <div class="card-image">
-                                                <img th:src="@{'' + ${echo.profileImage}}">
+    <div class="row">
+        <div class="col s12 m3">
+            <div class="card profile-info-card center hoverable">
+                <h2 class="center">Profile Info</h2>
+                <img class="user-profile-img center" th:src="@{'' + ${user.image}}">
+                <h5 class="profile-name center-align" th:text="${user.getUsername()}"></h5>
+                <h5 class="profile-name center-align" th:text="${user.getFullName()}"></h5>
+                <h5 class="profile-name center-align" th:text="${user.getEmail()}"></h5>
+<!--                </div>-->
+<!--                <div class="card-action">-->
+                  <a th:href="@{/profile/edit}" class="waves-effect waves-amber waves-lighten-4 amber lighten-2 btn center-align">Edit Profile</a>
+<!--                </div>-->
+            </div>
+        </div>
+        <div class="col s12 m9">
+            <h2 class="center">Your Echoes</h2>
+            <div class="container">
+                    <th:block th:if="${user.getEchoes().size()} == 0">
+                        <div class="col s12 m6" style="display: flex; justify-content: center; align-items: center">
+                            <a th:href="@{/echo-create}" class=" center waves-effect waves-amber waves-lighten-4 amber lighten-2 btn">
+                            Create An Echo
+                            </a>
+                        </div>
+                    </th:block>
+                    <th:block th:if="${user.getEchoes().size()} > 0">
+                        <div class="col s12 m6" th:each="echo : ${echoes}">
+                                <div class="card hoverable grey lighten-4">
+                                    <div class="card-image">
+                                        <img th:src="@{'' + ${echo.profileImage}}">
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title center" th:text="${echo.firstName} + ' ' + ${echo.lastName}"></span>
+                                        <p class="center" th:text="${echo.birthDate} + ' - ' + ${echo.deathDate}"></p>
+                                        <br>
+                                        <div class="fb-share-button center" th:data-href="'https://echovault.xyz/echo/' + ${echo.getId()}" data-layout="button" data-size="large" style="display: flex;justify-content: center">
+                                            <a target="_blank" href="'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
+                                        </div>
+                                    </div>
+                                    <div class="card-action">
+                                        <div class="row" style="margin-bottom: 0 !important">
+                                            <div class="col s4">
+                                                <a th:href="@{/echo/{id}/(id=${echo.id})}" style="display: flex; justify-content: center; align-items: center">
+                                                    <i class="material-icons tooltipped center-align" data-position="bottom" data-tooltip="Go To Echo">remove_red_eye</i>
+                                                </a>
                                             </div>
-                                            <div class="card-content">
-                                                <span class="card-title center" th:text="${echo.firstName} + ' ' + ${echo.lastName}"></span>
-                                                <p class="center" th:text="${echo.birthDate} + ' - ' + ${echo.deathDate}"></p>
-                                                <br>
-                                                <div class="fb-share-button center" th:data-href="'https://echovault.xyz/echo/' + ${echo.getId()}" data-layout="button" data-size="large" style="display: flex;justify-content: center">
-                                                    <a target="_blank" href="'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
-                                                </div>
+                                            <div class="col s4">
+                                                <a th:href="@{/echo/{id}/edit/(id=${echo.id})}" style="display: flex; justify-content: center; align-items: center">
+                                                    <i class="material-icons tooltipped center-align" data-position="bottom" data-tooltip="Edit Echo">edit</i>
+                                                </a>
                                             </div>
-                                            <div class="card-action">
-                                                <div class="row" style="margin-bottom: 0 !important">
-                                                    <div class="col s4">
-                                                        <a th:href="@{/echo/{id}/(id=${echo.id})}" style="display: flex; justify-content: center; align-items: center">
-                                                            <i class="material-icons tooltipped center-align" data-position="bottom" data-tooltip="Go To Echo">remove_red_eye</i>
-                                                        </a>
-                                                    </div>
-                                                    <div class="col s4">
-                                                        <a th:href="@{/echo/{id}/edit/(id=${echo.id})}" style="display: flex; justify-content: center; align-items: center">
-                                                            <i class="material-icons tooltipped center-align" data-position="bottom" data-tooltip="Edit Echo">edit</i>
-                                                        </a>
-                                                    </div>
-                                                    <div class="col s4">
-                                                        <a th:href="'#' + ${echo.id}" class="modal-trigger" style="display: flex; justify-content: center; align-items: center">
-                                                            <i class="material-icons tooltipped center-align" data-position="bottom" data-tooltip="Delete Echo">delete</i>
-                                                        </a>
-                                                    </div>
-                                                </div>
+                                            <div class="col s4">
+                                                <a th:href="'#' + ${echo.id}" class="modal-trigger" style="display: flex; justify-content: center; align-items: center">
+                                                    <i class="material-icons tooltipped center-align" data-position="bottom" data-tooltip="Delete Echo">delete</i>
+                                                </a>
                                             </div>
                                         </div>
-                                        <div th:replace="partials/modal.html :: delete-modal"></div>
-                                    <div th:text="${success}" th:if="${success}"></div>
+                                    </div>
                                 </div>
-                            </th:block>
+                                <div th:replace="partials/modal.html :: delete-modal"></div>
+                            <div th:text="${success}" th:if="${success}"></div>
                         </div>
-                    </div>
-
-
-
-        </div>
+                    </th:block>
+                </div>
+            </div>
     </div>
+
 
 </main>
 

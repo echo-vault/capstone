@@ -12,14 +12,15 @@
 }
 
 .echo-vault-intro{
-    padding-left: 10em;
-    padding-right: 10em;
     display: flex;
     justify-content: center;
     align-items: center;
+    background: rgba(255,255,255, 0.7);
+    padding: 5px;
+    color: #01579B;
     /*padding-top: 150px;*/
-    font-family: 'Tangerine', serif;
-    font-size: large;
+    /*font-family: 'BadScript', serif;*/
+    /*font-size: large;*/
 
 }
 
@@ -32,7 +33,16 @@
 }
 
 .user-profile-img {
-    padding-top: 1.5em;
+    padding: .5em;
+    height: 10em;
+    /*margin: 10px;*/
+
+}
+
+.profile-info-card{
+    background: #01579B;
+    color: white;
+    padding-bottom: 10px;
 }
 
 
@@ -63,15 +73,15 @@
 }
 
 .register-home{
-    padding: 10px;
-    background: rgba(255,255,255, 0.4);
+    padding: 5px;
+    background: rgba(255,255,255, 0.7);
 }
 
 .home-buttons{
     font-family: sans-serif;
     background-color: #FFD54F;
     color: #01579B;
-    margin: auto;
+    margin-top: 10px;
 
 }
 
@@ -115,14 +125,20 @@
 }
 
 .slide-3{
-    background-image: url("../img/blue-flowers.jpg");
+    background-image: url("../img/red-flowers.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    color: white;
+
 
 }
-.home-profile-card-info{
-    padding-bottom: 10px;
+.slide-3-text{
+    background: rgba(255,255,255, 0.7);
+    margin: 20px 20px 20px;
+    padding: 5px;
+    color: #01579B;
+}
+.home-profile-card{
+
 }
 
 .slide-4{
@@ -132,7 +148,13 @@
     color: white;
 
 }
-.home-card{
+.slide-4-text{
+    background: rgba(255,255,255, 0.7);
+    margin: 20px 20px 20px;
+    padding: 5px;
+    color: #01579B;
+}
+.home-profile-card{
     margin: auto;
 }
 
@@ -140,13 +162,20 @@
     background-image: url("../img/landscape.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    color: white;
+
 }
 
-.memory-form-home{
-    margin-top: 20%;
-    margin-right: 20%;
-    margin-left: 20%;
+.slide-5-text{
+    background: rgba(255,255,255, 0.7);
+    margin: 20px 40px 20px;
+    padding: 5px;
+    color: #01579B;
+}
+
+.home-memory{
+
+    max-width: 75%;
+    margin-top: 50px;
 }
 
 #map{
@@ -203,8 +232,11 @@
 
 .blue-texture{
     background-color: #b2e5ff;
-    background-image: url("https://www.transparenttextures.com/patterns/black-thread-light.png");
+    background-image: url("../img/backgrnd-black-thread-light.png");
     color: #01579B;
 }
+
+
+
 
 
