@@ -79,6 +79,7 @@ public class HomeController {
     public String createUser(@ModelAttribute @Validated User user, Errors validation, @RequestParam(name = "user-profile-img")MultipartFile uploadedFile, @RequestParam(name = "confirm") String confirm, Model model) throws ServletException, IOException {
 //        User user = userDao.findById(principal.getId()).get();
 //        model.addAttribute("user", user);
+
         for (User u: userDao.findAll()){
             if(u.getUsername().equalsIgnoreCase(user.getUsername())){
                 validation.rejectValue(
@@ -123,8 +124,8 @@ public class HomeController {
             }
         }
         String password = user.getPassword();
-        String hash = encoder.encode(password);
-        user.setPassword(hash);
+          String hash = encoder.encode(password);
+          user.setPassword(hash);
         userDao.save(user);
         String subject = "Thank You For Registering";
         String body = "Hello, " + user.getFirstName() +
