@@ -401,15 +401,52 @@
         </div>
     </div>
 
-    <th:block th:if='${!(echo.getRestingPlace().equals("")) or echo.getLinks().size() > 0}'>
-        <div class="container">
-            <div class="row">
-                <th:block th:if='${!(echo.getRestingPlace().equals(""))}'>
-                <div class="col s12 m7">
-                        <div class="row card hoverable grey lighten-4">
-                            <div class="col s12">
-                                <h5 class="center">Resting Place</h5>
+<!--    Map and Links-->
+    <th:block th:switch="${echo.getUser().getId() == user.getId()}">
+        <th:block th:case="false">
+            <th:block th:if='${!(echo.getRestingPlace().equals("")) or echo.getLinks().size() > 0}'>
+                <div class="container">
+                    <div class="row">
+                        <th:block th:if='${!(echo.getRestingPlace().equals(""))}'>
+                        <div class="col s12 m7">
+                            <div class="row card hoverable grey lighten-4">
+                                <div class="col s12">
+                                    <h5 class="center">Resting Place</h5>
+                                </div>
+                                <div class="col s12" style="display: flex;align-items: center;justify-content: center;">
+                                    <img class="responsive-img" id="staticmap" style="border: 5px solid #01579B">
+                                </div>
+                                <div class="col s12">
+                                    <p class="center" id="burialaddress" th:text="${echo.restingPlace}"></p>
+                                </div>
                             </div>
+                        </div>
+                        </th:block>
+                        <th:block th:if="${echo.getLinks().size()} > 0">
+                            <div class="col m4 offset-m1 s12 card hoverable grey lighten-4"  style="display: flex;align-items: center;justify-content: center; flex-direction: column">
+                                <h5>Links</h5>
+                                <ul>
+                                    <li th:each="link : ${echo.getLinks()}" style="margin-bottom: 10px">
+                                        <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
+                                            <span th:text="${link.name}" ></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </th:block>
+                    </div>
+                </div>
+            </th:block>
+        </th:block>
+<!--        Echo is current user's-->
+        <th:block th:case="true">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m7">
+                        <div class="row card hoverable grey lighten-4">
+                            <span class="card-title center" style="width: 95%"><h5>Resting Place</h5><a href="editMap" class="right modal-trigger light-blue-text text-darken-4 right">
+                                  <i class="material-icons tooltipped" data-position="bottom" data-tooltip="Add Link">edit</i>
+                                </a></span>
                             <div class="col s12" style="display: flex;align-items: center;justify-content: center;">
                                 <img class="responsive-img" id="staticmap" style="border: 5px solid #01579B">
                             </div>
@@ -417,78 +454,31 @@
                                 <p class="center" id="burialaddress" th:text="${echo.restingPlace}"></p>
                             </div>
                         </div>
+                    </div>
+                    <div class="col m4 offset-m1 s12 card hoverable grey lighten-4"  style="display: flex;align-items: center;justify-content: center; flex-direction: column">
+                        <span class="card-title" style="width: 95%;display: flex;justify-content: flex-end; align-items: center"><h5 style="justify-self: center">Links</h5><a th:href="'#addLink' + ${echo.getId()}" class="modal-trigger light-blue-text text-darken-4 right">
+                                  <i class="material-icons tooltipped" data-position="bottom" data-tooltip="Add Link">add</i>
+                                </a></span>
+                        <ul style="width: 95%">
+                            <li th:each="link : ${echo.getLinks()}" style="margin-bottom: 5px;display: flex;justify-content: space-between">
+                                    <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
+                                        <span th:text="${link.name}" ></span>
+                                    </a>
+                                <p><a th:href="'#deleteL' + ${link.getId()}" class="modal-trigger light-blue-text text-darken-4"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="delete">delete</i></a></p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                </th:block>
-                <th:block th:if="${echo.getLinks().size()} > 0">
-                    <th:block th:switch="${echo.getUser().getId() == user.getId()}">
-                        <th:block th:case="true">
-                            <div class="col m4 offset-m1 s12 card hoverable grey lighten-4"  style="display: flex;align-items: center;justify-content: center; flex-direction: column">
-                                    <span class="card-title">Links<a th:href="'#addLink' + ${echo.getId()}" class="modal-trigger light-blue-text text-darken-4">
-                                              <i class="material-icons tooltipped" data-position="bottom" data-tooltip="Add Link">add</i>
-                                            </a></span>
-                                    <ul style="width: 95%">
-                                        <li th:each="link : ${echo.getLinks()}" style="margin-bottom: 10px;display: flex;justify-content: space-between">
-                                            <th:block th:if='${link.getName().equals("Donations")}'>
-                                                <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
-                                                    <i class="material-icons">attach_money</i>
-                                                    <span th:text="${link.name}" ></span>
-                                                </a>
-                                            </th:block>
-                                            <th:block th:if='${link.getName().equals("Flowers/Condolences")}'>
-                                                <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
-                                                    <i class="material-icons">filter_vintage</i>
-                                                    <span th:text="${link.name}" ></span>
-                                                </a>
-                                            </th:block>
-                                            <th:block th:if='${link.getName().equals("Services Details")}'>
-                                                <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
-                                                    <i class="material-icons">details</i>
-                                                    <span th:text="${link.name}" ></span>
-                                                </a>
-                                            </th:block>
-                                            <p><a th:href="'#deleteL' + ${link.getId()}" class="modal-trigger light-blue-text text-darken-4"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="delete">delete</i></a></p>
-                                        </li>
-                                    </ul>
-                                 </div>
-                        </th:block>
-                        <th:block th:case="*">
-                            <div class="col m4 offset-m1 s12 card hoverable grey lighten-4"  style="display: flex;align-items: center;justify-content: center; flex-direction: column">
-                                    <h5>Links</h5>
-                                    <ul>
-                                        <li th:each="link : ${echo.getLinks()}" style="margin-bottom: 10px">
-                                            <th:block th:if='${link.getName().equals("Donations")}'>
-                                                <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
-                                                    <i class="material-icons">attach_money</i>
-                                                    <span th:text="${link.name}" ></span>
-                                                </a>
-                                            </th:block>
-                                            <th:block th:if='${link.getName().equals("Flowers/Condolences")}'>
-                                                <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
-                                                    <i class="material-icons">filter_vintage</i>
-                                                    <span th:text="${link.name}" ></span>
-                                                </a>
-                                            </th:block>
-                                            <th:block th:if='${link.getName().equals("Services Details")}'>
-                                                <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
-                                                    <i class="material-icons">details</i>
-                                                    <span th:text="${link.name}" ></span>
-                                                </a>
-                                            </th:block>
-                                        </li>
-                                    </ul>
-                                 </div>
-                        </th:block>
-                    </th:block>
-                </th:block>
             </div>
-        </div>
+        </th:block>
+<!--        ^^^ Echo is current user's ^^^-->
     </th:block>
+<!--    Map and Links-->
 
 <!--    Modals-->
-
+    <div th:replace="partials/modal.html :: link-modal"></div>
     <th:block th:each="link : ${echo.getLinks()}">
         <div th:replace="partials/modal.html :: delete-link-modal"></div>
-        <div th:replace="partials/modal.html :: link-modal"></div>
     </th:block>
     <th:block th:each="memory : ${echo.getMemories()}">
         <div th:replace="partials/modal.html :: comment-modal"></div>
@@ -506,28 +496,75 @@
 
 <div th:replace="partials/footer.html :: footer"></div>
 <div th:replace="partials/scripts.html :: scripts"></div>
-<script>
-    function geocode(search, token) {
-        let baseUrl = 'https://api.mapbox.com';
-        let endPoint = '/geocoding/v5/mapbox.places/';
-        return fetch(baseUrl + endPoint + encodeURIComponent(search) + '.json' + "?" + 'access_token=' + token)
-            .then(function(res) {
-                return res.json();
-                // to get all the data from the request, comment out the following three lines...
-            }).then(function(data) {
-                // console.log(data.features[0])
-                return data.features[0].center;
-            });
-    }
+<!--<th:block th:switch="${echo.getUser().getId() == user.getId()}">-->
+<!--    <th:block th:case="true">-->
+<!--        <script>-->
+<!--            let mapOptions = {-->
+<!--                accessToken: mapboxToken,-->
+<!--                container: 'map',-->
+<!--                style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location-->
+<!--                center: [-98.4916, 29.4252], // starting position [lng, lat]-->
+<!--                zoom: 10,-->
+<!--                interactive: false-->
+<!--            }-->
+<!--        -->
+<!--            let map = new mapboxgl.Map(mapOptions);-->
+<!--            -->
+<!--            //GEOLOCATE-->
+<!--            let geolocate = new mapboxgl.GeolocateControl({-->
+<!--                positionOptions: {-->
+<!--                    enableHighAccuracy: true-->
+<!--                },-->
+<!--                trackUserLocation: false-->
+<!--            });-->
+<!--            map.addControl(geolocate);-->
+<!--            map.on('load', function() {-->
+<!--                geolocate.trigger();-->
+<!--            });-->
+<!--        -->
+<!--            //GEOCODE-->
+<!--            var geocoder = new MapboxGeocoder({-->
+<!--                accessToken: mapboxToken,-->
+<!--                marker: {-->
+<!--                    color: 'blue',-->
+<!--                    draggable: 'false'-->
+<!--                },-->
+<!--                mapboxgl: mapboxgl-->
+<!--            });-->
+<!--        -->
+<!--            document.getElementById('geocoder').appendChild(geocoder.onAdd(map));-->
+<!--        -->
+<!--            geocoder.on("result", e => {-->
+<!--                $("#burialaddress").val(e.result.place_name);-->
+<!--            })-->
+<!--        </script>-->
+<!--    </th:block>-->
+<!--    <th:block th:case="false">-->
+        <script>
+            function geocode(search, token) {
+                let baseUrl = 'https://api.mapbox.com';
+                let endPoint = '/geocoding/v5/mapbox.places/';
+                return fetch(baseUrl + endPoint + encodeURIComponent(search) + '.json' + "?" + 'access_token=' + token)
+                    .then(function(res) {
+                        return res.json();
+                        // to get all the data from the request, comment out the following three lines...
+                    }).then(function(data) {
+                        // console.log(data.features[0])
+                        return data.features[0].center;
+                    });
+            }
 
-    geocode($("#burialaddress").text(), mapboxToken).then(function(e){
-        // console.log(e)
-        // console.log(e.join(","))
-        let eFixed = e.join(",");
-        let path = 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s+01579B(' + eFixed + ')/' + eFixed + ',10/500x300?access_token=' + mapboxToken;
-        $("#staticmap").attr("src", path);
-    });
-</script>
+            geocode($("#burialaddress").text(), mapboxToken).then(function(e){
+                // console.log(e)
+                // console.log(e.join(","))
+                let eFixed = e.join(",");
+                let path = 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s+01579B(' + eFixed + ')/' + eFixed + ',10/500x300?access_token=' + mapboxToken;
+                $("#staticmap").attr("src", path);
+            });
+        </script>
+<!--    </th:block>-->
+<!--</th:block>-->
+
 
 </body>
 </html>

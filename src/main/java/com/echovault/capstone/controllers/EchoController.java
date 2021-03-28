@@ -493,7 +493,7 @@ public class EchoController {
     }
 
     @PostMapping("/link")
-    public String createComment(@RequestParam(name = "linkName") String linkName,
+    public String createLink(@RequestParam(name = "linkName") String linkName,
                                 @RequestParam(name = "link") String linkUrl,
                                 @RequestParam(name = "echoId") long echoId
                                 ){
