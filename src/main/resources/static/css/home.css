@@ -281,6 +281,19 @@
     color: #01579B;
 }
 
+/*.about-img {*/
+/*    height: 50%;*/
+/*    max-height: 516px;*/
+/*}*/
+
+.card-panel {
+    height: 100%;
+}
+
+.about-card {
+    height: 100%;
+}
+
 
 
 

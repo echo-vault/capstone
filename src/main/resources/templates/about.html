@@ -10,9 +10,9 @@
 
 <!--    <div class="col s12 m6 offset-m2 l6 offset-l3">-->
             <div class="row">
-                <div class="col s12 m6 l3">
-                    <div id="first-about-card" class="card-panel grey lighten-5 z-depth-1">
-                                <img src="img/kaitlin.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                <div id="first-about-card" class="about-card col s12 m6 l3">
+                    <div class="card-panel grey lighten-5 z-depth-1">
+                                <img src="img/kaitlin.jpg" alt="" class="circle responsive-img about-img kaitlin-img"> <!-- notice the "circle" class -->
                                 <div class="card-action center-align">
                                     <h5>Kaitlin Muse</h5>
                                     <a href="https://github.com/KaitlinKelley">
@@ -27,9 +27,9 @@
                                 </div>
                     </div>
                 </div>
-                <div class="col s12 m6 l3">
-                    <div id="about-card" class="card-panel grey lighten-5 z-depth-1">
-                                <img src="img/ryan.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                <div id="about-card" class="about-card col s12 m6 l3">
+                    <div class="card-panel grey lighten-5 z-depth-1">
+                                <img src="img/ryan.jpg" alt="" class="circle responsive-img about-img ryan-img"> <!-- notice the "circle" class -->
 
                                 <div class="card-action center-align">
                                     <h5>Ryan McGuire</h5>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="col s12 m6 l3">
                     <div class="card-panel grey lighten-5 z-depth-1">
-                    <img src="img/eleanor.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                    <img src="img/eleanor.jpg" alt="" class="circle responsive-img about-img"> <!-- notice the "circle" class -->
 
                     <div class="card-action center-align">
                         <h5>Eleanor Ellingson</h5>
@@ -65,7 +65,7 @@
                 </div>
                 <div class="col s12 m6 l3">
                     <div class="card-panel grey lighten-5 z-depth-1">
-                    <img src="img/will1.JPG" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                    <img src="img/will1.JPG" alt="" class="circle responsive-img about-img"> <!-- notice the "circle" class -->
 
                     <div class="card-action center-align">
                         <h5>Will Tisdale</h5>
@@ -94,10 +94,11 @@
 <script>
     $(document).ready(function(){
         function fixHeight(){
-            let newHeight = $("#first-about-card").height();
-            $("#about-card").height(newHeight);
+            let newHeight = $(".kaitlin-img").height();
+            $(".ryan-img").height(newHeight);
         }
         window.onload = fixHeight;
+        window.onresize = fixHeight;
     });
 
 </script>
