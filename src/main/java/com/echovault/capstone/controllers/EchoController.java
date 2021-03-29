@@ -122,6 +122,7 @@ public class EchoController {
         }
         echo.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         echo.setCreatedAt(new Date());
+        echo.setUpdatedAt(new Date());
         if (summary.equals("")){
             summary = "Here you can talk about how your loved one can be remembered. Tell us about their passions. Tell us about their accomplishments. Tell us what they stood for most. Let everyone know how they lived with a life story.";
         }
@@ -274,6 +275,16 @@ public class EchoController {
         linkNames.add(linkName0);
         linkNames.add(linkName1);
         linkNames.add(linkName2);
+        for(String s: linkNames){
+            System.out.println(s);
+        }
+        for(String s: linkUrls){
+            System.out.println(s);
+        }
+        for(Link l: links){
+            System.out.println(l.getName());
+            System.out.println(l.getUrl());
+        }
         int count = 0;
         for(int i = 0; i < links.size(); i++) {
             count += 1;
@@ -284,8 +295,12 @@ public class EchoController {
                     l.setEcho(echo);
                     linkDao.save(l);
                     System.out.println("existing link " + i + " was saved");
+            } else {
+                System.out.println(links.get(i).getId());
+                Link l = linkDao.getOne(links.get(i).getId());
+                linkDao.delete(l);
+                System.out.println(count);
             }
-
         }
         if(count == 0){
             if (linkUrls.get(0).length() > 0 && linkNames.get(0).length() > 0) {
@@ -319,6 +334,7 @@ public class EchoController {
                     System.out.println("count was 2 and link was saved");
             }
         }
+        echo.setUpdatedAt(new Date());
         echoDao.save(echo);
         return "redirect:/echo/" + echo.getId();
     }
@@ -396,6 +412,7 @@ public class EchoController {
             }
         }
         memory.setCreatedAt(new Date());
+        memory.setUpdatedAt(new Date());
         memory.setUser(userDao.getOne(userId));
         memory.setEcho(echoDao.getOne(echoId));
         memoryDao.save(memory);
@@ -441,6 +458,7 @@ public class EchoController {
                                 @RequestParam(name = "userId") long userId
                                 ){
         comment.setCreatedAt(new Date());
+        comment.setUpdatedAt(new Date());
         comment.setUser(userDao.getOne(userId));
         comment.setMemory(memoryDao.getOne(memoryId));
         commentDao.save(comment);
@@ -463,6 +481,30 @@ public class EchoController {
         c.setBody(body);
         c.setUpdatedAt(new Date());
         commentDao.save(c);
+        return "redirect:/echo/" + echoId;
+    }
+
+    @PostMapping("link/delete")
+    public String deleteLink(@RequestParam(name="linkId")long linkId,
+                             @RequestParam(name="linkEchoId")long echoId){
+        Link l = linkDao.getOne(linkId);
+        linkDao.delete(l);
+        return "redirect:/echo/" + echoId;
+    }
+
+    @PostMapping("/link")
+    public String createComment(@RequestParam(name = "linkName") String linkName,
+                                @RequestParam(name = "link") String linkUrl,
+                                @RequestParam(name = "echoId") long echoId
+                                ){
+        Link l = new Link();
+        l.setEcho(echoDao.getOne(echoId));
+        l.setName(linkName);
+        if(!(linkUrl.substring(0,4).equals("http"))){
+            linkUrl = "https://" + linkUrl;
+        }
+        l.setUrl(linkUrl);
+        linkDao.save(l);
         return "redirect:/echo/" + echoId;
     }
 

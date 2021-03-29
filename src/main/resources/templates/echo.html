@@ -17,7 +17,7 @@
 <!--    </th:block>-->
     <!--    carousel-->
     <div class="carousel hide">
-        <a th:each="image : ${echo.getImages()}" class="carousel-item materialboxed" th:href="'#' + ${echo.getImages().indexOf(image) + 1} + '!'"><img class="slideshowLG responsive-img" th:src="${image.path}"></a>
+        <a th:each="image : ${echo.getImages()}" class="carousel-item" th:href="'#' + ${echo.getImages().indexOf(image) + 1} + '!'"><img class="slideshowLG" th:src="${image.path}"></a>
     </div>
 
 <!--    <div class="carousel carousel-slider echoCarousel hide">-->
@@ -404,8 +404,8 @@
     <th:block th:if='${!(echo.getRestingPlace().equals("")) or echo.getLinks().size() > 0}'>
         <div class="container">
             <div class="row">
+                <th:block th:if='${!(echo.getRestingPlace().equals(""))}'>
                 <div class="col s12 m7">
-                    <th:block th:if='${!(echo.getRestingPlace().equals(""))}'>
                         <div class="row card hoverable grey lighten-4">
                             <div class="col s12">
                                 <h5 class="center">Resting Place</h5>
@@ -417,41 +417,79 @@
                                 <p class="center" id="burialaddress" th:text="${echo.restingPlace}"></p>
                             </div>
                         </div>
-                    </th:block>
                 </div>
-                <div class="col m4 offset-m1 s12 card hoverable grey lighten-4"  style="display: flex;align-items: center;justify-content: center; flex-direction: column">
-                    <th:block th:if="${echo.getLinks().size()} > 0">
-                        <h5>Links</h5>
-                        <ul>
-                            <li th:each="link : ${echo.getLinks()}" style="margin-bottom: 10px">
-                                <th:block th:if='${link.getName().equals("Donations")}'>
-                                    <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
-                                        <i class="material-icons">attach_money</i>
-                                        <span th:text="${link.name}" ></span>
-                                    </a>
-                                </th:block>
-                                <th:block th:if='${link.getName().equals("Flowers/Condolences")}'>
-                                    <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
-                                        <i class="material-icons">filter_vintage</i>
-                                        <span th:text="${link.name}" ></span>
-                                    </a>
-                                </th:block>
-                                <th:block th:if='${link.getName().equals("Services Details")}'>
-                                    <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
-                                        <i class="material-icons">details</i>
-                                        <span th:text="${link.name}" ></span>
-                                    </a>
-                                </th:block>
-                            </li>
-                        </ul>
+                </th:block>
+                <th:block th:if="${echo.getLinks().size()} > 0">
+                    <th:block th:switch="${echo.getUser().getId() == user.getId()}">
+                        <th:block th:case="true">
+                            <div class="col m4 offset-m1 s12 card hoverable grey lighten-4"  style="display: flex;align-items: center;justify-content: center; flex-direction: column">
+                                    <span class="card-title">Links<a th:href="'#addLink' + ${echo.getId()}" class="modal-trigger light-blue-text text-darken-4">
+                                              <i class="material-icons tooltipped" data-position="bottom" data-tooltip="Add Link">add</i>
+                                            </a></span>
+                                    <ul style="width: 95%">
+                                        <li th:each="link : ${echo.getLinks()}" style="margin-bottom: 10px;display: flex;justify-content: space-between">
+                                            <th:block th:if='${link.getName().equals("Donations")}'>
+                                                <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
+                                                    <i class="material-icons">attach_money</i>
+                                                    <span th:text="${link.name}" ></span>
+                                                </a>
+                                            </th:block>
+                                            <th:block th:if='${link.getName().equals("Flowers/Condolences")}'>
+                                                <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
+                                                    <i class="material-icons">filter_vintage</i>
+                                                    <span th:text="${link.name}" ></span>
+                                                </a>
+                                            </th:block>
+                                            <th:block th:if='${link.getName().equals("Services Details")}'>
+                                                <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
+                                                    <i class="material-icons">details</i>
+                                                    <span th:text="${link.name}" ></span>
+                                                </a>
+                                            </th:block>
+                                            <p><a th:href="'#deleteL' + ${link.getId()}" class="modal-trigger light-blue-text text-darken-4"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="delete">delete</i></a></p>
+                                        </li>
+                                    </ul>
+                                 </div>
+                        </th:block>
+                        <th:block th:case="*">
+                            <div class="col m4 offset-m1 s12 card hoverable grey lighten-4"  style="display: flex;align-items: center;justify-content: center; flex-direction: column">
+                                    <h5>Links</h5>
+                                    <ul>
+                                        <li th:each="link : ${echo.getLinks()}" style="margin-bottom: 10px">
+                                            <th:block th:if='${link.getName().equals("Donations")}'>
+                                                <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
+                                                    <i class="material-icons">attach_money</i>
+                                                    <span th:text="${link.name}" ></span>
+                                                </a>
+                                            </th:block>
+                                            <th:block th:if='${link.getName().equals("Flowers/Condolences")}'>
+                                                <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
+                                                    <i class="material-icons">filter_vintage</i>
+                                                    <span th:text="${link.name}" ></span>
+                                                </a>
+                                            </th:block>
+                                            <th:block th:if='${link.getName().equals("Services Details")}'>
+                                                <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
+                                                    <i class="material-icons">details</i>
+                                                    <span th:text="${link.name}" ></span>
+                                                </a>
+                                            </th:block>
+                                        </li>
+                                    </ul>
+                                 </div>
+                        </th:block>
                     </th:block>
-                </div>
+                </th:block>
             </div>
         </div>
     </th:block>
 
 <!--    Modals-->
 
+    <th:block th:each="link : ${echo.getLinks()}">
+        <div th:replace="partials/modal.html :: delete-link-modal"></div>
+        <div th:replace="partials/modal.html :: link-modal"></div>
+    </th:block>
     <th:block th:each="memory : ${echo.getMemories()}">
         <div th:replace="partials/modal.html :: comment-modal"></div>
         <div th:replace="partials/modal.html :: edit-memory-modal"></div>
