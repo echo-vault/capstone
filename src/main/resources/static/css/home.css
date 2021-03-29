@@ -260,6 +260,10 @@
     background-color: #FFD54F;
 }
 
+.datepicker-controls .select-month input {
+    width: 90%;
+}
+
 /*.datepicker-day-button > .is-disabled {*/
 /*    color: grey!important;*/
 /*}*/
