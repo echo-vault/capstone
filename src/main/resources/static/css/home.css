@@ -6,46 +6,28 @@
     color:darkblue;
 }
 
-
 .pd {
     padding: 20px;
 }
 
 .echo-vault-intro{
-
     margin-top: 20px;
     background: rgba(255,255,255, 0.7);
     padding: 5px;
     color: #01579B;
     text-align: center;
-
 }
-
 
 .user-profile-img {
     padding: .5em;
     height: 10em;
     /*margin: 10px;*/
-
 }
 
 .profile-info-card{
     background: #01579B;
     color: white;
     padding: 10px;
-}
-
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(255,255,255, 0.7);
-    padding: 5px;
-    color: #01579B;
-    /*padding-top: 150px;*/
-    /*font-family: 'BadScript', serif;*/
-    /*font-size: large;*/
-
 }
 
 .echo-vault-logo{
@@ -60,12 +42,11 @@
     padding: .5em;
     height: 10em;
     /*margin: 10px;*/
-
+}
 
 .delete-modal {
     width: max-content;
 }
-
 
 .slide-1 {
     background-image: url("../img/mountain.jpg");
@@ -94,13 +75,11 @@
     background: rgba(255,255,255, 0.7);
 }
 
-
 .profile-info-card{
     background: #01579B;
     color: white;
     padding: 10px;
 }
-
 
 .delete-modal {
     width: max-content;
@@ -139,7 +118,6 @@
     background-color: #FFD54F;
     color: #01579B;
     margin-top: 10px;
-
 }
 
 .main-form-container{
@@ -195,9 +173,6 @@
     padding: 5px;
     color: #01579B;
 }
-.home-profile-card{
-
-}
 
 .slide-4{
     background-image: url("../img/orange-flowers.jpg");
@@ -206,12 +181,14 @@
     color: white;
 
 }
+
 .slide-4-text{
     background: rgba(255,255,255, 0.7);
     margin: 20px 20px 20px;
     padding: 5px;
     color: #01579B;
 }
+
 .home-profile-card{
     margin: auto;
 }
@@ -245,9 +222,6 @@
 .map-container{
     display: flex;
     margin-top: 1em;
-}
-
-
 }
 
 .form-inner-container{
@@ -284,17 +258,13 @@
     background-image: url("../img/red-flowers.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-
-
 }
+
 .slide-3-text{
     background: rgba(255,255,255, 0.7);
     margin: 20px 20px 20px;
     padding: 5px;
     color: #01579B;
-}
-.home-profile-card{
-
 }
 
 .slide-4{
@@ -302,23 +272,19 @@
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
-
 }
+
 .slide-4-text{
     background: rgba(255,255,255, 0.7);
     margin: 20px 20px 20px;
     padding: 5px;
     color: #01579B;
 }
-.home-profile-card{
-    margin: auto;
-}
 
 .slide-5{
     background-image: url("../img/landscape.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-
 }
 
 .slide-5-text{
@@ -344,7 +310,6 @@
     display: flex;
     margin-top: 1em;
 }
-
 
 .map-inner-container{
     width: 100%;
@@ -402,9 +367,17 @@
     color: #01579B;
 }
 
-/*.is-today, .is-selected {*/
-/*    color: darkslategrey!important;*/
-/*}*/
+.dropdown-content > li > span {
+    color: #01579B!important;
+}
+
+.datepicker-table td.is-selected {
+    background-color: #FFD54F;
+}
+
+.datepicker-controls .select-month input {
+    width: 90%;
+}
 
 .datepicker-day-button {
     color: black;
@@ -421,35 +394,6 @@
 .datepicker-controls .select-month input {
     width: 90%;
 }
-
-
-}
-
-
-/*.is-today, .is-selected {*/
-/*    color: darkslategrey!important;*/
-/*}*/
-
-.datepicker-day-button {
-    color: black;
-}
-
-.dropdown-content > li > span {
-    color: #01579B!important;
-}
-
-.datepicker-table td.is-selected {
-    background-color: #FFD54F;
-}
-
-.datepicker-controls .select-month input {
-    width: 90%;
-}
-
-
-/*.datepicker-day-button > .is-disabled {*/
-/*    color: grey!important;*/
-/*}*/
 
 .search-icon {
     color: black!important;
@@ -464,18 +408,9 @@
     color: #01579B;
 }
 
-
-
 .carousel-slider {
     min-height: 600px;
 }
-
-
-
-/*.about-img {*/
-/*    height: 50%;*/
-/*    max-height: 516px;*/
-/*}*/
 
 .card-panel {
     height: 100%;
