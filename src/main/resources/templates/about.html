@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="partials/head.html :: head('Welcome')"></head>
 
-<body>
+<body class="blue-texture">
 <nav th:replace="partials/navbar.html :: navbar"></nav>
 <div class="meet center-align">
     <h2>Meet our Developers</h2>
@@ -10,7 +10,7 @@
 
 <!--    <div class="col s12 m6 offset-m2 l6 offset-l3">-->
 
-            <div class="row valign-wrapper">
+            <div class="row">
                 <div class="col s12 m6 l3">
                     <div class="card-panel grey lighten-5 z-depth-1">
                     <img src="img/kaitlin.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
@@ -18,14 +18,17 @@
                     <div class="card-action center-align">
                         <h5>Kaitlin Muse</h5>
                         <a href="https://github.com/KaitlinKelley">
-                            <img class="icon" src="img/github.png" alt="Github icon">
+                            <img class="icon-about" src="img/github.png" alt="Github icon">
                         </a>
                         <a href="https://www.linkedin.com/in/kaitlin-muse/">
-                            <img class="icon" src="img/linkedin.png" alt="Linkedin icon">
+                            <img class="icon-about" src="img/linkedin.png" alt="Linkedin icon">
+                        </a>
+                        <a href="https://alumni.codeup.com/students/1006">
+                            <img class="icon-about" src="img/codeup.jpg" alt="Linkedin icon">
                         </a>
                     </div>
-                    </div>
                 </div>
+            </div>
                 <div class="col s12 m6 l3">
                     <div class="card-panel grey lighten-5 z-depth-1">
                     <img src="img/ryan.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
@@ -33,10 +36,13 @@
                     <div class="card-action center-align">
                         <h5>Ryan McGuire</h5>
                         <a href="https://github.com/RyanMcGuire1">
-                            <img class="icon" src="img/github.png" alt="Github icon">
+                            <img class="icon-about" src="img/github.png" alt="Github icon">
                         </a>
                         <a href="https://www.linkedin.com/in/ryan-wayne-mcguire/">
-                            <img class="icon" src="img/linkedin.png" alt="Linkedin icon">
+                            <img class="icon-about" src="img/linkedin.png" alt="Linkedin icon">
+                        </a>
+                        <a href="https://alumni.codeup.com/students/1018">
+                            <img class="icon-about" src="img/codeup.jpg" alt="Linkedin icon">
                         </a>
                     </div>
                     </div>
@@ -48,25 +54,31 @@
                     <div class="card-action center-align">
                         <h5>Eleanor Ellingson</h5>
                         <a href="https://github.com/EleanorEllingson">
-                            <img class="icon" src="img/github.png" alt="Github icon">
+                            <img class="icon-about" src="img/github.png" alt="Github icon">
                         </a>
                         <a href="https://www.linkedin.com/in/eleanor-ellingson/">
-                            <img class="icon" src="img/linkedin.png" alt="Linkedin icon">
+                            <img class="icon-about" src="img/linkedin.png" alt="Linkedin icon">
+                        </a>
+                        <a href="https://alumni.codeup.com/students/1010">
+                            <img class="icon-about" src="img/codeup.jpg" alt="Linkedin icon">
                         </a>
                     </div>
                     </div>
                 </div>
                 <div class="col s12 m6 l3">
                     <div class="card-panel grey lighten-5 z-depth-1">
-                    <img src="img/will.JPG" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                    <img src="img/will1.JPG" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
 
                     <div class="card-action center-align">
                         <h5>Will Tisdale</h5>
                         <a href="https://github.com/WillTisdale">
-                            <img class="icon" src="img/github.png" alt="Github icon">
+                            <img class="icon-about" src="img/github.png" alt="Github icon">
                         </a>
                         <a href="https://www.linkedin.com/in/willtisdale/">
-                            <img class="icon" src="img/linkedin.png" alt="Linkedin icon">
+                            <img class="icon-about" src="img/linkedin.png" alt="Linkedin icon">
+                        </a>
+                        <a href="https://alumni.codeup.com/students/1002">
+                            <img class="icon-about" src="img/codeup.jpg" alt="Linkedin icon">
                         </a>
                     </div>
                     </div>
@@ -79,6 +91,7 @@
 
 
 
-
+<div th:replace="partials/footer.html :: footer"></div>
+<div th:replace="partials/scripts.html :: scripts"></div>
 </body>
 </html>

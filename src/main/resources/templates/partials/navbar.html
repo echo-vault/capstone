@@ -6,33 +6,56 @@
 <header th:fragment="navbar">
 
     <nav>
+
+      
+
         <div class="nav-wrapper light-blue darken-4">
-            <a th:href="@{/}" class="brand-logo valign-wrapper">EchoVault</a>
+            <a href="#" class="brand-logo echovault-nav valign-wrapper" onclick="M.toast({html:'Welcome to Echo Vault!'})">EchoVault</a>
+            <a href="#mobile-demo" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li>
-                    <a th:href="@{/}">Home</a>
+                    <a th:href="@{/}"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Home">home</i></a>
                 </li>
                 <li>
-                    <a th:href="@{/search}">Search</a>
-                </li>
-                <li>
-                    <a th:href="@{/about}">About</a>
+                    <a th:href="@{/search}"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Search">search</i></a>
                 </li>
                 <li sec:authorize="isAnonymous()">
-                    <a th:href="@{/login}">Login</a>
+                    <a th:href="@{/login}"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Login">exit_to_app</i></a>
                 </li>
                 <li sec:authorize="isAuthenticated()">
-                    <a id="echo-create" th:href="@{/echo-create}">Create an Echo</a>
+                    <a id="echo-create" th:href="@{/echo-create}"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Create Echo">add</i></a>
                 </li>
                 <li sec:authorize="isAuthenticated()">
-                    <a id="view-profile" th:href="@{/profile}">Profile</a>
+                    <a id="view-profile" th:href="@{/profile}"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Profile">account_circle</i></a>
                 </li>
                 <li sec:authorize="isAuthenticated()">
-                    <a id="logout">Logout</a>
+                    <a id="logout"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Logout">do_not_disturb</i></a>
                 </li>
             </ul>
         </div>
     </nav>
+
+    <ul class="sidenav" id="mobile-demo">
+        <li>
+            <a th:href="@{/}"><i class="material-icons">home</i>Home</a>
+        </li>
+        <li>
+            <a th:href="@{/search}"><i class="material-icons">search</i>Search</a>
+        </li>
+        <li sec:authorize="isAnonymous()">
+            <a th:href="@{/login}"><i class="material-icons">exit_to_app</i>Login</a>
+        </li>
+        <li sec:authorize="isAuthenticated()">
+            <a id="echo-create" th:href="@{/echo-create}"><i class="material-icons">add</i>Create Echo</a>
+        </li>
+        <li sec:authorize="isAuthenticated()">
+            <a id="view-profile" th:href="@{/profile}"><i class="material-icons">account_circle</i>Profile</a>
+        </li>
+        <li sec:authorize="isAuthenticated()">
+            <a href="#" id="logout2"><i class="material-icons">do_not_disturb</i>Logout</a>
+        </li>
+    </ul>
 
     <form id="logoutForm" th:action="@{/logout}" th:method="post"></form>
 

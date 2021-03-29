@@ -8,9 +8,15 @@
 <div th:fragment="scripts" th:remove="tag">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
+    <script th:src="@{/js/keys.js}"></script>
+    <link
+            rel="stylesheet"
+            href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
+            type="text/css"
+    />
     <script>
         $(document).ready(function() {
-            $('.carousel').carousel();
             M.textareaAutoResize($('#textarea1'));
             $('.datepicker').datepicker({
                 format: 'mmmm dd yyyy',
@@ -18,13 +24,15 @@
                 maxDate: new Date()
             });
             $('select').formSelect();
+            var time = 4500
             function autoplay() {
                 $('.carousel').carousel('next');
                 setTimeout(autoplay, 4500);
             }
-            autoplay()
-            M.updateTextFields();
             $('#logout').click(function(){
+                $('#logoutForm').submit();
+            })
+            $('#logout2').click(function(){
                 $('#logoutForm').submit();
             })
             $('.deleteMemory').click(function(){
@@ -33,11 +41,40 @@
             $('.editMemory').click(function(){
                 $('.editMemoryForm').submit();
             })
+            function resize(){
+                window.dispatchEvent(new Event('resize'))
+            }
             $('.modal').modal();
-            var divWidth = $('.profile-card').width();
-            $('.summary-card').css('min-width', divWidth+'px');
+            $('#editMap').modal({
+                onOpenStart: resize,
+                onOpenEnd: resize
+            })
+            // let divWidth = $('.profile-card').width();
+            // $('.summary-card').css('min-width', divWidth+'px');
+            // function adjustCardWidth(){
+            //     $('.summary-card').css('min-width', divWidth+'px');
+            // }
+            // document.getElementsByTagName('body').addEventListener("resize", adjustCardWidth)
             $('.tooltipped').tooltip();
+            $('.sidenav').sidenav();
+            $('.view_carousel').click(function(){
+                $('.carousel').toggleClass('hide');
+                $('.carousel').carousel();
+                autoplay()
+            })
+            $('.homeCarousel').carousel({
+                indicators: true,
+                fullWidth: true,
+            });
+            function autoplayhome() {
+                $('.homeCarousel').carousel('next');
+            }
+            setInterval(autoplayhome, 10000);
+            M.updateTextFields();
+            $('.materialboxed').materialbox();
         });
+
+
     </script>
 </div>
 

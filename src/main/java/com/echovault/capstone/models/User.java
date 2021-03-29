@@ -5,6 +5,7 @@ import jdk.jfr.Unsigned;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -26,6 +27,7 @@ public class User {
 
     @Column(nullable = false, unique = true)
     @NotBlank(message = "Username can not be blank")
+    @Size(min=2, max=30)
     private String username;
 
     @Column(nullable = false)

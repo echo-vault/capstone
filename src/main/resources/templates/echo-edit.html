@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head('Edit Echo')">
+
+</head>
+<body>
+
+<nav th:replace="partials/navbar :: navbar"></nav>
+<main class="blue-texture">
+<div class="container">
+    <h1>Edit Your Echo</h1>
+
+    <form th:action="@{/echo/{id}/edit/(id=${echo.id})}" th:method="POST" th:object="${echo}" enctype="multipart/form-data" >
+<!--        <input type="hidden" th:field="*{id}">-->
+        <div class = "pd card hoverable grey lighten-4">
+        <div class="file-field input-field">
+            <div class="btn waves-effect waves-amber waves-lighten-4 light-blue darken-2">
+                <span>Change Profile Image</span>
+                <input type="file" name="profileImg" th:value="*{profileImage}">
+<!--                <input type="hidden" name="current-profile" th:value="${echo.profileImage}">-->
+            </div>
+            <div th:if="${echo.profileImage != null}">
+                <img th:src="@{'' + ${echo.profileImage}}" style="max-height: 200px"/>
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+            </div>
+        </div>
+
+        <div class="file-field input-field">
+            <div class="btn waves-effect waves-amber waves-lighten-4 light-blue darken-2">
+                <span>Change Background Image</span>
+                <input type="file" name="bgImg" th:value="*{backgroundImage}">
+<!--                <input type="hidden" name="current-background" th:value="${echo.backgroundImage}">-->
+            </div>
+            <div th:if="${echo.backgroundImage != null}">
+                <img th:src="@{'' + ${echo.backgroundImage}}" style="max-height: 200px"/>
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+            </div>
+        </div>
+
+        <div class="file-field input-field">
+            <div class="btn waves-effect waves-amber waves-lighten-4 light-blue darken-2">
+                <span>Carousel</span>
+                <input type="file" multiple  name="image" th:value="*{images}">
+<!--                <input type="hidden" name="current-carousel" th:value="${echo.images}">-->
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text" placeholder="Add one or more images">
+            </div>
+        </div>
+        </div>
+        <div class = "pd card hoverable grey lighten-4">
+        <div class="row">
+            <div class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="first_name" type="text" class="validate" th:field="*{firstName}" >
+                        <label for="first_name">First Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="last_name" type="text" class="validate" th:field="*{lastName}">
+                        <label for="last_name">Last Name</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="birthdate">Birthdate</label>
+                        <input type="text" class="datepicker" id="birthdate" th:field="*{birthDate}">
+                    </div>
+
+                    <div class="input-field col s6">
+                        <label for="passingdate">Date of Passing</label>
+                        <input type="text" class="datepicker" id="passingdate" th:field="*{deathDate}">
+                    </div>
+               </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="textarea1" class="materialize-textarea" th:text="${echo.getSummary()}" th:field="*{summary}"></textarea>
+                        <label for="textarea1">Life Story</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-field">
+            <label for="burialaddress">Resting Place</label>
+            <input type="hidden" id="burialaddress" th:field="*{restingPlace}">
+        </div>
+
+        <div class="container">
+            <div id="geocoder" class="geocoder"></div>
+            <div id="map"></div>
+        </div>
+        </div>
+<!--        <input type="hidden" name="current-links" th:value="${echo.getLinks()}">-->
+        <div class = "pd card hoverable grey lighten-4">
+        <th:block th:switch="${echo.getLinks().size()} > 0">
+            <div th:case="true">
+                <div class="row" th:each="link : ${echo.getLinks()}">
+                    <div class="input-field col s12 m6">
+                        <select th:name="'linkName' + ${echo.getLinks().indexOf(link)}">
+                            <th:block th:if='${link.getName().equals("Donations")}'>
+                                <option value="">Choose Type</option>
+                                <option value="Donations" selected>Donations</option>
+                                <option value="Flowers/Condolences">Flowers/Condolences</option>
+                                <option value="Services Details">Services Details</option>
+                            </th:block>
+                            <th:block th:if='${link.getName().equals("Flowers/Condolences")}'>
+                                <option value="">Choose Type</option>
+                                <option value="Donations">Donations</option>
+                                <option value="Flowers/Condolences" selected>Flowers/Condolences</option>
+                                <option value="Services Details">Services Details</option>
+                            </th:block>
+                            <th:block th:if='${link.getName().equals("Services Details")}'>
+                                <option value="">Choose Type</option>
+                                <option value="Donations">Donations</option>
+                                <option value="Flowers/Condolences">Flowers/Condolences</option>
+                                <option value="Services Details" selected>Services Details</option>
+                            </th:block>
+                        </select>
+                        <label>Link Type</label>
+                    </div>
+
+                    <div class="input-field col s12 m6">
+                        <label for="link">Link</label>
+                        <input type="text" th:name="'link' + ${echo.getLinks().indexOf(link)}" id="link" th:value="${link.getUrl()}">
+                    </div>
+                </div>
+            </div>
+            <div th:case="*">
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <select name="linkName0">
+                            <option value="" disabled selected>Choose What kind of link to add.</option>
+                            <option value="Donations">Donations</option>
+                            <option value="Flowers/Condolences">Flowers/Condolences</option>
+                            <option value="Services Details">Services Details</option>
+                        </select>
+                        <label>Link Type</label>
+                    </div>
+
+                    <div class="input-field col s12 m6">
+                        <label for="link1">Link 1</label>
+                        <input type="text" name="link0" id="link1">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <select name="linkName1">
+                            <option value="" disabled selected>Choose What kind of link to add.</option>
+                            <option value="Donations">Donations</option>
+                            <option value="Flowers/Condolences">Flowers/Condolences</option>
+                            <option value="Services Details">Services Details</option>
+                        </select>
+                        <label>Link Type</label>
+                    </div>
+
+                    <div class="input-field col s12 m6">
+                        <label for="link1">Link</label>
+                        <input type="text" name="link1" id="link1">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <select name="linkName2">
+                            <option value="" disabled selected>Choose What kind of link to add.</option>
+                            <option value="Donations">Donations</option>
+                            <option value="Flowers/Condolences">Flowers/Condolences</option>
+                            <option value="Services Details">Services Details</option>
+                        </select>
+                        <label>Link Type</label>
+                    </div>
+
+                    <div class="input-field col s12 m6">
+                        <label for="link2">Link</label>
+                        <input type="text" name="link2" id="link2">
+                    </div>
+                </div>
+            </div>
+            <div th:if="${echo.getLinks().size()} == 1">
+
+
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            <select name="linkName1">
+                                <option value="" disabled selected>Choose What kind of link to add.</option>
+                                <option value="Donations">Donations</option>
+                                <option value="Flowers/Condolences">Flowers/Condolences</option>
+                                <option value="Services Details">Services Details</option>
+                            </select>
+                        <label>Link Type</label>
+                        </div>
+
+                        <div class="input-field col s12 m6">
+                            <label for="link1">Link</label>
+                            <input type="text" name="link1" id="link1">
+                        </div>
+                    </div>
+
+
+                <div class="row">
+
+                    <div class="input-field col s12 m6">
+                        <select name="linkName2">
+                            <option value="" disabled selected>Choose What kind of link to add.</option>
+                            <option value="Donations">Donations</option>
+                            <option value="Flowers/Condolences">Flowers/Condolences</option>
+                            <option value="Services Details">Services Details</option>
+                        </select>
+                        <label>Link Type</label>
+                    </div>
+
+                    <div class="input-field col s12 m6">
+                        <label for="link2">Link</label>
+                        <input type="text" name="link2" id="link2">
+                    </div>
+
+                </div>
+
+            </div>
+            <div th:if="${echo.getLinks().size()} == 2">
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <select name="linkName2">
+                            <option value="" disabled selected>Choose What kind of link to add.</option>
+                            <option value="Donations">Donations</option>
+                            <option value="Flowers/Condolences">Flowers/Condolences</option>
+                            <option value="Services Details">Services Details</option>
+                        </select>
+                        <label>Link Type</label>
+                    </div>
+
+                    <div class="input-field col s12 m6">
+                        <label for="link2">Link</label>
+                        <input type="text" name="link2" id="link2">
+                    </div>
+                </div>
+            </div>
+        </th:block>
+
+
+
+        <button class="btn waves-effect waves-amber waves-lighten-4 light-blue darken-2" type="submit" name="action">Save Changes
+            <i class="material-icons right">check</i>
+        </button>
+        </div>
+    </form>
+
+
+</div>
+</main>
+<div th:replace="partials/scripts :: scripts"></div>
+<script>
+    let mapOptions = {
+        accessToken: mapboxToken,
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+        center: [-98.4916, 29.4252], // starting position [lng, lat]
+        zoom: 10 // starting zoom
+    }
+
+    let map = new mapboxgl.Map(mapOptions);
+
+
+
+    //GEOLOCATE
+    let geolocate = new mapboxgl.GeolocateControl({
+        positionOptions: {
+            enableHighAccuracy: true
+        },
+        trackUserLocation: false
+    });
+    map.addControl(geolocate);
+    map.on('load', function() {
+        geolocate.trigger();
+    });
+
+    //GEOCODE
+    var geocoder = new MapboxGeocoder({
+        accessToken: mapboxToken,
+        marker: {
+            color: 'blue',
+            draggable: 'false'
+        },
+        mapboxgl: mapboxgl
+    });
+
+    document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+
+    geocoder.on("result", e => {
+        console.log(e.result);
+        console.log(e.result.place_name);
+        $("#burialaddress").val(e.result.place_name);
+    })
+</script>
+</body>
+</html>

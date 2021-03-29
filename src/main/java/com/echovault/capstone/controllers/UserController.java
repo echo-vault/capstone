@@ -32,6 +32,9 @@ public class UserController {
     public String showProfile(Model model){
         User sessionUser = userService.getLoggedInUser();
         User user = userDao.getOne(sessionUser.getId());
+        if(user.getId() == 0){
+            return "login";
+        }
         model.addAttribute("echoes", user.getEchoes());
         model.addAttribute("user", user);
         return "profile";
@@ -46,7 +49,10 @@ public class UserController {
     }
 
     @PostMapping("/profile/edit")
-    public String goToProfile(@ModelAttribute User user, @RequestParam(name = "user-profile-img-edit") MultipartFile uploadedFile, @RequestParam(name = "current-image") String imagePath, Model model){
+    public String goToProfile(@ModelAttribute User user,
+                              @RequestParam(name = "user-profile-img-edit") MultipartFile uploadedFile,
+                              @RequestParam(name = "current-image") String imagePath,
+                              Model model){
 
         User sessionUser = userService.getLoggedInUser();
         User editedUser = userDao.getOne(sessionUser.getId());
@@ -65,7 +71,6 @@ public class UserController {
                 model.addAttribute("message", "Oops! Something went wrong! " + e);
             }
         }
-
         user.setId(editedUser.getId());
         user.setPassword(editedUser.getPassword());
         userDao.save(user);
