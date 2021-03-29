@@ -24,7 +24,7 @@
                 <img class="user-profile-img center" th:src="@{'' + ${user.image}}">
                 <h5 class="profile-name center-align" th:text="${user.getUsername()}"></h5>
                 <h5 class="profile-name center-align" th:text="${user.getFullName()}"></h5>
-                <h5 class="profile-name center-align" th:text="${user.getEmail()}"></h5>
+                <p class="profile-name center-align" th:text="${user.getEmail()}"></p>
 <!--                </div>-->
 <!--                <div class="card-action">-->
                   <a th:href="@{/profile/edit}" class="home-buttons waves-effect waves-amber waves-lighten-4 amber lighten-2 btn center-align">Edit Profile</a>
