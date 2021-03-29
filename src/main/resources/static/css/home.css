@@ -268,6 +268,14 @@
 /*    color: grey!important;*/
 /*}*/
 
+.search-icon {
+    color: black!important;
+}
+
+::placeholder {
+    color: black;
+    font-style: italic;
+}
 
 
 
