@@ -4,16 +4,14 @@
 <body>
 
 <ul id="slide-out" class="sidenav">
-    <li><div class="user-view">
-        <div class="background">
-            <img src="images/office.jpg">
-        </div>
-        <a href="#user"><img class="circle" th:src="@{'' + ${user.image}}"></a>
-        <a href="#name"><span class="white-text name" th:text="${user.getFullName()}"></span></a>
+    <li>
+        <div class="user-view">
+            <div class="background"><img src="images/office.jpg"></div>
+            <div><img class="circle" th:src="@{'' + ${user.image}}"></div>
+            <div><span class="white-text name" th:text="${user.getFullName()}"></span></div>
         </div>
     </li>
-    <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-    <li><a href="#!">Second Link</a></li>
+    <li><a class="waves-effect" th:href="@{/profile/edit}"><i class="material-icons">edit</i>Edit Profile</a></li>
     <li><div class="divider"></div></li>
     <li><a class="subheader">Subheader</a></li>
     <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
@@ -26,19 +24,19 @@
         <div class="row">
 
 
-                <div class="col s12 m5">
-                  <div class="card">
-                    <div class="card-image">
-                      <img th:src="@{'' + ${user.image}}">
-                    </div>
-                    <div class="card-content">
-                      <span class="card-title" th:text="${user.getFullName()}">Card Title</span>
-                    </div>
-                    <div class="card-action">
-                      <a th:href="@{/profile/edit}" class="waves-effect waves-amber waves-lighten-4 amber lighten-2 btn">Edit Profile</a>
-                    </div>
-                  </div>
-                </div>
+<!--                <div class="col s12 m5">-->
+<!--                  <div class="card">-->
+<!--                    <div class="card-image">-->
+<!--                      <img th:src="@{'' + ${user.image}}">-->
+<!--                    </div>-->
+<!--                    <div class="card-content">-->
+<!--                      <span class="card-title" th:text="${user.getFullName()}">Card Title</span>-->
+<!--                    </div>-->
+<!--                    <div class="card-action">-->
+<!--                      <a th:href="@{/profile/edit}" class="waves-effect waves-amber waves-lighten-4 amber lighten-2 btn">Edit Profile</a>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
 
                 <div class="col s12 m7">
                     <h2 class="center">Your Echoes</h2>
