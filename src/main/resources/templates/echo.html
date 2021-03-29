@@ -17,7 +17,7 @@
 <!--    </th:block>-->
     <!--    carousel-->
     <div class="carousel hide">
-        <a th:each="image : ${echo.getImages()}" class="carousel-item materialboxed" th:href="'#' + ${echo.getImages().indexOf(image) + 1} + '!'"><img class="slideshowLG" th:src="${image.path}"></a>
+        <a th:each="image : ${echo.getImages()}" class="carousel-item materialboxed" th:href="'#' + ${echo.getImages().indexOf(image) + 1} + '!'"><img class="slideshowLG responsive-img" th:src="${image.path}"></a>
     </div>
 
 <!--    <div class="carousel carousel-slider echoCarousel hide">-->
