@@ -4,77 +4,67 @@
 
 <body>
 <nav th:replace="partials/navbar.html :: navbar"></nav>
+<main class="blue-texture">
 
 
-<main class="carousel carousel-slider homeCarousel center">
-<!--    <div class="carousel-fixed-item center">-->
-<!--        <a class="btn waves-effect white grey-text darken-text-2">Next Slide</a>-->
-<!--    </div>-->
-    <div class="carousel-item slide-1" href="next">
-        <div class="row">
-            <div class="col s12">
-                <div class="echo-vault-logo">
-                    <img class="logo" src="img/echovaultlogo.png" alt="Echo Vault Logo">
-                </div>
-                <div class="echo-vault-intro">
-                    <h4>Echoes are familiarly known as reflections of sound. Remember your loved one by echoing their memory where the reflection never ends.</h4>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="carousel-item slide-2" href="#two!">
-        <div class="container">
-            <div class="row">
-                <div class="col s12">
-                    <div class="register-home">
-                        <h2>To view an Echo, create an Echo or add a Memory, please Register for an account and Login</h2>
-                    </div>
-                    <div>
-                        <a class="btn home-buttons" th:href="@{/register}">Register</a>
-                        <a class="btn home-buttons" th:href="@{/login}">Login</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="carousel-item slide-3" href="#three!">
-        <h2 class="slide-3-text">Create an Echo to remember your loved one</h2>
+    <div class="carousel carousel-slider homeCarousel center">
+
+        <div class="carousel-item slide-2" href="#two!">
             <div class="container">
                 <div class="row">
                     <div class="col s12">
-                        <h2 class="slide-3-text center">Add Photos</h2>
-                        <img class="home-profile-card center responsive-img " src="img/home-profile-card.png" alt="Home Profile Card">
+                        <div class="register-home">
+                            <h2>To view an Echo, create an Echo or add a Memory, please Register for an account and Login</h2>
+                        </div>
+                        <div>
+                            <a class="btn home-buttons" th:href="@{/register}">Register</a>
+                            <a class="btn home-buttons" th:href="@{/login}">Login</a>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        <div class="carousel-item slide-3" href="#three!">
+            <h2 class="slide-3-text">Create an Echo to remember your loved one</h2>
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12">
+                            <h2 class="slide-3-text center">Add Photos</h2>
+                            <img class="home-profile-card center responsive-img " src="img/home-profile-card.png" alt="Home Profile Card">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="carousel-item slide-4" href="#four!">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12">
+                        <h2 class="slide-4-text">Add a summary of your loved one's life</h2>
+                        <img class="home-life-story responsive-img center-align" src="img/home-life-story.png" alt="Home Life Story">
                     </div>
                 </div>
             </div>
         </div>
-    <div class="carousel-item slide-4" href="#four!">
-        <div class="container">
-            <div class="row">
-                <div class="col s12">
-                    <h2 class="slide-4-text">Add a summary of your loved one's life</h2>
-                    <img class="home-life-story responsive-img center-align" src="img/home-life-story.png" alt="Home Life Story">
+        <div class="carousel-item slide-5" href="#four!">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12">
+                        <h2 class="slide-5-text">Add a Memory to an existing Echo</h2>
+                        <p class="slide-5-text">Users can add Memories, upload photos, and comment on Memories</p>
+                        <img class="home-memory responsive-img" src="img/home-memory.png" alt="Home Life Story">
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-    <div class="carousel-item slide-5" href="#four!">
-        <div class="container">
-            <div class="row">
-                <div class="col s12">
-                    <h2 class="slide-5-text">Add a Memory to an existing Echo</h2>
-                    <p class="slide-5-text">Users can add Memories, upload photos, and comment on Memories</p>
-                    <img class="home-memory responsive-img" src="img/home-memory.png" alt="Home Life Story">
-                </div>
-            </div>
+    <div class="container">
+        <div class="echo-vault-intro">
+            <h5>Echoes are familiarly known as reflections of sound. Remember your loved one by echoing their memory where the reflection never ends.</h5>
         </div>
     </div>
+
 </main>
-
-
-
-
-
 
 <div th:replace="partials/footer.html :: footer"></div>
 <div th:replace="partials/scripts.html :: scripts"></div>
