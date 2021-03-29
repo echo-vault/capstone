@@ -493,7 +493,7 @@ public class EchoController {
     }
 
     @PostMapping("/link")
-    public String createComment(@RequestParam(name = "linkName") String linkName,
+    public String createLink(@RequestParam(name = "linkName") String linkName,
                                 @RequestParam(name = "link") String linkUrl,
                                 @RequestParam(name = "echoId") long echoId
                                 ){
@@ -505,6 +505,17 @@ public class EchoController {
         }
         l.setUrl(linkUrl);
         linkDao.save(l);
+        return "redirect:/echo/" + echoId;
+    }
+
+    @PostMapping("/map")
+    public String editLocation(@RequestParam(name = "echoId")long echoId,
+                                @ModelAttribute Echo newEcho){
+        Echo echo = echoDao.getOne(echoId);
+        System.out.println(echo.getRestingPlace());
+        System.out.println(newEcho.getRestingPlace());
+        echo.setRestingPlace(newEcho.getRestingPlace());
+        echoDao.save(echo);
         return "redirect:/echo/" + echoId;
     }
 

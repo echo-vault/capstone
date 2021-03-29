@@ -173,7 +173,6 @@
 }
 
 .home-memory{
-
     max-width: 75%;
     margin-top: 50px;
 }
@@ -191,6 +190,7 @@
 }
 
 .map-inner-container{
+    width: 100%;
     justify-content: center;
     align-items: center;
 }
