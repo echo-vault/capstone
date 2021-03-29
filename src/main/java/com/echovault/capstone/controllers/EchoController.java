@@ -508,6 +508,17 @@ public class EchoController {
         return "redirect:/echo/" + echoId;
     }
 
+    @PostMapping("/map")
+    public String editLocation(@RequestParam(name = "echoId")long echoId,
+                                @ModelAttribute Echo newEcho){
+        Echo echo = echoDao.getOne(echoId);
+        System.out.println(echo.getRestingPlace());
+        System.out.println(newEcho.getRestingPlace());
+        echo.setRestingPlace(newEcho.getRestingPlace());
+        echoDao.save(echo);
+        return "redirect:/echo/" + echoId;
+    }
+
 
 }
 

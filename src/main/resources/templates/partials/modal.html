@@ -145,6 +145,32 @@
         </form>
     </div>
 
+    <div th:fragment="map-edit-modal" id="editMap" class="modal grey lighten-4" style="height: 90%!important;">
+        <form th:action="@{/map}" th:object="${echo}" method="post">
+            <div class="modal-content" style="padding-bottom: 0 !important;">
+                <div class="row" style="margin-bottom: 0 !important;">
+                    <div class="col s12 input-field">
+                            <div id="geocoder" class="geocoder"></div>
+                            <label for="geocoder"></label>
+                            <div id="map"></div>
+                     </div>
+                    <input type="hidden" id="burialaddressEdit" th:field="*{restingPlace}">
+                    <input type="hidden" name="echoId" th:value="${echo.getId()}">
+                </div>
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class="left modal-close waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">Cancel</a>
+              <button type="submit" class="right waves-effect waves-amber waves-lighten-4 btn amber lighten-2 light-blue-text text-darken-4">Submit</button>
+            </div>
+        </form>
+    </div>
+
+
+<div class="input-field">
+
+        </div>
+
+
 
 
 

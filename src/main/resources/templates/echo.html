@@ -444,8 +444,8 @@
                 <div class="row">
                     <div class="col s12 m7">
                         <div class="row card hoverable grey lighten-4">
-                            <span class="card-title center" style="width: 95%"><h5>Resting Place</h5><a href="editMap" class="right modal-trigger light-blue-text text-darken-4 right">
-                                  <i class="material-icons tooltipped" data-position="bottom" data-tooltip="Add Link">edit</i>
+                            <span class="card-title center" style="width: 95%;display: flex;justify-content: space-between; align-items: center"><span><i class="material-icons" style="visibility: hidden">edit</i></span><h5>Resting Place</h5><a href="#editMap" class="modal-trigger light-blue-text text-darken-4">
+                                  <i class="material-icons tooltipped" data-position="bottom" data-tooltip="Edit Location">edit</i>
                                 </a></span>
                             <div class="col s12" style="display: flex;align-items: center;justify-content: center;">
                                 <img class="responsive-img" id="staticmap" style="border: 5px solid #01579B">
@@ -456,9 +456,9 @@
                         </div>
                     </div>
                     <div class="col m4 offset-m1 s12 card hoverable grey lighten-4"  style="display: flex;align-items: center;justify-content: center; flex-direction: column">
-                        <span class="card-title" style="width: 95%;display: flex;justify-content: flex-end; align-items: center"><h5 style="justify-self: center">Links</h5><a th:href="'#addLink' + ${echo.getId()}" class="modal-trigger light-blue-text text-darken-4 right">
-                                  <i class="material-icons tooltipped" data-position="bottom" data-tooltip="Add Link">add</i>
-                                </a></span>
+                        <span class="card-title" style="width: 95%;display: flex;justify-content: space-between; align-items: center"><span><i class="material-icons" style="visibility: hidden">add</i></span><h5>Links</h5><a th:href="'#addLink' + ${echo.getId()}" class="modal-trigger light-blue-text text-darken-4">
+                              <i class="material-icons tooltipped" data-position="bottom" data-tooltip="Add Link">add</i>
+                            </a></span>
                         <ul style="width: 95%">
                             <li th:each="link : ${echo.getLinks()}" style="margin-bottom: 5px;display: flex;justify-content: space-between">
                                     <a th:href="${link.url}" target="_blank" style="display: flex;align-items: center">
@@ -476,6 +476,7 @@
 <!--    Map and Links-->
 
 <!--    Modals-->
+    <div th:replace="partials/modal.html :: map-edit-modal"></div>
     <div th:replace="partials/modal.html :: link-modal"></div>
     <th:block th:each="link : ${echo.getLinks()}">
         <div th:replace="partials/modal.html :: delete-link-modal"></div>
@@ -496,51 +497,49 @@
 
 <div th:replace="partials/footer.html :: footer"></div>
 <div th:replace="partials/scripts.html :: scripts"></div>
-<!--<th:block th:switch="${echo.getUser().getId() == user.getId()}">-->
-<!--    <th:block th:case="true">-->
-<!--        <script>-->
-<!--            let mapOptions = {-->
-<!--                accessToken: mapboxToken,-->
-<!--                container: 'map',-->
-<!--                style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location-->
-<!--                center: [-98.4916, 29.4252], // starting position [lng, lat]-->
-<!--                zoom: 10,-->
-<!--                interactive: false-->
-<!--            }-->
-<!--        -->
-<!--            let map = new mapboxgl.Map(mapOptions);-->
-<!--            -->
-<!--            //GEOLOCATE-->
-<!--            let geolocate = new mapboxgl.GeolocateControl({-->
-<!--                positionOptions: {-->
-<!--                    enableHighAccuracy: true-->
-<!--                },-->
-<!--                trackUserLocation: false-->
-<!--            });-->
-<!--            map.addControl(geolocate);-->
-<!--            map.on('load', function() {-->
-<!--                geolocate.trigger();-->
-<!--            });-->
-<!--        -->
-<!--            //GEOCODE-->
-<!--            var geocoder = new MapboxGeocoder({-->
-<!--                accessToken: mapboxToken,-->
-<!--                marker: {-->
-<!--                    color: 'blue',-->
-<!--                    draggable: 'false'-->
-<!--                },-->
-<!--                mapboxgl: mapboxgl-->
-<!--            });-->
-<!--        -->
-<!--            document.getElementById('geocoder').appendChild(geocoder.onAdd(map));-->
-<!--        -->
-<!--            geocoder.on("result", e => {-->
-<!--                $("#burialaddress").val(e.result.place_name);-->
-<!--            })-->
-<!--        </script>-->
-<!--    </th:block>-->
-<!--    <th:block th:case="false">-->
+
+
         <script>
+            $('document').ready(function(){
+            let mapOptions = {
+                accessToken: mapboxToken,
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+                // center: [-98.4916, 29.4252], // starting position [lng, lat]
+                zoom: 10,
+                interactive: false
+            }
+
+            let map = new mapboxgl.Map(mapOptions);
+
+            //GEOCODE
+            var geocoder = new MapboxGeocoder({
+                accessToken: mapboxToken,
+                marker: {
+                    color: 'blue',
+                    draggable: 'false'
+                },
+                mapboxgl: mapboxgl
+            });
+
+            document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+
+             //GEOLOCATE
+                let geolocate = new mapboxgl.GeolocateControl({
+                    positionOptions: {
+                        enableHighAccuracy: true
+                    },
+                    trackUserLocation: false
+                });
+                map.addControl(geolocate);
+                map.on('load', function() {
+                    geolocate.trigger();
+                });
+
+            geocoder.on("result", e => {
+                $("#burialaddressEdit").val(e.result.place_name);
+            })
+
             function geocode(search, token) {
                 let baseUrl = 'https://api.mapbox.com';
                 let endPoint = '/geocoding/v5/mapbox.places/';
@@ -550,6 +549,7 @@
                         // to get all the data from the request, comment out the following three lines...
                     }).then(function(data) {
                         // console.log(data.features[0])
+                        mapOptions.center = data.features[0].center
                         return data.features[0].center;
                     });
             }
@@ -561,9 +561,9 @@
                 let path = 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s+01579B(' + eFixed + ')/' + eFixed + ',10/500x300?access_token=' + mapboxToken;
                 $("#staticmap").attr("src", path);
             });
+            });
         </script>
-<!--    </th:block>-->
-<!--</th:block>-->
+
 
 
 </body>
