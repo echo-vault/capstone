@@ -41,7 +41,13 @@
             $('.editMemory').click(function(){
                 $('.editMemoryForm').submit();
             })
-            $('.modal').modal();
+            function resize(){
+                window.dispatchEvent(new Event('resize'))
+            }
+            $('.modal').modal({
+                onOpenStart: window.dispatchEvent(new Event('resize')),
+                onOpenEnd: window.dispatchEvent(new Event('resize'))
+            });
             // let divWidth = $('.profile-card').width();
             // $('.summary-card').css('min-width', divWidth+'px');
             // function adjustCardWidth(){
