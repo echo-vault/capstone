@@ -12,6 +12,7 @@
 }
 
 .echo-vault-intro{
+
     margin-top: 20px;
     background: rgba(255,255,255, 0.7);
     padding: 5px;
@@ -27,6 +28,72 @@
     /*margin: 10px;*/
 
 }
+
+.profile-info-card{
+    background: #01579B;
+    color: white;
+    padding: 10px;
+}
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255,255,255, 0.7);
+    padding: 5px;
+    color: #01579B;
+    /*padding-top: 150px;*/
+    /*font-family: 'BadScript', serif;*/
+    /*font-size: large;*/
+
+}
+
+.echo-vault-logo{
+    padding-top: 30px;
+    display: flex;
+    /*align-items: center;*/
+    justify-content: left;
+
+}
+
+.user-profile-img {
+    padding: .5em;
+    height: 10em;
+    /*margin: 10px;*/
+
+
+.delete-modal {
+    width: max-content;
+}
+
+
+.slide-1 {
+    background-image: url("../img/mountain.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    /*padding-top: 10%;*/
+    /*background: rgb(2,63,111);*/
+    /*background: radial-gradient(circle, rgba(2,63,111,1) 50%, rgba(128,216,255,1) 86%, rgba(255,213,79,1) 97%, rgba(255,236,179,1) 100%);*/
+}
+
+.slide-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*margin: auto;*/
+    /*background-color: #b2e5ff;*/
+    /*background-image: url("https://www.transparenttextures.com/patterns/black-thread-light.png");*/
+    background-image: url("../img/grandparents.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #01579B;
+}
+
+.register-home{
+    padding: 5px;
+    background: rgba(255,255,255, 0.7);
+}
+
 
 .profile-info-card{
     background: #01579B;
@@ -66,6 +133,7 @@
     background: rgba(255,255,255, 0.7);
 }
 
+
 .home-buttons{
     font-family: sans-serif;
     background-color: #FFD54F;
@@ -81,6 +149,7 @@
 .form-container{
     background: white;
     margin-bottom: 20px;
+
 }
 
 .form-inner-container{
@@ -178,6 +247,105 @@
     margin-top: 1em;
 }
 
+
+}
+
+.form-inner-container{
+    display: flex;
+    margin: 30px 20px;
+    justify-content: center;
+}
+
+.form-background {
+    background-color: #b2e5ff;
+    background-image: url("https://www.transparenttextures.com/patterns/black-thread-light.png");
+    color: #01579B;
+}
+
+.padded-btn{
+    margin: 10px 5px;
+}
+
+.register-form, .edit-form{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    padding: 5px 5px;
+}
+
+.custom-file-upload {
+    border: 1px solid black;
+    display: inline-block;
+    padding: 5px;
+}
+
+.slide-3{
+    background-image: url("../img/red-flowers.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+
+}
+.slide-3-text{
+    background: rgba(255,255,255, 0.7);
+    margin: 20px 20px 20px;
+    padding: 5px;
+    color: #01579B;
+}
+.home-profile-card{
+
+}
+
+.slide-4{
+    background-image: url("../img/orange-flowers.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+
+}
+.slide-4-text{
+    background: rgba(255,255,255, 0.7);
+    margin: 20px 20px 20px;
+    padding: 5px;
+    color: #01579B;
+}
+.home-profile-card{
+    margin: auto;
+}
+
+.slide-5{
+    background-image: url("../img/landscape.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.slide-5-text{
+    background: rgba(255,255,255, 0.7);
+    margin: 20px 40px 20px;
+    padding: 5px;
+    color: #01579B;
+}
+
+.home-memory{
+    max-width: 75%;
+    margin-top: 50px;
+}
+
+#map{
+    display: block;
+    width: 100%;
+    height: 400px;
+    margin-top: 10px;
+}
+
+.map-container{
+    display: flex;
+    margin-top: 1em;
+}
+
+
 .map-inner-container{
     width: 100%;
     justify-content: center;
@@ -227,6 +395,7 @@
 
 .datepicker-date-display {
     background-color:#01579B;
+
 }
 
 .datepicker-cancel, .datepicker-done {
@@ -253,6 +422,31 @@
     width: 90%;
 }
 
+
+}
+
+
+/*.is-today, .is-selected {*/
+/*    color: darkslategrey!important;*/
+/*}*/
+
+.datepicker-day-button {
+    color: black;
+}
+
+.dropdown-content > li > span {
+    color: #01579B!important;
+}
+
+.datepicker-table td.is-selected {
+    background-color: #FFD54F;
+}
+
+.datepicker-controls .select-month input {
+    width: 90%;
+}
+
+
 /*.datepicker-day-button > .is-disabled {*/
 /*    color: grey!important;*/
 /*}*/
@@ -271,8 +465,28 @@
 }
 
 
+
 .carousel-slider {
     min-height: 600px;
 }
+
+
+
+/*.about-img {*/
+/*    height: 50%;*/
+/*    max-height: 516px;*/
+/*}*/
+
+.card-panel {
+    height: 100%;
+}
+
+.about-card {
+    height: 100%;
+}
+
+
+
+
 
 
