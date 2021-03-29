@@ -9,11 +9,11 @@
 
 
     <nav>
-        <div class="nav-wrapper light-blue darken-4">
+        <div class="nav-wrapper amber lighten-2">
             <form th:action="@{/search}" method="post">
                 <div class="input-field" >
-                    <input id="search" type="search" required name="search">
-                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                    <input id="search" type="search" placeholder="Search" required name="search">
+                    <label class="label-icon" for="search"><i class="material-icons search-icon">search</i></label>
                     <i class="material-icons">close</i>
                 </div>
             </form>

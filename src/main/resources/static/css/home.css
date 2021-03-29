@@ -42,7 +42,7 @@
 .profile-info-card{
     background: #01579B;
     color: white;
-    padding-bottom: 10px;
+    padding: 10px;
 }
 
 
@@ -235,6 +235,48 @@
     background-image: url("../img/backgrnd-black-thread-light.png");
     color: #01579B;
 }
+
+.datepicker-date-display {
+    background-color:#01579B;
+}
+
+.datepicker-cancel, .datepicker-done {
+    color: #01579B;
+}
+
+/*.is-today, .is-selected {*/
+/*    color: darkslategrey!important;*/
+/*}*/
+
+.datepicker-day-button {
+    color: black;
+}
+
+.dropdown-content > li > span {
+    color: #01579B!important;
+}
+
+.datepicker-table td.is-selected {
+    background-color: #FFD54F;
+}
+
+.datepicker-controls .select-month input {
+    width: 90%;
+}
+
+/*.datepicker-day-button > .is-disabled {*/
+/*    color: grey!important;*/
+/*}*/
+
+.search-icon {
+    color: black!important;
+}
+
+::placeholder {
+    color: black;
+    font-style: italic;
+}
+
 
 
 

@@ -24,10 +24,10 @@
                 <img class="user-profile-img center" th:src="@{'' + ${user.image}}">
                 <h5 class="profile-name center-align" th:text="${user.getUsername()}"></h5>
                 <h5 class="profile-name center-align" th:text="${user.getFullName()}"></h5>
-                <h5 class="profile-name center-align" th:text="${user.getEmail()}"></h5>
+                <p class="profile-name center-align" th:text="${user.getEmail()}"></p>
 <!--                </div>-->
 <!--                <div class="card-action">-->
-                  <a th:href="@{/profile/edit}" class="waves-effect waves-amber waves-lighten-4 amber lighten-2 btn center-align">Edit Profile</a>
+                  <a th:href="@{/profile/edit}" class="home-buttons waves-effect waves-amber waves-lighten-4 amber lighten-2 btn center-align">Edit Profile</a>
 <!--                </div>-->
             </div>
         </div>
@@ -36,7 +36,7 @@
             <div class="container">
                     <th:block th:if="${user.getEchoes().size()} == 0">
                         <div class="col s12 m6" style="display: flex; justify-content: center; align-items: center">
-                            <a th:href="@{/echo-create}" class=" center waves-effect waves-amber waves-lighten-4 amber lighten-2 btn">
+                            <a th:href="@{/echo-create}" class="center home-buttons waves-effect waves-amber waves-lighten-4 amber lighten-2 btn">
                             Create An Echo
                             </a>
                         </div>

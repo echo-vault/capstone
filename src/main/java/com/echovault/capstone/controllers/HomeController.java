@@ -46,7 +46,6 @@ public class HomeController {
         this.tlsEmail = tlsEmail;
     }
 
-
     @Value("${file-upload-path}")
     private String uploadPath;
 
@@ -61,8 +60,6 @@ public class HomeController {
         model.addAttribute("echos", echoList);
         return "home";
     }
-
-
 
     @GetMapping("/about")
     public String about(){
