@@ -236,6 +236,35 @@
     color: #01579B;
 }
 
+.datepicker-date-display {
+    background-color:#01579B;
+}
+
+.datepicker-cancel, .datepicker-done {
+    color: #01579B;
+}
+
+/*.is-today, .is-selected {*/
+/*    color: darkslategrey!important;*/
+/*}*/
+
+.datepicker-day-button {
+    color: black;
+}
+
+.dropdown-content > li > span {
+    color: #01579B!important;
+}
+
+.datepicker-table td.is-selected {
+    background-color: #FFD54F;
+}
+
+/*.datepicker-day-button > .is-disabled {*/
+/*    color: grey!important;*/
+/*}*/
+
+
 
 
 
