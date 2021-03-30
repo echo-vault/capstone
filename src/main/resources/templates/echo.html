@@ -474,7 +474,9 @@
 <!--        ^^^ Echo is current user's ^^^-->
     </th:block>
 <!--    Map and Links-->
-
+    <div>
+        <p style="text-align: right; padding-right: 1em">Echo Created By: <span th:text="${echo.getUser().getUsername()}"></span></p>
+    </div>
 <!--    Modals-->
     <div th:replace="partials/modal.html :: map-edit-modal"></div>
     <div th:replace="partials/modal.html :: link-modal"></div>
